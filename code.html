@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Empieza de cero &amp; Asociados - Asesoría Jurídica</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#0A2463",
+              "background-light": "#F8F9FA",
+              "background-dark": "#05143A",
+            },
+            fontFamily: {
+              display: ["Montserrat", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.5rem",
+            },
+          },
+        },
+      };
+    </script>
+<style>
+        .hero-animated-bg {
+            background: linear-gradient(-45deg, #0A2463, #0D2E7A, #05143A, #122D6B);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        .hero-gradient {
+            background-image: linear-gradient(to right, #0A2463 50%, transparent 100%);
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-200">
+<div class="relative hero-animated-bg overflow-hidden">
+<div class="container mx-auto px-6 lg:px-8">
+<div class="flex flex-col lg:flex-row items-center min-h-screen">
+<div class="relative z-10 w-full lg:w-1/2 py-20 lg:py-0 text-white text-center lg:text-left">
+<!-- Logo y marca -->
+<div class="flex items-center justify-center lg:justify-start gap-3 mb-6">
+<svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 1L22 6V8H2V6L12 1ZM4.5 9H19.5V11H4.5V9ZM3 12V20C3 20.5523 3.44772 21 4 21H20C20.5523 21 21 20.5523 21 20V12H3ZM5 14H7V18H5V14ZM9 14H11V18H9V14ZM13 14H15V18H13V14ZM17 14H19V18H17V14Z"></path>
+</svg>
+<span class="text-lg font-semibold tracking-wide">Empieza de Cero &amp; Asociados</span>
+</div>
+
+<!-- Badge -->
+<div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full py-2 px-4 mb-6">
+<svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="text-sm font-medium">Especialistas en Ley de Segunda Oportunidad</span>
+</div>
+
+<!-- Título principal -->
+<h1 class="font-extrabold text-4xl md:text-5xl lg:text-6xl leading-tight mb-6">
+Únete a la Red de<br/>
+<span class="text-white/90">Segundas Oportunidades</span>
+</h1>
+
+<!-- Subtítulo -->
+<p class="text-lg md:text-xl text-white/80 max-w-xl mb-8 leading-relaxed">
+Forma parte de un ecosistema que ayuda a personas con deudas a empezar de nuevo, recuperando su dignidad financiera y construyendo impacto real.
+</p>
+
+<!-- CTA Principal -->
+<div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-6">
+<a href="#registro" class="group inline-flex items-center justify-center gap-2 bg-white text-primary font-bold text-lg px-8 py-4 rounded-full shadow-lg hover:bg-gray-100 hover:scale-105 transition-all duration-300">
+<span>👉 Quiero ser Conector</span>
+<svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+</a>
+</div>
+
+<!-- Microtexto -->
+<p class="text-sm text-white/60 mb-8">
+Remuneración justa, transparente y sostenible.
+</p>
+
+<!-- Elementos de autoridad -->
+<div class="flex flex-wrap justify-center lg:justify-start gap-6 text-sm text-white/70">
+<div class="flex items-center gap-2">
+<span class="material-icons text-base">verified</span>
+<span>WhatsApp</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-icons text-base">phone</span>
+<span>Teléfono</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-icons text-base">email</span>
+<span>Email</span>
+</div>
+</div>
+</div>
+
+<!-- Video Vimeo -->
+<div class="w-full lg:w-1/2 mt-12 lg:mt-0 lg:pl-12 flex items-center">
+<div class="w-full rounded-2xl overflow-hidden shadow-2xl bg-black/20 backdrop-blur-sm">
+<div class="relative" style="padding-top: 56.25%;">
+<!-- Reemplaza VIDEO_ID con el ID de tu video de Vimeo -->
+<iframe 
+src="https://player.vimeo.com/video/VIDEO_ID?autoplay=0&loop=1&autopause=0&background=0&title=0&byline=0&portrait=0" 
+class="absolute top-0 left-0 w-full h-full"
+frameborder="0" 
+allow="autoplay; fullscreen; picture-in-picture" 
+allowfullscreen>
+</iframe>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 w-full bg-primary/80 backdrop-blur-sm z-20">
+<div class="container mx-auto px-6 lg:px-8 py-4">
+<div class="flex flex-wrap justify-center lg:justify-between items-center gap-6 text-white text-sm">
+<div class="flex items-center gap-2">
+<span class="material-icons text-base">call</span>
+<span>(34) 692 161 958</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-icons text-base">location_on</span>
+<span>Calle Zurbano 45, 1º Madrid</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-icons text-base">public</span>
+<span>empiezadecero.es</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-icons text-base">email</span>
+<span>info@empiezadecero.es</span>
+</div>
+<img alt="Empieza de Cero circular logo" class="h-12 w-12 hidden lg:block" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1ErJr7kfB7Z1lg3HgWBwd2jZ9_rZsn3XX1x-zetfffOJOXNY45JACK7iKulyjPg5wHGyxyYtq-F8H1W0GaH8USwsnV-dluVOGjP4tCBeNZV-0TXO1_148C0-4n7AWI5on4j4vOJv5Z1iVb2JTCVJF93LMHCz4M4jIHWB9JaAC1Si6CL9-hUOjwG91nyp1oIdjkk18dff9njD_q9OYItAigthrxALAreWU7hXne4-CAwAuUzotBp0Bj3PD83On_4ba-JGRN4CRPuo"/>
+</div>
+</div>
+</div>
+</div>
+<section class="py-20 md:py-32 bg-background-light dark:bg-background-dark">
+<div class="container mx-auto px-6 lg:px-8 text-center">
+<h3 class="text-lg font-semibold text-gray-600 dark:text-gray-400 tracking-widest uppercase">EN EMPIEZA DE CERO</h3>
+<h2 class="mt-4 text-4xl md:text-6xl font-bold text-primary dark:text-white">TENEMOS UN SUEÑO</h2>
+<p class="mt-8 text-xl md:text-2xl max-w-4xl mx-auto text-gray-700 dark:text-gray-300 leading-relaxed">
+                Construir un verdadero ecosistema de segundas oportunidades.
+            </p>
+</div>
+</section>
+
+</body></html>
