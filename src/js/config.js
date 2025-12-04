@@ -6,13 +6,23 @@ const CONFIG = {
     // Hello Bar
     helloBar: {
         mensaje: "🎉 ¡Únete ahora y gana 300€ por cada referido! Programa limitado.",
-        mostrar: true,  // true para mostrar, false para ocultar
+        mostrar: true,
         enlace: "#registro",
         textoBoton: "Más info"
     },
     
-    // Video de Vimeo (reemplaza con tu ID)
+    // Video de Vimeo
     vimeoVideoId: "VIDEO_ID",
+    
+    // ============================================
+    // HUBSPOT - CONFIGURACIÓN DEL FORMULARIO
+    // ============================================
+    hubspot: {
+        enabled: true,                    // true para activar, false para desactivar
+        portalId: "TU_PORTAL_ID",         // ← CAMBIAR: Tu Portal ID (número)
+        formGuid: "TU_FORM_GUID",         // ← CAMBIAR: Tu Form GUID
+        region: "eu1"                     // eu1 para Europa, na1 para USA
+    },
     
     // Animaciones AOS
     aos: {

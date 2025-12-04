@@ -171,3 +171,83 @@ function toggleFaq(button) {
     icon.classList.toggle('rotate-180');
     faqItem.classList.toggle('faq-active');
 }
+
+// ============================================
+// HUBSPOT FORM SUBMISSION
+// ============================================
+function initHubSpotForm() {
+    const form = document.getElementById('contactForm');
+    if (!form || !CONFIG.hubspot.enabled) return;
+    
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        
+        // Estado de carga
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="material-icons animate-spin">sync</span> Enviando...';
+        
+        // Recoger datos del formulario
+        const formData = {
+            fields: [
+                { name: "firstname", value: document.getElementById('nombre').value },
+                { name: "email", value: document.getElementById('email').value },
+                { name: "phone", value: document.getElementById('telefono').value },
+                { name: "state", value: document.getElementById('provincia').value }
+            ],
+            context: {
+                pageUri: window.location.href,
+                pageName: document.title
+            },
+            legalConsentOptions: {
+                consent: {
+                    consentToProcess: true,
+                    text: "Acepto la política de privacidad",
+                    communications: [
+                        {
+                            value: document.getElementById('newsletter').checked,
+                            subscriptionTypeId: 999,
+                            text: "Acepto recibir comunicaciones"
+                        }
+                    ]
+                }
+            }
+        };
+        
+        try {
+            const response = await fetch(
+                `https://api.hsforms.com/submissions/v3/integration/submit/${CONFIG.hubspot.portalId}/${CONFIG.hubspot.formGuid}`,
+                {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                }
+            );
+            
+            if (response.ok) {
+                // Éxito
+                form.innerHTML = `
+                    <div class="text-center py-12">
+                        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <span class="material-icons text-green-500 text-4xl">check_circle</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-primary mb-4">¡Gracias por tu interés!</h3>
+                        <p class="text-gray-600">Nos pondremos en contacto contigo muy pronto.</p>
+                    </div>
+                `;
+            } else {
+                throw new Error('Error en el envío');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+            alert('Hubo un error al enviar. Por favor, inténtalo de nuevo.');
+        }
+    });
+}
+
+// Añadir al DOMContentLoaded existente o llamar directamente
+document.addEventListener('DOMContentLoaded', initHubSpotForm);
