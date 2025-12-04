@@ -1,0 +1,150 @@
+/* ============================================
+   EMPIEZA DE CERO - LANDING PAGE STYLES
+   ============================================ */
+
+/* Smooth scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.hero-animated-bg {
+    background: linear-gradient(-45deg, #0A2463, #0D2E7A, #05143A, #122D6B);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.hero-gradient {
+    background-image: linear-gradient(to right, #0A2463 50%, transparent 100%);
+}
+
+/* ============================================
+   HELLO BAR
+   ============================================ */
+.hello-bar {
+    animation: helloBarSlide 0.5s ease-out;
+}
+
+@keyframes helloBarSlide {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ============================================
+   TIMELINE ANIMADO
+   ============================================ */
+.timeline-container {
+    position: relative;
+}
+
+.timeline-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, #0A2463 10%, #0A2463 90%, transparent);
+    transform: translateX(-50%);
+    opacity: 0.2;
+}
+
+.timeline-line-progress {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 3px;
+    height: 0%;
+    background: linear-gradient(to bottom, #0A2463, #1a3a8f);
+    transform: translateX(-50%);
+    transition: height 0.1s ease-out;
+    border-radius: 3px;
+}
+
+.timeline-step {
+    position: relative;
+}
+
+.timeline-horizontal {
+    position: absolute;
+    top: 50%;
+    height: 3px;
+    background: #0A2463;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: all 0.6s ease-out;
+}
+
+.timeline-horizontal.left {
+    right: 50%;
+    width: 0;
+    transform-origin: right center;
+}
+
+.timeline-horizontal.right {
+    left: 50%;
+    width: 0;
+    transform-origin: left center;
+}
+
+.timeline-horizontal.active {
+    opacity: 1;
+    width: calc(50% - 2rem);
+}
+
+.timeline-dot {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border: 3px solid #0A2463;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.4s ease-out;
+    z-index: 10;
+}
+
+.timeline-dot.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.timeline-dot::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: #0A2463;
+    border-radius: 50%;
+}
+
+/* ============================================
+   UTILIDADES Y EFECTOS
+   ============================================ */
+.card-hover {
+    transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(10, 36, 99, 0.15);
+}
