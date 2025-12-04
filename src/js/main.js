@@ -83,19 +83,19 @@ function animateTimeline() {
 // ============================================
 // INICIALIZACIÓN
 // ============================================
-document.addEventListener('DOMContentLoaded', function() {
-    // Iniciar Hello Bar
-    iniciarHelloBar();
-    
-    // Iniciar AOS
+
+// Función para inicializar AOS cuando esté disponible
+function initAOS() {
     if (typeof AOS !== 'undefined') {
         AOS.init(CONFIG.aos);
+    } else {
+        // Reintentar si AOS no está cargado aún
+        setTimeout(initAOS, 100);
     }
-    
-    // Iniciar animación del timeline
-    animateTimeline();
-    
-    // Iniciar Swiper Testimonios
+}
+
+// Función para inicializar Swiper cuando esté disponible
+function initSwiper() {
     if (typeof Swiper !== 'undefined') {
         const testimoniosSwiper = new Swiper('.testimoniosSwiper', {
             slidesPerView: 1,
@@ -124,7 +124,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
             },
         });
+    } else {
+        // Reintentar si Swiper no está cargado aún
+        setTimeout(initSwiper, 100);
     }
+}
+
+// Inicialización principal
+document.addEventListener('DOMContentLoaded', function() {
+    // Iniciar Hello Bar (no depende de librerías externas)
+    iniciarHelloBar();
+    
+    // Iniciar animación del timeline
+    animateTimeline();
+    
+    // Iniciar AOS (carga diferida)
+    initAOS();
+    
+    // Iniciar Swiper (carga diferida)
+    initSwiper();
 });
 
 // Event Listeners
