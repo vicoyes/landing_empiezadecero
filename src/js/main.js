@@ -16,8 +16,14 @@ function iniciarHelloBar() {
             link.textContent = CONFIG.helloBar.textoBoton;
             link.href = CONFIG.helloBar.enlace;
             
+            // Solo mostrar en desktop (md+), mantener hidden en móviles
             bar.classList.remove('hidden');
-            document.body.style.paddingTop = bar.offsetHeight + 'px';
+            bar.classList.add('hidden', 'md:block');
+            
+            // Ajustar padding solo en desktop
+            if (window.innerWidth >= 768) {
+                document.body.style.paddingTop = bar.offsetHeight + 'px';
+            }
         }
     }
 }

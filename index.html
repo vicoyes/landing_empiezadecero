@@ -37,9 +37,9 @@
 </head>
 <body class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-200">
 
-<!-- Hello Bar -->
-<div id="helloBar" class="hello-bar fixed top-0 left-0 w-full bg-yellow-400 text-primary z-50 py-2 px-4 text-center hidden">
-<div class="container mx-auto flex items-center justify-center gap-4 flex-wrap">
+<!-- Hello Bar - Oculto en móviles -->
+<div id="helloBar" class="hello-bar fixed top-0 left-0 w-full bg-yellow-400 text-primary z-50 py-2 px-4 text-center hidden md:block">
+<div class="container mx-auto hidden md:flex items-center justify-center gap-4 flex-wrap">
 <p class="font-semibold text-sm md:text-base" id="helloBarMessage"></p>
 <a href="#" id="helloBarLink" class="bg-primary text-white text-xs md:text-sm font-bold px-4 py-1 rounded-full hover:bg-primary/90 transition-colors"></a>
 <button onclick="cerrarHelloBar()" class="absolute right-4 top-1/2 -translate-y-1/2 text-primary/60 hover:text-primary transition-colors">
@@ -64,12 +64,12 @@
 </div>
 
 <!-- H1 - Título principal -->
-<h1 class="font-extrabold text-3xl md:text-4xl lg:text-5xl leading-tight mb-6" data-aos="fade-up" data-aos-delay="200">
+<h1 class="font-extrabold text-2xl md:text-4xl lg:text-5xl leading-tight mb-6" data-aos="fade-up" data-aos-delay="200">
 Genera <span class="text-yellow-400">300€ extra</span> por cada persona a la que ayudes a cancelar sus deudas legalmente.
 </h1>
 
 <!-- H2 - Subtítulo -->
-<p class="text-lg md:text-xl text-white/90 max-w-xl mb-4 leading-relaxed" data-aos="fade-up" data-aos-delay="300">
+<p class="text-base md:text-xl text-white/90 max-w-xl mb-4 leading-relaxed" data-aos="fade-up" data-aos-delay="300">
 <strong>Sin ser abogado. Sin experiencia en ventas.</strong>
 </p>
 <p class="text-base md:text-lg text-white/70 max-w-xl mb-8 leading-relaxed" data-aos="fade-up" data-aos-delay="400">
@@ -158,12 +158,12 @@ allowfullscreen>
 <span class="inline-block px-4 py-2 bg-primary/10 text-primary text-sm font-semibold rounded-full mb-4" data-aos="fade-down">MIRA A TU ALREDEDOR</span>
 
 <!-- Título -->
-<h2 class="text-3xl md:text-5xl font-bold text-primary mb-8 text-center" data-aos="fade-up">
+<h2 class="text-2xl md:text-4xl lg:text-5xl font-bold text-primary mb-8 text-center" data-aos="fade-up">
 Seguro conoces a alguien que necesita un respiro.
 </h2>
 
 <!-- Texto principal -->
-<div class="space-y-6 text-lg md:text-xl text-gray-600 leading-relaxed" data-aos="fade-up" data-aos-delay="100">
+<div class="space-y-6 text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed" data-aos="fade-up" data-aos-delay="100">
 <p>
 Vivimos tiempos difíciles. Es muy probable que tengas un <strong class="text-primary">amigo, un familiar, un compañero de trabajo o un vecino</strong> que está atrapado en una espiral de deudas, llamadas de acoso y ansiedad financiera.
 </p>
@@ -192,19 +192,19 @@ No buscamos comerciales agresivos. Buscamos <strong>personas empáticas</strong>
 <!-- Estadísticas visuales -->
 <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4" data-aos="fade-up" data-aos-delay="300">
 <div class="text-center p-6 bg-gray-50 rounded-xl">
-<div class="text-3xl md:text-4xl font-bold text-primary mb-2">1 de 4</div>
+<div class="text-2xl md:text-3xl lg:text-4xl font-bold text-primary mb-2">1 de 4</div>
 <p class="text-gray-500 text-sm">familias tiene problemas de deuda</p>
 </div>
 <div class="text-center p-6 bg-gray-50 rounded-xl">
-<div class="text-3xl md:text-4xl font-bold text-primary mb-2">85%</div>
+<div class="text-2xl md:text-3xl lg:text-4xl font-bold text-primary mb-2">85%</div>
 <p class="text-gray-500 text-sm">no conoce la Ley de Segunda Oportunidad</p>
 </div>
 <div class="text-center p-6 bg-gray-50 rounded-xl">
-<div class="text-3xl md:text-4xl font-bold text-primary mb-2">+50K€</div>
+<div class="text-2xl md:text-3xl lg:text-4xl font-bold text-primary mb-2">+50K€</div>
 <p class="text-gray-500 text-sm">deuda media cancelada</p>
 </div>
 <div class="text-center p-6 bg-gray-50 rounded-xl">
-<div class="text-3xl md:text-4xl font-bold text-primary mb-2">300€</div>
+<div class="text-2xl md:text-3xl lg:text-4xl font-bold text-primary mb-2">300€</div>
 <p class="text-gray-500 text-sm">ganas por cada referido</p>
 </div>
 </div>
@@ -226,7 +226,7 @@ No buscamos comerciales agresivos. Buscamos <strong>personas empáticas</strong>
 <!-- Encabezado -->
 <div class="text-center mb-20">
 <span class="inline-block px-4 py-2 bg-primary/10 text-primary text-sm font-semibold rounded-full mb-4" data-aos="fade-down">NUESTRO MODELO</span>
-<h2 class="text-3xl md:text-5xl font-bold text-primary" data-aos="fade-up" data-aos-delay="100">Cómo Funciona el Ecosistema</h2>
+<h2 class="text-2xl md:text-4xl lg:text-5xl font-bold text-primary" data-aos="fade-up" data-aos-delay="100">Cómo Funciona el Ecosistema</h2>
 </div>
 
 <!-- Timeline Vertical -->
@@ -343,10 +343,10 @@ Tu labor <strong>abre puertas, crea oportunidades y cambia vidas</strong>. Eres 
 <!-- Encabezado -->
 <div class="text-center mb-16">
 <span class="inline-block px-4 py-2 bg-primary/10 text-primary text-sm font-semibold rounded-full mb-4" data-aos="fade-down">NUESTRA AUTORIDAD</span>
-<h2 class="text-3xl md:text-5xl font-bold text-primary mb-4" data-aos="fade-up">
+<h2 class="text-2xl md:text-4xl lg:text-5xl font-bold text-primary mb-4" data-aos="fade-up">
 Respalda tu recomendación con expertos reales.
 </h2>
-<p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+<p class="text-base md:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">
 Al unirte como Conector, te respaldas en la solidez de <strong class="text-primary">Empieza de Cero</strong>. No somos una oficina virtual; somos un despacho líder en cancelación de deudas.
 </p>
 </div>
@@ -405,10 +405,10 @@ Cuidamos a tus contactos como si fueran de nuestra familia.
 <!-- Encabezado -->
 <div class="text-center mb-16">
 <span class="inline-block px-4 py-2 bg-primary/10 text-primary text-sm font-semibold rounded-full mb-4" data-aos="fade-down">TU ÚNICA MISIÓN</span>
-<h2 class="text-3xl md:text-5xl font-bold text-primary mb-4" data-aos="fade-up">
+<h2 class="text-2xl md:text-4xl lg:text-5xl font-bold text-primary mb-4" data-aos="fade-up">
 "Conectar"
 </h2>
-<p class="text-xl md:text-2xl text-gray-600" data-aos="fade-up" data-aos-delay="100">
+<p class="text-lg md:text-xl lg:text-2xl text-gray-600" data-aos="fade-up" data-aos-delay="100">
 Nosotros hacemos el resto.
 </p>
 </div>
@@ -575,10 +575,10 @@ Sin letra pequeña. Sin límites de referidos.
 <span class="inline-block px-4 py-2 bg-primary/10 text-primary text-sm font-semibold rounded-full mb-4">
 TUS BENEFICIOS
 </span>
-<h2 class="text-4xl md:text-5xl font-bold text-primary mb-4">
+<h2 class="text-2xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">
 ¿Qué ganas tú como Conector?
 </h2>
-<p class="text-gray-600 text-lg">
+<p class="text-gray-600 text-base md:text-lg">
 Más que un ingreso extra, una forma de generar impacto real.
 </p>
 </div>
@@ -653,10 +653,10 @@ Sin inversión inicial • Sin riesgo • 100% transparente
 <!-- Encabezado -->
 <div class="text-center mb-16 max-w-3xl mx-auto">
 <span class="inline-block px-4 py-2 bg-primary/10 text-primary text-sm font-semibold rounded-full mb-4" data-aos="fade-down">TESTIMONIOS REALES</span>
-<h2 class="text-3xl md:text-5xl font-bold text-primary mb-4" data-aos="fade-up">
+<h2 class="text-2xl md:text-4xl lg:text-5xl font-bold text-primary mb-4" data-aos="fade-up">
 Historias de personas que empezaron de cero
 </h2>
-<p class="text-lg md:text-xl text-gray-600" data-aos="fade-up" data-aos-delay="100">
+<p class="text-base md:text-lg lg:text-xl text-gray-600" data-aos="fade-up" data-aos-delay="100">
 Estas son las experiencias de quienes confiaron en nosotros. Tu referido podría ser el próximo.
 </p>
 </div>
@@ -922,10 +922,10 @@ Estas son las experiencias de quienes confiaron en nosotros. Tu referido podría
 <!-- Encabezado -->
 <div class="text-center mb-12">
 <span class="inline-block px-4 py-2 bg-white/10 text-white text-sm font-semibold rounded-full mb-4" data-aos="fade-down">ÚNETE COMO CONECTOR</span>
-<h2 class="text-3xl md:text-5xl font-bold text-white mb-4" data-aos="fade-up">
+<h2 class="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4" data-aos="fade-up">
 Consulta tu caso gratuitamente con nosotros
 </h2>
-<p class="text-lg md:text-xl text-white/80" data-aos="fade-up" data-aos-delay="100">
+<p class="text-base md:text-lg lg:text-xl text-white/80" data-aos="fade-up" data-aos-delay="100">
 Déjanos tus datos y te contactaremos para explicarte todo sin compromiso.
 </p>
 </div>
@@ -1116,10 +1116,10 @@ Tus datos están seguros y nunca serán compartidos.
 <!-- Encabezado -->
 <div class="text-center mb-16">
 <span class="inline-block px-4 py-2 bg-primary/10 text-primary text-sm font-semibold rounded-full mb-4" data-aos="fade-down">PREGUNTAS FRECUENTES</span>
-<h2 class="text-3xl md:text-5xl font-bold text-primary mb-4" data-aos="fade-up">
+<h2 class="text-2xl md:text-4xl lg:text-5xl font-bold text-primary mb-4" data-aos="fade-up">
 Resolvemos tus dudas
 </h2>
-<p class="text-lg md:text-xl text-gray-600" data-aos="fade-up" data-aos-delay="100">
+<p class="text-base md:text-lg lg:text-xl text-gray-600" data-aos="fade-up" data-aos-delay="100">
 Todo lo que necesitas saber antes de unirte como Conector.
 </p>
 </div>
