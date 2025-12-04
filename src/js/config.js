@@ -33,3 +33,11 @@ const CONFIG = {
         delay: 0
     }
 };
+
+
+// Crea cuenta gratis: hubspot.com/products/crm
+// Crea formulario: Marketing → Formularios → Crear formulario
+// Campos necesarios: Nombre, Email, Teléfono, Estado/Provincia
+// Obtén los IDs:
+// Portal ID: En la URL app.hubspot.com/contacts/**12345678**/...
+// Form GUID: Formulario → Acciones → Compartir → Ver GUID
