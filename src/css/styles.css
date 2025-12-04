@@ -153,7 +153,13 @@ html {
    TESTIMONIOS SLIDER
    ============================================ */
 .testimoniosSwiper {
-    padding: 30px 0 50px 0;
+    padding: 30px 0 50px 0 !important;
+    overflow: visible;
+}
+
+.testimoniosSwiper .swiper {
+    padding-top: 20px;
+    padding-bottom: 3px;
     overflow: visible;
 }
 
