@@ -88,8 +88,62 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Iniciar animación del timeline
     animateTimeline();
+    
+    // Iniciar Swiper Testimonios
+    if (typeof Swiper !== 'undefined') {
+        const testimoniosSwiper = new Swiper('.testimoniosSwiper', {
+            slidesPerView: 1,
+            spaceBetween: 24,
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next-custom',
+                prevEl: '.swiper-button-prev-custom',
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                    spaceBetween: 24,
+                },
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 32,
+                },
+            },
+        });
+    }
 });
 
 // Event Listeners
 window.addEventListener('scroll', animateTimeline);
 window.addEventListener('load', animateTimeline);
+
+// ============================================
+// FAQ ACORDEÓN
+// ============================================
+function toggleFaq(button) {
+    const faqItem = button.closest('.faq-item');
+    const content = faqItem.querySelector('.faq-content');
+    const icon = faqItem.querySelector('.faq-icon');
+    
+    // Cerrar otros items abiertos
+    document.querySelectorAll('.faq-item').forEach(item => {
+        if (item !== faqItem) {
+            item.querySelector('.faq-content').classList.add('hidden');
+            item.querySelector('.faq-icon').classList.remove('rotate-180');
+            item.classList.remove('faq-active');
+        }
+    });
+    
+    // Toggle el item actual
+    content.classList.toggle('hidden');
+    icon.classList.toggle('rotate-180');
+    faqItem.classList.toggle('faq-active');
+}

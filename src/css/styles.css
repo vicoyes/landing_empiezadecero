@@ -148,3 +148,88 @@ html {
     transform: translateY(-5px);
     box-shadow: 0 20px 40px rgba(10, 36, 99, 0.15);
 }
+
+/* ============================================
+   TESTIMONIOS SLIDER
+   ============================================ */
+.testimoniosSwiper {
+    padding: 20px 0 50px 0;
+}
+
+.testimoniosSwiper .swiper-slide {
+    height: auto;
+}
+
+.testimoniosSwiper .swiper-slide > div {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.testimoniosSwiper .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background: #0A2463;
+    opacity: 0.3;
+    transition: all 0.3s ease;
+}
+
+.testimoniosSwiper .swiper-pagination-bullet-active {
+    opacity: 1;
+    width: 30px;
+    border-radius: 5px;
+}
+
+/* Botones de navegación personalizados */
+.swiper-button-prev-custom,
+.swiper-button-next-custom {
+    transition: all 0.2s ease;
+}
+
+.swiper-button-prev-custom:hover,
+.swiper-button-next-custom:hover {
+    background-color: #0A2463;
+    color: white;
+}
+
+@media (max-width: 1024px) {
+    .swiper-button-prev-custom,
+    .swiper-button-next-custom {
+        display: none;
+    }
+}
+
+/* ============================================
+   FAQ ACORDEÓN
+   ============================================ */
+.faq-item {
+    transition: all 0.3s ease;
+}
+
+.faq-item.faq-active {
+    border-color: #0A2463;
+    box-shadow: 0 4px 20px rgba(10, 36, 99, 0.1);
+}
+
+.faq-icon {
+    transition: transform 0.3s ease;
+}
+
+.faq-icon.rotate-180 {
+    transform: rotate(180deg);
+}
+
+.faq-content {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
