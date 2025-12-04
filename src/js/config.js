@@ -5,7 +5,7 @@
 const CONFIG = {
     // Hello Bar
     helloBar: {
-        mensaje: "🎉 ¡Únete ahora y gana 300€ por cada referido! Programa limitado.",
+        mensaje: "Únete ahora y gana 300€ por cada referido. Programa limitado por zonas.",
         mostrar: true,
         enlace: "#registro",
         textoBoton: "Más info"
