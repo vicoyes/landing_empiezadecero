@@ -149,15 +149,15 @@
           
           <!-- Pre-título con icono de balanza -->
           <div
-            class="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-full py-2 px-4 mb-6"
+            class="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-full py-2 px-4 mb-6 mt-4 md:mt-0"
             data-aos="fade-down" data-aos-delay="100">
-            <span class="material-icons text-white text-2xl">balance</span>
-            <span class="text-xs md:text-sm font-semibold tracking-wider uppercase">Programa de Embajadores y
+            <span class="material-icons text-white text-xl md:text-2xl">balance</span>
+            <span class="text-[10px] md:text-sm font-semibold tracking-wider uppercase">Programa de Embajadores y
               Conectores</span>
           </div>
 
           <!-- H1 - Título principal -->
-          <h1 class="font-extrabold text-[38px] leading-tight mb-6" style="font-family: 'Inter', sans-serif;" data-aos="fade-up"
+          <h1 class="font-extrabold text-[28px] md:text-[38px] leading-tight mb-4 md:mb-6" style="font-family: 'Inter', sans-serif;" data-aos="fade-up"
             data-aos-delay="200">
             Gana <span class="text-yellow-400">300€</span> por recomendarnos mientras ayudas a personas a cancelar sus deudas legalmente.
           </h1>
@@ -176,9 +176,9 @@
           <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-3" data-aos="fade-up"
             data-aos-delay="500">
             <a href="#registro"
-              class="group inline-flex items-center justify-center gap-2 bg-white text-primary font-bold text-base md:text-lg px-8 py-4 rounded-full shadow-lg hover:bg-yellow-400 hover:text-primary hover:scale-105 transition-all duration-300">
+              class="group inline-flex items-center justify-center gap-1 md:gap-2 bg-white text-primary font-bold text-base md:text-lg px-4 md:px-8 py-3 md:py-4 rounded-full shadow-lg hover:bg-yellow-400 hover:text-primary hover:scale-105 transition-all duration-300 tracking-tight md:tracking-normal whitespace-nowrap">
               <span>QUIERO SER CONECTOR Y GANAR 300€</span>
-              <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor"
+              <svg class="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform flex-shrink-0" fill="none" stroke="currentColor"
                 viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3">
                 </path>
@@ -221,12 +221,12 @@
       </div>
     </div>
     
-    <!-- Fondo decorativo detrás de la mujer -->
-    <div class="hidden lg:block absolute right-0 bottom-0 w-1/2 h-full z-[5]">
+    <!-- Fondo decorativo detrás de la mujer - visible en móvil y desktop -->
+    <div class="absolute right-0 bottom-0 w-full lg:w-1/2 h-[40%] lg:h-full z-[5]">
       <img 
         src="src/img/fondo-hero-header.png" 
         alt="" 
-        class="w-full h-full object-cover object-center opacity-20"
+        class="w-full h-full object-cover object-center lg:object-bottom opacity-15 lg:opacity-20"
       />
     </div>
     
@@ -241,8 +241,9 @@
     </div>
     
     <div class="absolute bottom-0 left-0 w-full bg-primary/80 backdrop-blur-sm z-20">
-      <div class="container mx-auto px-6 lg:px-8 py-4">
-        <div class="flex flex-wrap justify-center lg:justify-between items-center gap-6 text-white text-sm">
+      <div class="container mx-auto px-4 lg:px-8 py-3 lg:py-4">
+        <!-- Desktop: una fila -->
+        <div class="hidden lg:flex justify-between items-center text-white text-sm">
           <div class="flex items-center gap-2">
             <span class="material-icons text-base">call</span>
             <span>(34) 692 161 958</span>
@@ -260,9 +261,236 @@
             <span>conectores@empiezadecero.legal</span>
           </div>
         </div>
+        <!-- Móvil: grid 2x2 compacto -->
+        <div class="grid grid-cols-2 gap-2 lg:hidden text-white text-xs">
+          <div class="flex items-center gap-1.5">
+            <span class="material-icons text-sm">call</span>
+            <span>692 161 958</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="material-icons text-sm">location_on</span>
+            <span>Madrid</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="material-icons text-sm">public</span>
+            <span>empiezadecero.es</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="material-icons text-sm">email</span>
+            <span>conectores@...</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- GSAP y ScrollTrigger para el efecto pinned (solo desktop) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- SECCIÓN ESPECIAL: NUESTRO SUEÑO - Versión MÓVIL (vertical) -->
+  <section id="sueno-mobile" class="lg:hidden relative overflow-hidden py-20" style="background: linear-gradient(135deg, #0A2463 0%, #0d2d6e 50%, #051330 100%);">
+    <!-- Fondo con patrón sutil -->
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute top-0 left-0 w-full h-full" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 50px 50px;"></div>
+    </div>
+
+    <div class="container mx-auto px-6 relative z-10">
+      <!-- Panel 1: TENEMOS UN SUEÑO -->
+      <div class="text-center mb-16" data-aos="fade-up">
+        <p class="text-white/60 text-sm font-semibold tracking-[0.2em] uppercase mb-4">
+          En Empieza de Cero
+        </p>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight mb-4" 
+            style="font-family: 'Inter', sans-serif;">
+          TENEMOS UN SUEÑO
+        </h2>
+        <p class="text-lg text-white/90 font-light mb-2">
+          Construir un verdadero ecosistema
+        </p>
+        <p class="text-lg text-white font-semibold">
+          de segundas oportunidades
+        </p>
+        <div class="mt-6 flex justify-center">
+          <div class="w-16 h-1 bg-gradient-to-r from-transparent via-white to-transparent rounded"></div>
+        </div>
+      </div>
+
+      <!-- Imagen central en móvil -->
+      <div class="flex justify-center mb-16" data-aos="zoom-in" data-aos-delay="100">
+        <div class="w-48 h-48 rounded-3xl overflow-hidden opacity-80 shadow-2xl">
+          <img src="src/img/Personas_celebrando.png" alt="" class="w-full h-full object-cover">
+        </div>
+      </div>
+
+      <!-- Panel 2: ÚNETE AL SUEÑO -->
+      <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+        <p class="text-white/60 text-sm font-semibold tracking-[0.2em] uppercase mb-4">
+          ¿Quieres ser parte del cambio?
+        </p>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight mb-4" 
+            style="font-family: 'Inter', sans-serif;">
+          ÚNETE AL SUEÑO
+        </h2>
+        <p class="text-lg text-white/90 font-light mb-8">
+          Juntos podemos llegar más lejos
+        </p>
+        <a href="#registro" class="inline-flex items-center gap-2 bg-white text-primary font-bold px-6 py-3 rounded-full hover:bg-white/90 transition-all duration-300 shadow-lg">
+          <span>Quiero ser Conector</span>
+          <span class="material-icons">arrow_forward</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN ESPECIAL: NUESTRO SUEÑO - Versión DESKTOP (scroll horizontal) -->
+  <section id="sueno-section" class="hidden lg:block relative overflow-hidden" style="background: linear-gradient(135deg, #0A2463 0%, #0d2d6e 50%, #051330 100%);">
+    <!-- Fondo con patrón sutil -->
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute top-0 left-0 w-full h-full" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 50px 50px;"></div>
+    </div>
+
+    <!-- Contenedor que se mueve horizontalmente -->
+    <div id="horizontal-container" class="flex h-screen">
+      
+      <!-- Panel 1: TENEMOS UN SUEÑO -->
+      <div class="panel min-w-full h-screen flex items-center justify-center px-8 relative">
+        <!-- Imágenes decorativas flotantes -->
+        <div class="absolute top-20 left-10 w-48 h-48 rounded-3xl overflow-hidden opacity-30 transform -rotate-6">
+          <img src="src/img/ayuda.jpg" alt="" class="w-full h-full object-cover">
+        </div>
+        <div class="absolute bottom-20 right-10 w-56 h-56 rounded-3xl overflow-hidden opacity-30 transform rotate-6">
+          <img src="src/img/Personas_celebrando.png" alt="" class="w-full h-full object-cover">
+        </div>
+        <div class="absolute top-1/4 right-20 w-32 h-32 rounded-2xl overflow-hidden opacity-20 transform rotate-12 hidden xl:block">
+          <img src="src/img/equipo.jpg" alt="" class="w-full h-full object-cover">
+        </div>
+        
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+          <p class="text-white/60 text-base font-semibold tracking-[0.2em] uppercase mb-4">
+            En Empieza de Cero
+          </p>
+          <h2 class="text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-6" 
+              style="font-family: 'Inter', sans-serif;">
+            TENEMOS UN SUEÑO
+          </h2>
+          <p class="text-3xl text-white/90 font-light max-w-3xl mx-auto mb-2">
+            Construir un verdadero ecosistema
+          </p>
+          <p class="text-3xl text-white font-semibold max-w-3xl mx-auto">
+            de segundas oportunidades
+          </p>
+          <div class="mt-10 flex justify-center">
+            <div class="w-24 h-1 bg-gradient-to-r from-transparent via-white to-transparent rounded"></div>
+          </div>
+          <div class="mt-10 animate-bounce">
+            <span class="material-icons text-white/50 text-3xl">expand_more</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 2: ¿QUIERES SER PARTE DEL CAMBIO? -->
+      <div class="panel min-w-full h-screen flex items-center justify-center px-8 relative">
+        <!-- Imágenes decorativas flotantes -->
+        <div class="absolute top-16 left-16 w-52 h-52 rounded-3xl overflow-hidden opacity-30 transform rotate-3">
+          <img src="src/img/conector.jpg" alt="" class="w-full h-full object-cover">
+        </div>
+        <div class="absolute bottom-24 left-20 w-36 h-36 rounded-2xl overflow-hidden opacity-25 transform -rotate-6 hidden xl:block">
+          <img src="src/img/ayuda.jpg" alt="" class="w-full h-full object-cover">
+        </div>
+        <div class="absolute top-1/3 right-16 w-48 h-48 rounded-3xl overflow-hidden opacity-30 transform -rotate-3">
+          <img src="src/img/equipo.jpg" alt="" class="w-full h-full object-cover">
+        </div>
+        <div class="absolute bottom-20 right-24 w-32 h-32 rounded-2xl overflow-hidden opacity-20 transform rotate-12 hidden xl:block">
+          <img src="src/img/Personas_celebrando.png" alt="" class="w-full h-full object-cover">
+        </div>
+        
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+          <p class="text-white/60 text-base font-semibold tracking-[0.2em] uppercase mb-4">
+            ¿Quieres ser parte del cambio?
+          </p>
+          <h2 class="text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-6" 
+              style="font-family: 'Inter', sans-serif;">
+            ÚNETE AL SUEÑO
+          </h2>
+          <p class="text-3xl text-white/90 font-light max-w-3xl mx-auto">
+            Juntos podemos llegar más lejos
+          </p>
+          <div class="mt-10 flex justify-center">
+            <div class="w-24 h-1 bg-gradient-to-r from-transparent via-white to-transparent rounded"></div>
+          </div>
+          <div class="mt-10">
+            <a href="#registro" class="inline-flex items-center gap-2 bg-white text-primary font-bold px-8 py-4 rounded-full hover:bg-white/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
+              <span>Quiero ser Conector</span>
+              <span class="material-icons">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Indicador de progreso (solo desktop) -->
+    <div id="progress-indicators" class="fixed bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-50 opacity-0">
+      <div id="ind-1" class="w-8 h-1 rounded-full bg-white transition-all duration-300"></div>
+      <div id="ind-2" class="w-8 h-1 rounded-full bg-white/30 transition-all duration-300"></div>
+    </div>
+  </section>
+
+  <script>
+    // Solo inicializar GSAP ScrollTrigger en desktop (>= 1024px)
+    if (window.innerWidth >= 1024) {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Seleccionar elementos
+      const section = document.getElementById('sueno-section');
+      const container = document.getElementById('horizontal-container');
+      const panels = gsap.utils.toArray('.panel');
+      const indicators = document.getElementById('progress-indicators');
+      const ind1 = document.getElementById('ind-1');
+      const ind2 = document.getElementById('ind-2');
+
+      // Calcular el ancho total a desplazar + espacio extra para pausa
+      const totalWidth = container.scrollWidth - window.innerWidth;
+      const extraPause = window.innerHeight * 0.8; // 80% de la altura de pantalla extra para leer
+
+      // Crear la animación de scroll horizontal
+      gsap.to(container, {
+        x: -totalWidth,
+        ease: "none",
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: () => "+=" + (totalWidth + extraPause),
+          pin: true,
+          scrub: 1,
+          anticipatePin: 1,
+          onUpdate: (self) => {
+            // Actualizar indicadores
+            if (self.progress < 0.4) {
+              ind1.style.background = 'white';
+              ind2.style.background = 'rgba(255,255,255,0.3)';
+            } else {
+              ind1.style.background = 'rgba(255,255,255,0.3)';
+              ind2.style.background = 'white';
+            }
+          },
+          onEnter: () => {
+            gsap.to(indicators, { opacity: 1, duration: 0.3 });
+          },
+          onLeave: () => {
+            gsap.to(indicators, { opacity: 0, duration: 0.3 });
+          },
+          onEnterBack: () => {
+            gsap.to(indicators, { opacity: 1, duration: 0.3 });
+          },
+          onLeaveBack: () => {
+            gsap.to(indicators, { opacity: 0, duration: 0.3 });
+          }
+        }
+      });
+    }
+  </script>
 
   <!-- 1.5 LA SEGUNDA OPORTUNIDAD - Información de la Ley -->
   <section class="py-24 md:py-32 bg-gray-50">
@@ -825,7 +1053,7 @@
                 <span class="text-primary/80 font-bold text-sm mb-2 block">PASO 05</span>
                 <h3 class="typo-h4 text-primary mb-2">Cobras 300 €</h3>
                 <p class="text-primary/90 text-sm leading-relaxed">
-                  150 € por pago de 500 € o 300 € de una vez si paga 1.000 €.
+                  Si paga 1.000 € obtienes 300 € de inmediato. Si paga fraccionado: 150 € al llegar a 500 € y otros 150 € al llegar a 1.000 €.
                 </p>
               </div>
             </div>
@@ -1600,7 +1828,8 @@
             </button>
             <div class="faq-content hidden">
               <div class="px-6 pb-6 text-gray-600 leading-relaxed">
-                Cuando tu referido firma el NEP y realiza el primer pago correspondiente.
+                <strong>Si el pago inicial es de 1.000 €:</strong> Obtienes tus 300 € de inmediato.<br><br>
+                <strong>Si el cliente paga de forma fraccionada:</strong> Al llegar a 500 € recibirás 150 € y al llegar a los 1.000 € los otros 150 €.
               </div>
             </div>
           </div>
