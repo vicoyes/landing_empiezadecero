@@ -28,7 +28,7 @@
             "background-dark": "#05143A",
           },
           fontFamily: {
-            display: ["Montserrat", "sans-serif"],
+            display: ["IBM Plex Sans", "sans-serif"],
           },
           borderRadius: {
             DEFAULT: "0.5rem",
@@ -42,16 +42,24 @@
   <style>
     /* Font-face con font-display: swap para evitar FOIT */
     @font-face {
-      font-family: 'Montserrat';
+      font-family: 'IBM Plex Sans';
       font-style: normal;
-      font-weight: 400 800;
+      font-weight: 400 700;
       font-display: swap;
-      src: url(https://fonts.gstatic.com/s/montserrat/v26/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2) format('woff2');
+      src: url(https://fonts.gstatic.com/s/ibmplexsans/v19/zYXgKVElMYYaJe8bpLHnCwDKhdHeFaxOedc.woff2) format('woff2');
+    }
+    
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 600 800;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuFuYAZ9hjp-Ek-_EeA.woff2) format('woff2');
     }
 
     /* Estilos críticos para el Hero (Above the fold) */
     body {
-      font-family: 'Montserrat', system-ui, sans-serif;
+      font-family: 'IBM Plex Sans', system-ui, sans-serif;
       margin: 0;
       background: #F8F9FA;
     }
@@ -82,10 +90,10 @@
   <link href="src/css/styles.css" rel="stylesheet" />
 
   <!-- Google Fonts - Carga diferida con media print trick -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@600;700;800&display=swap"
     rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@600;700;800&display=swap"
       rel="stylesheet" />
   </noscript>
 
@@ -136,18 +144,20 @@
     </div>
 
     <div class="container mx-auto px-6 lg:px-8">
-      <div class="flex flex-col-reverse lg:flex-row items-center min-h-screen">
-        <div class="relative z-10 w-full lg:w-1/2 py-12 lg:py-0 text-white text-center lg:text-left">
-          <!-- Pre-título -->
+      <div class="flex flex-col lg:flex-row items-center min-h-screen">
+        <div class="relative z-10 w-full lg:w-1/2 py-12 lg:py-24 text-white text-center lg:text-left">
+          
+          <!-- Pre-título con icono de balanza -->
           <div
-            class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full py-2 px-4 mb-6 mt-4 lg:mt-0"
+            class="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-full py-2 px-4 mb-6"
             data-aos="fade-down" data-aos-delay="100">
+            <span class="material-icons text-white text-2xl">balance</span>
             <span class="text-xs md:text-sm font-semibold tracking-wider uppercase">Programa de Embajadores y
               Conectores</span>
           </div>
 
           <!-- H1 - Título principal -->
-          <h1 class="font-extrabold text-2xl md:text-4xl lg:text-5xl leading-tight mb-6" data-aos="fade-up"
+          <h1 class="font-extrabold text-[38px] leading-tight mb-6" style="font-family: 'Inter', sans-serif;" data-aos="fade-up"
             data-aos-delay="200">
             Gana <span class="text-yellow-400">300€</span> por recomendarnos mientras ayudas a personas a cancelar sus deudas legalmente.
           </h1>
@@ -208,24 +218,28 @@
           </div>
         </div>
 
-        <!-- Video de promoción -->
-        <div class="w-full lg:w-1/2 mt-20 lg:mt-0 lg:pl-12 flex items-center" data-aos="fade-left" data-aos-delay="400"
-          data-aos-duration="1000">
-          <div class="w-full">
-            <div class="rounded-2xl overflow-hidden shadow-2xl bg-black/20 backdrop-blur-sm border border-white/10">
-              <div class="relative" style="padding-top: 56.25%;">
-                <!-- Reemplaza VIDEO_ID con el ID de tu video de Vimeo -->
-                <iframe
-                  src="https://player.vimeo.com/video/VIDEO_ID?autoplay=0&loop=1&autopause=0&background=0&title=0&byline=0&portrait=0"
-                  class="absolute top-0 left-0 w-full h-full" frameborder="0"
-                  allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
-                </iframe>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
+    
+    <!-- Fondo decorativo detrás de la mujer -->
+    <div class="hidden lg:block absolute right-0 bottom-0 w-1/2 h-full z-[5]">
+      <img 
+        src="src/img/fondo-hero-header.png" 
+        alt="" 
+        class="w-full h-full object-cover object-center opacity-20"
+      />
+    </div>
+    
+    <!-- Imagen de la mujer abogada - posicionada al bottom del hero -->
+    <div class="hidden lg:flex absolute right-0 bottom-0 w-1/2 h-[96vh] items-end justify-center z-10" data-aos="fade-left" data-aos-delay="400"
+      data-aos-duration="1000">
+      <img 
+        src="src/img/mujer abogada.png" 
+        alt="Abogada profesional de Empieza de Cero" 
+        class="max-h-full w-auto object-contain object-bottom drop-shadow-2xl"
+      />
+    </div>
+    
     <div class="absolute bottom-0 left-0 w-full bg-primary/80 backdrop-blur-sm z-20">
       <div class="container mx-auto px-6 lg:px-8 py-4">
         <div class="flex flex-wrap justify-center lg:justify-between items-center gap-6 text-white text-sm">
@@ -243,10 +257,8 @@
           </div>
           <div class="flex items-center gap-2">
             <span class="material-icons text-base">email</span>
-            <span>info@empiezadecero.es</span>
+            <span>conectores@empiezadecero.legal</span>
           </div>
-          <img alt="Empieza de Cero circular logo" class="h-12 w-12 hidden lg:block"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1ErJr7kfB7Z1lg3HgWBwd2jZ9_rZsn3XX1x-zetfffOJOXNY45JACK7iKulyjPg5wHGyxyYtq-F8H1W0GaH8USwsnV-dluVOGjP4tCBeNZV-0TXO1_148C0-4n7AWI5on4j4vOJv5Z1iVb2JTCVJF93LMHCz4M4jIHWB9JaAC1Si6CL9-hUOjwG91nyp1oIdjkk18dff9njD_q9OYItAigthrxALAreWU7hXne4-CAwAuUzotBp0Bj3PD83On_4ba-JGRN4CRPuo" />
         </div>
       </div>
     </div>
@@ -259,12 +271,12 @@
 
         <!-- Encabezado -->
         <div class="text-center mb-16">
-          <span class="inline-block px-4 py-2 bg-primary/10 text-primary text-sm font-semibold rounded-full mb-4"
+          <span class="typo-badge inline-block px-4 py-2 bg-primary/10 text-primary font-semibold rounded-full mb-4"
             data-aos="fade-down">LEY DE SEGUNDA OPORTUNIDAD</span>
-          <h2 class="text-5xl font-bold text-primary mb-4" data-aos="fade-up">
+          <h2 class="typo-h2 text-primary mb-4" data-aos="fade-up">
              A quién puedes referir
           </h2>
-          <p class="text-base text-gray-600 max-w-3xl mx-auto" data-aos="fade-up"
+          <p class="typo-body text-gray-600 max-w-3xl mx-auto" data-aos="fade-up"
             data-aos-delay="100">
             Criterios basados en la Ley de la Segunda Oportunidad y el documento oficial del despacho 
           </p>
@@ -279,9 +291,9 @@
               <div class="w-14 h-14 bg-primary rounded-2xl flex items-center justify-center">
                 <span class="material-icons text-white text-3xl">how_to_reg</span>
               </div>
-              <h3 class="text-lg font-bold text-primary">¿Quién puede acogerse?</h3>
+              <h3 class="typo-h3 text-primary">¿Quién puede acogerse?</h3>
             </div>
-            <p class="text-base text-gray-600 mb-6">Cualquier persona mayor de edad endeudada en España que cumpla:</p>
+            <p class="typo-body text-gray-600 mb-6">Cualquier persona mayor de edad endeudada en España que cumpla:</p>
             <ul class="space-y-4">
               <li class="flex items-start gap-3">
                 <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -289,7 +301,7 @@
                 </div>
                 <div>
                   <span class="font-semibold text-gray-800 text-base">Deudas superiores a 15.000€</span>
-                  <p class="text-base text-gray-500">Mínimo necesario para iniciar el proceso</p>
+                  <p class="typo-body text-gray-500">Mínimo necesario para iniciar el proceso</p>
                 </div>
               </li>
               <li class="flex items-start gap-3">
@@ -298,7 +310,7 @@
                 </div>
                 <div>
                   <span class="font-semibold text-gray-800 text-base">2 o más acreedores</span>
-                  <p class="text-base text-gray-500">Bancos, financieras, hacienda, etc.</p>
+                  <p class="typo-body text-gray-500">Bancos, financieras, hacienda, etc.</p>
                 </div>
               </li>
               <li class="flex items-start gap-3">
@@ -307,7 +319,7 @@
                 </div>
                 <div>
                   <span class="font-semibold text-gray-800 text-base">Capacidad de pago mínima de 200€/mes</span>
-                  <p class="text-base text-gray-500">Para el plan de pagos inicial</p>
+                  <p class="typo-body text-gray-500">Para el plan de pagos inicial</p>
                 </div>
               </li>
             </ul>
@@ -319,43 +331,43 @@
               <div class="w-14 h-14 bg-primary rounded-2xl flex items-center justify-center">
                 <span class="material-icons text-white text-2xl">gavel</span>
               </div>
-              <h3 class="text-lg font-bold text-primary">¿Qué requisitos exige la Ley?</h3>
+              <h3 class="typo-h3 text-primary">¿Qué requisitos exige la Ley?</h3>
             </div>
             <ul class="space-y-3">
               <li class="flex items-start gap-3">
                 <span
                   class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-primary font-bold text-sm">1</span>
-                <span class="text-base text-gray-700">Demostrar <strong class="text-primary">buena fe</strong> (no haber causado
+                <span class="typo-body text-gray-700">Demostrar <strong class="text-primary">buena fe</strong> (no haber causado
                   el sobreendeudamiento intencionalmente)</span>
               </li>
               <li class="flex items-start gap-3">
                 <span
                   class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-primary font-bold text-sm">2</span>
-                <span class="text-base text-gray-700">No tener <strong class="text-primary">delitos
+                <span class="typo-body text-gray-700">No tener <strong class="text-primary">delitos
                     socioeconómicos</strong></span>
               </li>
               <li class="flex items-start gap-3">
                 <span
                   class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-primary font-bold text-sm">3</span>
-                <span class="text-base text-gray-700">No tener condenas por delitos contra <strong class="text-primary">Hacienda o
+                <span class="typo-body text-gray-700">No tener condenas por delitos contra <strong class="text-primary">Hacienda o
                     Seguridad Social</strong></span>
               </li>
               <li class="flex items-start gap-3">
                 <span
                   class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-primary font-bold text-sm">4</span>
-                <span class="text-base text-gray-700">No tener una <strong class="text-primary">derivación de
+                <span class="typo-body text-gray-700">No tener una <strong class="text-primary">derivación de
                     deuda</strong></span>
               </li>
               <li class="flex items-start gap-3">
                 <span
                   class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-primary font-bold text-sm">5</span>
-                <span class="text-base text-gray-700">Demostrar que <strong class="text-primary">no se puede vivir
+                <span class="typo-body text-gray-700">Demostrar que <strong class="text-primary">no se puede vivir
                     dignamente</strong> pagando toda la deuda</span>
               </li>
               <li class="flex items-start gap-3">
                 <span
                   class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-primary font-bold text-sm">6</span>
-                <span class="text-base text-gray-700">Deuda máxima de <strong class="text-primary">5 millones de
+                <span class="typo-body text-gray-700">Deuda máxima de <strong class="text-primary">5 millones de
                     euros</strong></span>
               </li>
             </ul>
@@ -365,8 +377,8 @@
 
         <!-- Tipos de casos: Válidos vs No válidos -->
         <div class="text-center mb-12" data-aos="fade-up">
-          <h3 class="text-lg font-bold text-primary mb-4">¿Qué casos son válidos para la Segunda Oportunidad?</h3>
-          <p class="text-base text-gray-600 max-w-2xl mx-auto">Conoce qué perfiles pueden beneficiarse y cuáles no cumplen los requisitos.</p>
+          <h3 class="typo-h3 text-primary mb-4">¿Qué casos son válidos para la Segunda Oportunidad?</h3>
+          <p class="typo-body text-gray-600 max-w-2xl mx-auto">Conoce qué perfiles pueden beneficiarse y cuáles no cumplen los requisitos.</p>
         </div>
 
         <div class="grid md:grid-cols-2 gap-8" data-aos="fade-up" data-aos-delay="100">
@@ -379,7 +391,7 @@
                 <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
                   <span class="material-icons text-white text-2xl">check_circle</span>
                 </div>
-                <h4 class="font-bold text-lg text-white">Casos que SÍ aplican</h4>
+                <h4 class="typo-h4 text-white">Casos que SÍ aplican</h4>
               </div>
             </div>
             <!-- Lista de casos válidos -->
@@ -389,25 +401,25 @@
                   <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span class="material-icons text-green-600 text-sm">check</span>
                   </div>
-                  <span class="text-base text-gray-700">Empleados <strong class="text-primary">sin bienes</strong> a su nombre</span>
+                  <span class="typo-body text-gray-700">Empleados <strong class="text-primary">sin bienes</strong> a su nombre</span>
                 </li>
                 <li class="flex items-start gap-3">
                   <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span class="material-icons text-green-600 text-sm">check</span>
                   </div>
-                  <span class="text-base text-gray-700">Empleados <strong class="text-primary">con patrimonio liquidable</strong></span>
+                  <span class="typo-body text-gray-700">Empleados <strong class="text-primary">con patrimonio liquidable</strong></span>
                 </li>
                 <li class="flex items-start gap-3">
                   <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span class="material-icons text-green-600 text-sm">check</span>
                   </div>
-                  <span class="text-base text-gray-700"><strong class="text-primary">Autónomos y empresarios</strong></span>
+                  <span class="typo-body text-gray-700"><strong class="text-primary">Autónomos y empresarios</strong></span>
                 </li>
                 <li class="flex items-start gap-3">
                   <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span class="material-icons text-green-600 text-sm">check</span>
                   </div>
-                  <span class="text-base text-gray-700">Personas físicas <strong class="text-primary">con actividad económica</strong></span>
+                  <span class="typo-body text-gray-700">Personas físicas <strong class="text-primary">con actividad económica</strong></span>
                 </li>
               </ul>
               <!-- Precios -->
@@ -432,7 +444,7 @@
                 <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
                   <span class="material-icons text-white text-2xl">cancel</span>
                 </div>
-                <h4 class="font-bold text-lg text-white">Casos que NO aplican</h4>
+                <h4 class="typo-h4 text-white">Casos que NO aplican</h4>
               </div>
             </div>
             <!-- Lista de casos no válidos -->
@@ -442,31 +454,31 @@
                   <div class="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span class="material-icons text-red-600 text-sm">close</span>
                   </div>
-                  <span class="text-base text-gray-700">Deuda <strong class="text-red-600">menor a 15.000€</strong></span>
+                  <span class="typo-body text-gray-700">Deuda <strong class="text-red-600">menor a 15.000€</strong></span>
                 </li>
                 <li class="flex items-start gap-3">
                   <div class="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span class="material-icons text-red-600 text-sm">close</span>
                   </div>
-                  <span class="text-base text-gray-700">Solo <strong class="text-red-600">un acreedor</strong></span>
+                  <span class="typo-body text-gray-700">Solo <strong class="text-red-600">un acreedor</strong></span>
                 </li>
                 <li class="flex items-start gap-3">
                   <div class="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span class="material-icons text-red-600 text-sm">close</span>
                   </div>
-                  <span class="text-base text-gray-700">Personas <strong class="text-red-600">sin ingresos estables</strong></span>
+                  <span class="typo-body text-gray-700">Personas <strong class="text-red-600">sin ingresos estables</strong></span>
                 </li>
                 <li class="flex items-start gap-3">
                   <div class="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span class="material-icons text-red-600 text-sm">close</span>
                   </div>
-                  <span class="text-base text-gray-700">Imposibilidad total de demostrar <strong class="text-red-600">capacidad de pago</strong></span>
+                  <span class="typo-body text-gray-700">Imposibilidad total de demostrar <strong class="text-red-600">capacidad de pago</strong></span>
                 </li>
                 <li class="flex items-start gap-3">
                   <div class="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span class="material-icons text-red-600 text-sm">close</span>
                   </div>
-                  <span class="text-base text-gray-700">Deudas exclusivamente con <strong class="text-red-600">Hacienda sin posibilidad de acuerdo</strong></span>
+                  <span class="typo-body text-gray-700">Deudas exclusivamente con <strong class="text-red-600">Hacienda sin posibilidad de acuerdo</strong></span>
                 </li>
               </ul>
               <!-- Nota informativa -->
@@ -502,11 +514,11 @@
 
         <!-- Encabezado -->
         <div class="text-center mb-12">
-          <span class="inline-block px-4 py-2 bg-primary/10 text-primary text-sm font-semibold rounded-full mb-4" data-aos="fade-down">EJEMPLOS DE CASOS</span>
-          <h2 class="text-5xl font-bold text-primary mb-4" data-aos="fade-up">
+          <span class="inline-block px-4 py-2 bg-primary/10 text-primary typo-badge rounded-full mb-4" data-aos="fade-down">EJEMPLOS DE CASOS</span>
+          <h2 class="typo-h2 text-primary mb-4" data-aos="fade-up">
             Ejemplos rápidos de casos que puedes referir
           </h2>
-          <p class="text-base text-gray-600 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+          <p class="typo-body text-gray-600 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
             Estos son ejemplos típicos de personas que pueden beneficiarse de la Ley de Segunda Oportunidad.
           </p>
         </div>
@@ -521,8 +533,8 @@
                 <span class="material-icons text-primary text-2xl">credit_card</span>
               </div>
               <div>
-                <h4 class="font-bold text-lg text-primary mb-2">Tarjetas y minicréditos</h4>
-                <p class="text-base text-gray-600">Persona con más de <strong class="text-primary">18.000€</strong> en tarjetas y minicréditos acumulados.</p>
+                <h4 class="typo-h4 text-primary mb-2">Tarjetas y minicréditos</h4>
+                <p class="typo-body text-gray-600">Persona con más de <strong class="text-primary">18.000€</strong> en tarjetas y minicréditos acumulados.</p>
               </div>
             </div>
           </div>
@@ -534,8 +546,8 @@
                 <span class="material-icons text-primary text-2xl">store</span>
               </div>
               <div>
-                <h4 class="font-bold text-lg text-primary mb-2">Autónomo con múltiples acreedores</h4>
-                <p class="text-base text-gray-600">Autónomo con <strong class="text-primary">70.000€</strong> de deuda y <strong class="text-primary">4 acreedores</strong> diferentes.</p>
+                <h4 class="typo-h4 text-primary mb-2">Autónomo con múltiples acreedores</h4>
+                <p class="typo-body text-gray-600">Autónomo con <strong class="text-primary">70.000€</strong> de deuda y <strong class="text-primary">4 acreedores</strong> diferentes.</p>
               </div>
             </div>
           </div>
@@ -547,8 +559,8 @@
                 <span class="material-icons text-primary text-2xl">person</span>
               </div>
               <div>
-                <h4 class="font-bold text-lg text-primary mb-2">Empleado sin bienes</h4>
-                <p class="text-base text-gray-600">Empleado sin bienes con <strong class="text-primary">30.000€</strong> en préstamos personales.</p>
+                <h4 class="typo-h4 text-primary mb-2">Empleado sin bienes</h4>
+                <p class="typo-body text-gray-600">Empleado sin bienes con <strong class="text-primary">30.000€</strong> en préstamos personales.</p>
               </div>
             </div>
           </div>
@@ -560,8 +572,8 @@
                 <span class="material-icons text-primary text-2xl">business</span>
               </div>
               <div>
-                <h4 class="font-bold text-lg text-primary mb-2">Empresario con deuda alta</h4>
-                <p class="text-base text-gray-600">Empresario con deuda acumulada de <strong class="text-primary">450.000€</strong> entre proveedores y entidades financieras.</p>
+                <h4 class="typo-h4 text-primary mb-2">Empresario con deuda alta</h4>
+                <p class="typo-body text-gray-600">Empresario con deuda acumulada de <strong class="text-primary">450.000€</strong> entre proveedores y entidades financieras.</p>
               </div>
             </div>
           </div>
@@ -572,9 +584,9 @@
         <div class="text-center mt-12 bg-primary/5 rounded-2xl p-8" data-aos="fade-up" data-aos-delay="300">
           <div class="flex items-center justify-center gap-3 mb-4">
             <span class="material-icons text-primary text-3xl">lightbulb</span>
-            <p class="text-lg font-bold text-primary">¿Conoces a alguien en una situación similar?</p>
+            <p class="typo-h4 text-primary">¿Conoces a alguien en una situación similar?</p>
           </div>
-          <p class="text-base text-gray-600 mb-6">Puedes ayudarle a empezar de cero y ganar 300€ por cada referido.</p>
+          <p class="typo-body text-gray-600 mb-6">Puedes ayudarle a empezar de cero y ganar 300€ por cada referido.</p>
           <a href="#registro"
             class="inline-flex items-center justify-center gap-2 bg-primary text-white font-bold text-base uppercase tracking-wide px-8 py-4 rounded-full shadow-lg hover:bg-primary/90 hover:scale-105 transition-all duration-300">
             <span>QUIERO SER CONECTOR</span>
@@ -591,11 +603,11 @@
     <div class="container mx-auto px-6 lg:px-8">
       <div class="max-w-4xl mx-auto text-center">
         <!-- Pre-título -->
-        <span class="inline-block px-4 py-2 bg-primary/10 text-primary text-sm font-semibold rounded-full mb-4"
+        <span class="inline-block px-4 py-2 bg-primary/10 text-primary typo-badge rounded-full mb-4"
           data-aos="fade-down">MIRA A TU ALREDEDOR</span>
 
         <!-- Título -->
-        <h2 class="text-5xl font-bold text-primary mb-8 text-center" data-aos="fade-up">
+        <h2 class="typo-h2 text-primary mb-8 text-center" data-aos="fade-up">
           Seguro conoces a alguien que necesita un respiro.
         </h2>
 
@@ -675,61 +687,154 @@
             <span class="w-3 h-3 bg-sky-400 rounded-full"></span>
             <span class="text-sky-400 text-sm font-semibold uppercase tracking-wider">5 PASOS SIMPLES</span>
           </div>
-          <h2 class="text-5xl font-bold text-white leading-tight" data-aos="fade-up" data-aos-delay="100">
+          <h2 class="typo-h2 text-white leading-tight" data-aos="fade-up" data-aos-delay="100">
             Cómo funciona tu papel<br class="hidden md:block"> como Conector
           </h2>
         </div>
 
-        <!-- Grid de 5 tarjetas -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-12" data-aos="fade-up" data-aos-delay="200">
-          <!-- Paso 1 -->
-          <div class="bg-primary/60 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-primary/80 transition-all duration-300">
-            <span class="text-sky-400 font-bold text-sm mb-3 block">01.</span>
-            <h3 class="text-white font-bold text-lg mb-3">Identifica</h3>
-            <p class="text-white/70 text-sm leading-relaxed">
-              Encuentra personas con deudas +15.000 € y mínimo 2 acreedores.
-            </p>
-          </div>
+        <!-- Grid de 5 pasos con flechas -->
+        <div class="relative mb-12">
+          <!-- Contenedor de pasos -->
+          <div class="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12">
+            
+            <!-- Paso 1 -->
+            <div class="relative flex flex-col items-center" data-aos="fade-up" data-aos-delay="0" data-aos-duration="600">
+              <div class="relative bg-primary/60 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-primary/80 hover:border-sky-400/30 transition-all duration-300 w-full h-full min-h-[280px] group">
+                <!-- Número de fondo -->
+                <span class="absolute top-3 right-3 text-[80px] font-black text-white/5 leading-none select-none">1</span>
+                <!-- Icono -->
+                <div class="w-14 h-14 bg-sky-400/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-sky-400/30 transition-colors">
+                  <span class="material-icons text-sky-400 text-2xl">search</span>
+                </div>
+                <span class="text-sky-400 font-bold text-sm mb-2 block">PASO 01</span>
+                <h3 class="typo-h4 text-white mb-2">Identifica</h3>
+                <p class="text-white/70 text-sm leading-relaxed">
+                  Encuentra personas con deudas +15.000 € y mínimo 2 acreedores.
+                </p>
+              </div>
+              <!-- Flecha hacia abajo (móvil) -->
+              <div class="flex md:hidden items-center justify-center py-4" data-aos="fade-down" data-aos-delay="200">
+                <div class="step-arrow-circle w-11 h-11 bg-white rounded-full flex items-center justify-center shadow-lg relative z-10">
+                  <span class="material-icons text-primary text-2xl step-arrow-vertical">keyboard_arrow_down</span>
+                </div>
+              </div>
+              <!-- Flecha hacia derecha (desktop) -->
+              <div class="hidden md:flex absolute -right-[26px] top-1/2 -translate-y-1/2 z-10" data-aos="zoom-in" data-aos-delay="300">
+                <div class="step-arrow-circle w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg relative">
+                  <span class="material-icons text-primary text-xl step-arrow-horizontal">arrow_forward</span>
+                </div>
+              </div>
+            </div>
 
-          <!-- Paso 2 -->
-          <div class="bg-primary/60 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-primary/80 transition-all duration-300">
-            <span class="text-sky-400 font-bold text-sm mb-3 block">02.</span>
-            <h3 class="text-white font-bold text-lg mb-3">Recoge datos</h3>
-            <p class="text-white/70 text-sm leading-relaxed">
-              Nombre, DNI, teléfono, email, dirección, estado civil y deuda aproximada.
-            </p>
-          </div>
+            <!-- Paso 2 -->
+            <div class="relative flex flex-col items-center" data-aos="fade-up" data-aos-delay="200" data-aos-duration="600">
+              <div class="relative bg-primary/60 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-primary/80 hover:border-sky-400/30 transition-all duration-300 w-full h-full min-h-[280px] group">
+                <!-- Número de fondo -->
+                <span class="absolute top-3 right-3 text-[80px] font-black text-white/5 leading-none select-none">2</span>
+                <!-- Icono -->
+                <div class="w-14 h-14 bg-sky-400/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-sky-400/30 transition-colors">
+                  <span class="material-icons text-sky-400 text-2xl">edit_note</span>
+                </div>
+                <span class="text-sky-400 font-bold text-sm mb-2 block">PASO 02</span>
+                <h3 class="typo-h4 text-white mb-2">Recoge datos</h3>
+                <p class="text-white/70 text-sm leading-relaxed">
+                  Nombre, DNI, teléfono, email, dirección, estado civil y deuda aproximada.
+                </p>
+              </div>
+              <!-- Flecha hacia abajo (móvil) -->
+              <div class="flex md:hidden items-center justify-center py-4" data-aos="fade-down" data-aos-delay="400">
+                <div class="step-arrow-circle w-11 h-11 bg-white rounded-full flex items-center justify-center shadow-lg relative z-10">
+                  <span class="material-icons text-primary text-2xl step-arrow-vertical">keyboard_arrow_down</span>
+                </div>
+              </div>
+              <!-- Flecha hacia derecha (desktop) -->
+              <div class="hidden md:flex absolute -right-[26px] top-1/2 -translate-y-1/2 z-10" data-aos="zoom-in" data-aos-delay="500">
+                <div class="step-arrow-circle w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg relative">
+                  <span class="material-icons text-primary text-xl step-arrow-horizontal">arrow_forward</span>
+                </div>
+              </div>
+            </div>
 
-          <!-- Paso 3 -->
-          <div class="bg-primary/60 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-primary/80 transition-all duration-300">
-            <span class="text-sky-400 font-bold text-sm mb-3 block">03.</span>
-            <h3 class="text-white font-bold text-lg mb-3">Envía el contacto</h3>
-            <p class="text-white/70 text-sm leading-relaxed">
-              Usa tu enlace privado o formulario de Conector.
-            </p>
-          </div>
+            <!-- Paso 3 -->
+            <div class="relative flex flex-col items-center" data-aos="fade-up" data-aos-delay="400" data-aos-duration="600">
+              <div class="relative bg-primary/60 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-primary/80 hover:border-sky-400/30 transition-all duration-300 w-full h-full min-h-[280px] group">
+                <!-- Número de fondo -->
+                <span class="absolute top-3 right-3 text-[80px] font-black text-white/5 leading-none select-none">3</span>
+                <!-- Icono -->
+                <div class="w-14 h-14 bg-sky-400/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-sky-400/30 transition-colors">
+                  <span class="material-icons text-sky-400 text-2xl">send</span>
+                </div>
+                <span class="text-sky-400 font-bold text-sm mb-2 block">PASO 03</span>
+                <h3 class="typo-h4 text-white mb-2">Envía el contacto</h3>
+                <p class="text-white/70 text-sm leading-relaxed">
+                  Usa tu enlace privado o formulario de Conector.
+                </p>
+              </div>
+              <!-- Flecha hacia abajo (móvil) -->
+              <div class="flex md:hidden items-center justify-center py-4" data-aos="fade-down" data-aos-delay="600">
+                <div class="step-arrow-circle w-11 h-11 bg-white rounded-full flex items-center justify-center shadow-lg relative z-10">
+                  <span class="material-icons text-primary text-2xl step-arrow-vertical">keyboard_arrow_down</span>
+                </div>
+              </div>
+              <!-- Flecha hacia derecha (desktop) -->
+              <div class="hidden md:flex absolute -right-[26px] top-1/2 -translate-y-1/2 z-10" data-aos="zoom-in" data-aos-delay="700">
+                <div class="step-arrow-circle w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg relative">
+                  <span class="material-icons text-primary text-xl step-arrow-horizontal">arrow_forward</span>
+                </div>
+              </div>
+            </div>
 
-          <!-- Paso 4 -->
-          <div class="bg-primary/60 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-primary/80 transition-all duration-300">
-            <span class="text-sky-400 font-bold text-sm mb-3 block">04.</span>
-            <h3 class="text-white font-bold text-lg mb-3">Nosotros actuamos</h3>
-            <p class="text-white/70 text-sm leading-relaxed">
-              Análisis jurídico, documentación y tramitación legal completa.
-            </p>
-          </div>
+            <!-- Paso 4 -->
+            <div class="relative flex flex-col items-center" data-aos="fade-up" data-aos-delay="600" data-aos-duration="600">
+              <div class="relative bg-primary/60 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-primary/80 hover:border-sky-400/30 transition-all duration-300 w-full h-full min-h-[280px] group">
+                <!-- Número de fondo -->
+                <span class="absolute top-3 right-3 text-[80px] font-black text-white/5 leading-none select-none">4</span>
+                <!-- Icono -->
+                <div class="w-14 h-14 bg-sky-400/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-sky-400/30 transition-colors">
+                  <span class="material-icons text-sky-400 text-2xl">gavel</span>
+                </div>
+                <span class="text-sky-400 font-bold text-sm mb-2 block">PASO 04</span>
+                <h3 class="typo-h4 text-white mb-2">Nosotros actuamos</h3>
+                <p class="text-white/70 text-sm leading-relaxed">
+                  Análisis jurídico, documentación y tramitación legal completa.
+                </p>
+              </div>
+              <!-- Flecha hacia abajo (móvil) -->
+              <div class="flex md:hidden items-center justify-center py-4" data-aos="fade-down" data-aos-delay="800">
+                <div class="step-arrow-circle w-11 h-11 bg-white rounded-full flex items-center justify-center shadow-lg relative z-10">
+                  <span class="material-icons text-primary text-2xl step-arrow-vertical">keyboard_arrow_down</span>
+                </div>
+              </div>
+              <!-- Flecha hacia derecha (desktop) -->
+              <div class="hidden md:flex absolute -right-[26px] top-1/2 -translate-y-1/2 z-10" data-aos="zoom-in" data-aos-delay="900">
+                <div class="step-arrow-circle w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg relative">
+                  <span class="material-icons text-primary text-xl step-arrow-horizontal">arrow_forward</span>
+                </div>
+              </div>
+            </div>
 
-          <!-- Paso 5 - Destacado -->
-          <div class="bg-gradient-to-br from-sky-500 to-sky-600 rounded-2xl p-6 shadow-lg shadow-sky-500/20">
-            <span class="text-white/80 font-bold text-sm mb-3 block">05.</span>
-            <h3 class="text-white font-bold text-lg mb-3">Cobras 300 €</h3>
-            <p class="text-white/90 text-sm leading-relaxed">
-              150 € por pago de 500 € o 300 € de una vez si paga 1.000 €.
-            </p>
+            <!-- Paso 5 - Destacado -->
+            <div class="relative flex flex-col items-center" data-aos="fade-up" data-aos-delay="800" data-aos-duration="600">
+              <div class="relative bg-gradient-to-br from-sky-500 to-sky-600 rounded-2xl p-6 shadow-lg shadow-sky-500/20 w-full h-full min-h-[280px] group">
+                <!-- Número de fondo -->
+                <span class="absolute top-3 right-3 text-[80px] font-black text-white/10 leading-none select-none">5</span>
+                <!-- Icono -->
+                <div class="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-white/30 transition-colors">
+                  <span class="material-icons text-white text-2xl">payments</span>
+                </div>
+                <span class="text-white/80 font-bold text-sm mb-2 block">PASO 05</span>
+                <h3 class="typo-h4 text-white mb-2">Cobras 300 €</h3>
+                <p class="text-white/90 text-sm leading-relaxed">
+                  150 € por pago de 500 € o 300 € de una vez si paga 1.000 €.
+                </p>
+              </div>
+            </div>
+
           </div>
         </div>
 
         <!-- Barra inferior con CTA -->
-        <div class="bg-primary/40 border border-white/10 rounded-2xl p-5 flex flex-col md:flex-row items-center justify-between gap-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="bg-primary/40 border border-white/10 rounded-2xl p-5 flex flex-col md:flex-row items-center justify-between gap-4" data-aos="fade-up" data-aos-delay="1000">
           <div class="flex items-center gap-4">
             <div class="flex -space-x-3">
               <div class="w-10 h-10 rounded-full bg-sky-400 flex items-center justify-center text-primary">
@@ -793,10 +898,10 @@
         <div class="w-full lg:w-1/2" data-aos="fade-left" data-aos-delay="200">
           <!-- Encabezado -->
           <div class="mb-10">
-            <span class="inline-block px-4 py-2 bg-primary/10 text-primary text-sm font-semibold rounded-full mb-4">
+            <span class="inline-block px-4 py-2 bg-primary/10 text-primary typo-badge rounded-full mb-4">
               TUS BENEFICIOS
             </span>
-            <h2 class="text-5xl font-bold text-primary mb-4">
+            <h2 class="typo-h2 text-primary mb-4">
               Qué ganas tú como Conector
             </h2>
           </div>
@@ -812,7 +917,7 @@
               </div>
               <div>
                 <h3 class="text-lg font-bold text-primary mb-1">Ingresos escalables</h3>
-                <p class="text-base text-gray-600">300 € por cada caso cerrado</p>
+                <p class="typo-body text-gray-600">300 € por cada caso cerrado</p>
               </div>
             </div>
 
@@ -825,7 +930,7 @@
               </div>
               <div>
                 <h3 class="text-lg font-bold text-primary mb-1">Impacto real</h3>
-                <p class="text-base text-gray-600">Ayudas a personas a empezar de nuevo</p>
+                <p class="typo-body text-gray-600">Ayudas a personas a empezar de nuevo</p>
               </div>
             </div>
 
@@ -838,7 +943,7 @@
               </div>
               <div>
                 <h3 class="text-lg font-bold text-primary mb-1">Sin ataduras</h3>
-                <p class="text-base text-gray-600">Sin horarios, sin exclusividad, sin inversión</p>
+                <p class="typo-body text-gray-600">Sin horarios, sin exclusividad, sin inversión</p>
               </div>
             </div>
 
@@ -851,7 +956,7 @@
               </div>
               <div>
                 <h3 class="text-lg font-bold text-primary mb-1">Formación y soporte incluidos</h3>
-                <p class="text-base text-gray-600">WhatsApp, teléfono y correo</p>
+                <p class="typo-body text-gray-600">WhatsApp, teléfono y correo</p>
               </div>
             </div>
           </div>
@@ -880,9 +985,9 @@
       <div class="max-w-5xl mx-auto">
         <!-- Encabezado -->
         <div class="text-center mb-16">
-          <span class="inline-block px-4 py-2 bg-primary/10 text-primary text-sm font-semibold rounded-full mb-4"
+          <span class="typo-badge inline-block px-4 py-2 bg-primary/10 text-primary font-semibold rounded-full mb-4"
             data-aos="fade-down">NUESTRA AUTORIDAD</span>
-          <h2 class="text-5xl font-bold text-primary mb-4" data-aos="fade-up">
+          <h2 class="typo-h2 text-primary mb-4" data-aos="fade-up">
             Respalda tu recomendación con expertos reales
           </h2>
         </div>
@@ -966,12 +1071,12 @@
     <div class="container mx-auto px-6 lg:px-8">
       <!-- Encabezado -->
       <div class="text-center mb-16 max-w-3xl mx-auto">
-        <span class="inline-block px-4 py-2 bg-primary/10 text-primary text-sm font-semibold rounded-full mb-4"
+        <span class="typo-badge inline-block px-4 py-2 bg-primary/10 text-primary font-semibold rounded-full mb-4"
           data-aos="fade-down">TESTIMONIOS REALES</span>
-        <h2 class="text-5xl font-bold text-primary mb-4" data-aos="fade-up">
+        <h2 class="typo-h2 text-primary mb-4" data-aos="fade-up">
           Historias de personas que empezaron de cero
         </h2>
-        <p class="text-base text-gray-600" data-aos="fade-up" data-aos-delay="100">
+        <p class="typo-body text-gray-600" data-aos="fade-up" data-aos-delay="100">
           Estas son las experiencias de quienes confiaron en nosotros. Tu referido podría ser el próximo.
         </p>
       </div>
@@ -1255,9 +1360,9 @@
 
         <!-- Encabezado -->
         <div class="text-center mb-12">
-          <span class="inline-block px-4 py-2 bg-white/10 text-white text-sm font-semibold rounded-full mb-4"
+          <span class="inline-block px-4 py-2 bg-white/10 text-white typo-badge rounded-full mb-4"
             data-aos="fade-down">ÚNETE COMO CONECTOR</span>
-          <h2 class="text-5xl font-bold text-white mb-4" data-aos="fade-up">
+          <h2 class="typo-h2 text-white mb-4" data-aos="fade-up">
             Únete como Conector
           </h2>
           <p class="text-base text-white/80" data-aos="fade-up" data-aos-delay="100">
@@ -1421,12 +1526,12 @@
 
         <!-- Encabezado -->
         <div class="text-center mb-16">
-          <span class="inline-block px-4 py-2 bg-primary/10 text-primary text-sm font-semibold rounded-full mb-4"
+          <span class="typo-badge inline-block px-4 py-2 bg-primary/10 text-primary font-semibold rounded-full mb-4"
             data-aos="fade-down">PREGUNTAS FRECUENTES</span>
-          <h2 class="text-5xl font-bold text-primary mb-4" data-aos="fade-up">
+          <h2 class="typo-h2 text-primary mb-4" data-aos="fade-up">
             Resolvemos tus dudas
           </h2>
-          <p class="text-base text-gray-600" data-aos="fade-up" data-aos-delay="100">
+          <p class="typo-body text-gray-600" data-aos="fade-up" data-aos-delay="100">
             Todo lo que necesitas saber antes de unirte como Conector.
           </p>
         </div>
@@ -1439,7 +1544,7 @@
             <button
               class="faq-trigger w-full flex items-center justify-between p-6 text-left bg-white hover:bg-gray-50 transition-colors"
               onclick="toggleFaq(this)">
-              <span class="font-semibold text-lg text-primary pr-4">¿Tengo que ser autónomo?</span>
+              <span class="typo-faq text-primary pr-4">¿Tengo que ser autónomo?</span>
               <span
                 class="faq-icon w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 transition-transform">
                 <span class="material-icons text-primary">expand_more</span>
@@ -1457,7 +1562,7 @@
             <button
               class="faq-trigger w-full flex items-center justify-between p-6 text-left bg-white hover:bg-gray-50 transition-colors"
               onclick="toggleFaq(this)">
-              <span class="font-semibold text-lg text-primary pr-4">¿Cuándo cobro los 300 €?</span>
+              <span class="typo-faq text-primary pr-4">¿Cuándo cobro los 300 €?</span>
               <span
                 class="faq-icon w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 transition-transform">
                 <span class="material-icons text-primary">expand_more</span>
@@ -1475,7 +1580,7 @@
             <button
               class="faq-trigger w-full flex items-center justify-between p-6 text-left bg-white hover:bg-gray-50 transition-colors"
               onclick="toggleFaq(this)">
-              <span class="font-semibold text-lg text-primary pr-4">¿Qué tipo de casos puedo enviar?</span>
+              <span class="typo-faq text-primary pr-4">¿Qué tipo de casos puedo enviar?</span>
               <span
                 class="faq-icon w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 transition-transform">
                 <span class="material-icons text-primary">expand_more</span>
@@ -1493,7 +1598,7 @@
             <button
               class="faq-trigger w-full flex items-center justify-between p-6 text-left bg-white hover:bg-gray-50 transition-colors"
               onclick="toggleFaq(this)">
-              <span class="font-semibold text-lg text-primary pr-4">¿Puedo enviar contactos con solo un acreedor?</span>
+              <span class="typo-faq text-primary pr-4">¿Puedo enviar contactos con solo un acreedor?</span>
               <span
                 class="faq-icon w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 transition-transform">
                 <span class="material-icons text-primary">expand_more</span>
@@ -1511,7 +1616,7 @@
             <button
               class="faq-trigger w-full flex items-center justify-between p-6 text-left bg-white hover:bg-gray-50 transition-colors"
               onclick="toggleFaq(this)">
-              <span class="font-semibold text-lg text-primary pr-4">¿Hay límite de referidos?</span>
+              <span class="typo-faq text-primary pr-4">¿Hay límite de referidos?</span>
               <span
                 class="faq-icon w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 transition-transform">
                 <span class="material-icons text-primary">expand_more</span>
@@ -1529,7 +1634,7 @@
             <button
               class="faq-trigger w-full flex items-center justify-between p-6 text-left bg-white hover:bg-gray-50 transition-colors"
               onclick="toggleFaq(this)">
-              <span class="font-semibold text-lg text-primary pr-4">¿Es legal lo que ofrecéis?</span>
+              <span class="typo-faq text-primary pr-4">¿Es legal lo que ofrecéis?</span>
               <span
                 class="faq-icon w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 transition-transform">
                 <span class="material-icons text-primary">expand_more</span>
@@ -1612,7 +1717,7 @@
           <ul class="space-y-3">
             <li class="flex items-center gap-3 text-gray-400">
               <span class="material-icons text-xl text-primary">call</span>
-              <a href="tel:+34692161958" class="hover:text-white transition-colors">(34) 692 161 958</a>
+              <a href="tel:+34685555362" class="hover:text-white transition-colors">(34) 685 555 362</a>
             </li>
             <li class="flex items-start gap-3 text-gray-400">
               <span class="material-icons text-xl text-primary">location_on</span>
@@ -1625,8 +1730,8 @@
             </li>
             <li class="flex items-center gap-3 text-gray-400">
               <span class="material-icons text-xl text-primary">email</span>
-              <a href="mailto:info@empiezadecero.es"
-                class="hover:text-white transition-colors">info@empiezadecero.es</a>
+              <a href="mailto:conectores@empiezadecero.legal"
+                class="hover:text-white transition-colors">conectores@empiezadecero.legal</a>
             </li>
           </ul>
         </div>
@@ -1650,7 +1755,7 @@
   </footer>
 
   <!-- Botón flotante WhatsApp -->
-  <a href="https://wa.me/34692161958" target="_blank"
+  <a href="https://wa.me/34685555362" target="_blank"
     class="fixed bottom-6 right-6 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 hover:scale-110 transition-all z-50">
     <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
       <path
