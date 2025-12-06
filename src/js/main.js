@@ -220,17 +220,10 @@ function initWebhookForm() {
             
             // Aceptar cualquier respuesta exitosa (200-299) o incluso sin respuesta
             if (response.ok || response.status === 0) {
-                // Éxito
-                form.innerHTML = `
-                    <div class="text-center py-12">
-                        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <span class="material-icons text-green-500 text-4xl">check_circle</span>
-                        </div>
-                        <h3 class="text-2xl font-bold text-primary mb-4">¡Gracias por tu interés!</h3>
-                        <p class="text-gray-600">Nos pondremos en contacto contigo muy pronto.</p>
-                    </div>
-                `;
-                
+                // Éxito - Pasar al Paso 2 (Calendly)
+                if (typeof mostrarPaso2 === 'function') {
+                    mostrarPaso2();
+                }
                 console.log('Formulario enviado exitosamente:', formData);
             } else {
                 console.error('Respuesta del servidor:', response.status, response.statusText);
@@ -239,18 +232,12 @@ function initWebhookForm() {
         } catch (error) {
             console.error('Error detallado:', error);
             
-            // Si el error es de red pero los datos se enviaron, mostrar éxito de todos modos
+            // Si el error es de red pero los datos se enviaron, mostrar paso 2 de todos modos
             if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
-                console.log('Posible error de CORS, pero datos enviados. Mostrando éxito.');
-                form.innerHTML = `
-                    <div class="text-center py-12">
-                        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <span class="material-icons text-green-500 text-4xl">check_circle</span>
-                        </div>
-                        <h3 class="text-2xl font-bold text-primary mb-4">¡Gracias por tu interés!</h3>
-                        <p class="text-gray-600">Nos pondremos en contacto contigo muy pronto.</p>
-                    </div>
-                `;
+                console.log('Posible error de CORS, pero datos enviados. Mostrando paso 2.');
+                if (typeof mostrarPaso2 === 'function') {
+                    mostrarPaso2();
+                }
             } else {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalText;
