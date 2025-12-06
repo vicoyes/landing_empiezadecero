@@ -288,105 +288,113 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-  <!-- SECCIÓN ESPECIAL: NUESTRO SUEÑO - Versión MÓVIL (vertical) -->
-  <section id="sueno-mobile" class="lg:hidden relative overflow-hidden py-20" style="background: linear-gradient(135deg, #0A2463 0%, #0d2d6e 50%, #051330 100%);">
+  <!-- SECCIÓN ESPECIAL: NUESTRO SUEÑO - Versión VERTICAL para todos -->
+  <section id="sueno-section" class="relative overflow-hidden py-20 lg:py-28" style="background: linear-gradient(135deg, #0A2463 0%, #0d2d6e 50%, #051330 100%);">
     <!-- Fondo con patrón sutil -->
     <div class="absolute inset-0 opacity-5">
       <div class="absolute top-0 left-0 w-full h-full" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 50px 50px;"></div>
     </div>
 
-    <div class="container mx-auto px-6 relative z-10">
+    <div class="container mx-auto px-6 lg:px-8 relative z-10">
+      
       <!-- Panel 1: TENEMOS UN SUEÑO -->
-      <div class="text-center mb-16" data-aos="fade-up">
-        <p class="text-white/60 text-sm font-semibold tracking-[0.2em] uppercase mb-4">
+      <div class="text-center mb-16 lg:mb-24" data-aos="fade-up">
+        <p class="text-white/60 text-sm lg:text-base font-semibold tracking-[0.2em] uppercase mb-4">
           En Empieza de Cero
         </p>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight mb-4" 
+        <h2 class="text-3xl sm:text-4xl lg:text-6xl font-extrabold text-white leading-tight mb-4 lg:mb-6" 
             style="font-family: 'Inter', sans-serif;">
           TENEMOS UN SUEÑO
         </h2>
-        <p class="text-lg text-white/90 font-light mb-2">
+        <p class="text-lg lg:text-2xl text-white/90 font-light mb-2">
           Construir un verdadero ecosistema
         </p>
-        <p class="text-lg text-white font-semibold">
+        <p class="text-lg lg:text-2xl text-white font-semibold">
           de segundas oportunidades
         </p>
-        <div class="mt-6 flex justify-center">
-          <div class="w-16 h-1 bg-gradient-to-r from-transparent via-white to-transparent rounded"></div>
+        <div class="mt-6 lg:mt-10 flex justify-center">
+          <div class="w-16 lg:w-24 h-1 bg-gradient-to-r from-transparent via-white to-transparent rounded"></div>
         </div>
       </div>
 
-      <!-- Imagen central en móvil -->
-      <div class="flex justify-center mb-16" data-aos="zoom-in" data-aos-delay="100">
-        <div class="w-48 h-48 rounded-3xl overflow-hidden opacity-80 shadow-2xl">
+      <!-- Imagen central -->
+      <div class="flex justify-center mb-16 lg:mb-24" data-aos="zoom-in" data-aos-delay="100">
+        <div class="w-48 h-48 lg:w-72 lg:h-72 rounded-3xl overflow-hidden opacity-80 shadow-2xl">
           <img src="src/img/Personas_celebrando.png" alt="" class="w-full h-full object-cover">
         </div>
       </div>
 
       <!-- Panel 2: ÚNETE AL SUEÑO -->
-      <div class="text-center mb-16" data-aos="fade-up" data-aos-delay="200">
-        <p class="text-white/60 text-sm font-semibold tracking-[0.2em] uppercase mb-4">
+      <div class="text-center mb-16 lg:mb-24" data-aos="fade-up" data-aos-delay="200">
+        <p class="text-white/60 text-sm lg:text-base font-semibold tracking-[0.2em] uppercase mb-4">
           ¿Quieres ser parte del cambio?
         </p>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight mb-4" 
+        <h2 class="text-3xl sm:text-4xl lg:text-6xl font-extrabold text-white leading-tight mb-4" 
             style="font-family: 'Inter', sans-serif;">
           ÚNETE AL SUEÑO
         </h2>
-        <p class="text-lg text-white/90 font-light">
+        <p class="text-lg lg:text-2xl text-white/90 font-light">
           Juntos podemos llegar más lejos
         </p>
       </div>
 
-      <!-- Panel 3 Mobile: CÓMO CONSTRUIREMOS ESE ECOSISTEMA -->
-      <div class="mt-12 mb-16" data-aos="fade-up" data-aos-delay="250">
-        <div class="text-center mb-8">
-          <p class="text-white/60 text-xs font-semibold tracking-[0.15em] uppercase mb-2">
+      <!-- Panel 3: CÓMO CONSTRUIREMOS ESE ECOSISTEMA -->
+      <div class="mb-16 lg:mb-24" data-aos="fade-up" data-aos-delay="250">
+        <div class="text-center mb-8 lg:mb-12">
+          <p class="text-white/60 text-xs lg:text-sm font-semibold tracking-[0.15em] uppercase mb-2 lg:mb-3">
             Primer Paso
           </p>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-white leading-tight" 
+          <h2 class="text-2xl sm:text-3xl lg:text-5xl font-extrabold text-white leading-tight" 
               style="font-family: 'Inter', sans-serif;">
             CÓMO CONSTRUIREMOS ESE ECOSISTEMA...
           </h2>
         </div>
 
         <!-- 2 Cards: Ayudando personas + Profesionales -->
-        <div class="space-y-4">
+        <div class="grid md:grid-cols-2 gap-4 lg:gap-8 max-w-5xl mx-auto relative">
           
           <!-- Card 01: Ayudando a personas -->
-          <div class="bg-white/95 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl">
-            <div class="relative h-40 overflow-hidden">
-              <div class="absolute top-4 left-4 z-10">
-                <span class="inline-flex items-center justify-center w-12 h-12 bg-primary rounded-xl text-white font-black text-lg shadow-lg">
+          <div class="bg-white/95 backdrop-blur-sm rounded-2xl lg:rounded-3xl overflow-hidden shadow-xl lg:shadow-2xl hover:scale-105 transition-all duration-500 group">
+            <div class="relative h-40 lg:h-64 overflow-hidden">
+              <div class="absolute top-4 left-4 lg:top-6 lg:left-6 z-10">
+                <span class="inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 bg-primary rounded-xl lg:rounded-2xl text-white font-black text-lg lg:text-2xl shadow-lg">
                   01
                 </span>
               </div>
-              <img src="src/img/ayuda.jpg" alt="Ayudando a personas" class="w-full h-full object-cover">
+              <img src="src/img/ayuda.jpg" alt="Ayudando a personas" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
             </div>
-            <div class="p-5">
-              <h3 class="text-lg font-bold text-primary mb-2 leading-tight" style="font-family: 'Inter', sans-serif;">
+            <div class="p-5 lg:p-8">
+              <h3 class="text-lg lg:text-2xl font-bold text-primary mb-2 lg:mb-4 leading-tight" style="font-family: 'Inter', sans-serif;">
                 AYUDANDO A PERSONAS CON DEUDAS A EMPEZAR DE NUEVO.
               </h3>
-              <p class="text-gray-700 text-sm leading-relaxed">
+              <p class="text-gray-700 text-sm lg:text-base leading-relaxed">
                 Cada caso es una historia de esperanza. Queremos darles las herramientas legales, financieras y emocionales para una nueva etapa.
               </p>
             </div>
           </div>
 
+          <!-- Icono central separador (visible solo en pantallas grandes) -->
+          <div class="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+            <div class="w-16 h-16 lg:w-20 lg:h-20 bg-white rounded-full flex items-center justify-center shadow-2xl">
+              <span class="material-icons text-primary text-3xl lg:text-4xl">handshake</span>
+            </div>
+          </div>
+
           <!-- Card 02: Profesionales comprometidos -->
-          <div class="bg-white/95 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl">
-            <div class="relative h-40 overflow-hidden">
-              <div class="absolute top-4 left-4 z-10">
-                <span class="inline-flex items-center justify-center w-12 h-12 bg-primary rounded-xl text-white font-black text-lg shadow-lg">
+          <div class="bg-white/95 backdrop-blur-sm rounded-2xl lg:rounded-3xl overflow-hidden shadow-xl lg:shadow-2xl hover:scale-105 transition-all duration-500 group">
+            <div class="relative h-40 lg:h-64 overflow-hidden">
+              <div class="absolute top-4 left-4 lg:top-6 lg:left-6 z-10">
+                <span class="inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 bg-primary rounded-xl lg:rounded-2xl text-white font-black text-lg lg:text-2xl shadow-lg">
                   02
                 </span>
               </div>
-              <img src="src/img/conector.jpg" alt="Profesionales comprometidos" class="w-full h-full object-cover">
+              <img src="src/img/conector.jpg" alt="Profesionales comprometidos" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
             </div>
-            <div class="p-5">
-              <h3 class="text-lg font-bold text-primary mb-2 leading-tight" style="font-family: 'Inter', sans-serif;">
+            <div class="p-5 lg:p-8">
+              <h3 class="text-lg lg:text-2xl font-bold text-primary mb-2 lg:mb-4 leading-tight" style="font-family: 'Inter', sans-serif;">
                 CONTAR CON PROFESIONALES Y PERSONAS COMPROMETIDAS
               </h3>
-              <p class="text-gray-700 text-sm leading-relaxed">
+              <p class="text-gray-700 text-sm lg:text-base leading-relaxed">
                 Abogados, asesores fiscales, psicólogos y conectores son piezas clave de esta red con remuneración justa y transparente.
               </p>
             </div>
@@ -395,399 +403,89 @@
         </div>
       </div>
 
-      <!-- Panel 4 Mobile: CTA Emotivo con 4 cards -->
-      <div class="mt-12" data-aos="fade-up" data-aos-delay="300">
-        <div class="text-center mb-6">
-          <p class="text-white/60 text-xs font-semibold tracking-[0.15em] uppercase mb-2">
+      <!-- Panel 4: CTA Emotivo con 4 cards -->
+      <div data-aos="fade-up" data-aos-delay="300">
+        <div class="text-center mb-6 lg:mb-10">
+          <p class="text-white/60 text-xs lg:text-sm font-semibold tracking-[0.15em] uppercase mb-2 lg:mb-3">
             Nuestro Propósito
           </p>
-          <h2 class="text-xl sm:text-2xl font-extrabold text-white leading-tight mb-2" 
+          <h2 class="text-xl sm:text-2xl lg:text-4xl font-extrabold text-white leading-tight mb-2" 
               style="font-family: 'Inter', sans-serif;">
             NO VENDEMOS UN SERVICIO LEGAL.
           </h2>
-          <p class="text-base text-white/90 font-light">
+          <p class="text-base lg:text-2xl text-white/90 font-light">
             Creamos un camino de transformación:
           </p>
         </div>
 
-        <!-- Grid de 4 tarjetas en móvil (2 columnas) -->
-        <div class="grid grid-cols-2 gap-3 mb-8">
+        <!-- Grid de 4 tarjetas -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-5 mb-8 lg:mb-10 max-w-5xl mx-auto">
           
           <!-- Card 01 -->
-          <div class="bg-yellow-300 rounded-2xl p-4 text-left shadow-xl">
-            <div class="text-3xl font-black mb-1" style="font-family: 'Inter', sans-serif;">01</div>
-            <span class="material-icons text-2xl mb-2">volunteer_activism</span>
-            <h3 class="text-sm font-bold leading-tight" style="font-family: 'Inter', sans-serif;">
+          <div class="bg-yellow-300 rounded-2xl p-4 lg:p-5 text-left shadow-xl hover:scale-105 transition-transform duration-500">
+            <div class="text-3xl lg:text-5xl font-black mb-1 lg:mb-2" style="font-family: 'Inter', sans-serif;">01</div>
+            <span class="material-icons text-2xl lg:text-3xl mb-2">volunteer_activism</span>
+            <h3 class="text-sm lg:text-base font-bold leading-tight" style="font-family: 'Inter', sans-serif;">
               Recuperar la dignidad financiera.
             </h3>
+            <p class="text-xs lg:text-sm leading-relaxed opacity-90 hidden lg:block mt-2">
+              Devolver a cada persona la seguridad y confianza que pierden ante una deuda interminable.
+            </p>
           </div>
 
           <!-- Card 02 -->
-          <div class="bg-green-300 rounded-2xl p-4 text-left shadow-xl">
-            <div class="text-3xl font-black mb-1" style="font-family: 'Inter', sans-serif;">02</div>
-            <span class="material-icons text-2xl mb-2">autorenew</span>
-            <h3 class="text-sm font-bold leading-tight" style="font-family: 'Inter', sans-serif;">
+          <div class="bg-green-300 rounded-2xl p-4 lg:p-5 text-left shadow-xl hover:scale-105 transition-transform duration-500">
+            <div class="text-3xl lg:text-5xl font-black mb-1 lg:mb-2" style="font-family: 'Inter', sans-serif;">02</div>
+            <span class="material-icons text-2xl lg:text-3xl mb-2">autorenew</span>
+            <h3 class="text-sm lg:text-base font-bold leading-tight" style="font-family: 'Inter', sans-serif;">
               Convertir clientes en agentes de cambio.
             </h3>
+            <p class="text-xs lg:text-sm leading-relaxed opacity-90 hidden lg:block mt-2">
+              Quienes salen adelante se convierten en inspiración para otros, cerrando el ciclo de solidaridad.
+            </p>
           </div>
 
           <!-- Card 03 -->
-          <div class="bg-cyan-300 rounded-2xl p-4 text-left shadow-xl">
-            <div class="text-3xl font-black mb-1" style="font-family: 'Inter', sans-serif;">03</div>
-            <span class="material-icons text-2xl mb-2">diversity_3</span>
-            <h3 class="text-sm font-bold leading-tight" style="font-family: 'Inter', sans-serif;">
+          <div class="bg-cyan-300 rounded-2xl p-4 lg:p-5 text-left shadow-xl hover:scale-105 transition-transform duration-500">
+            <div class="text-3xl lg:text-5xl font-black mb-1 lg:mb-2" style="font-family: 'Inter', sans-serif;">03</div>
+            <span class="material-icons text-2xl lg:text-3xl mb-2">diversity_3</span>
+            <h3 class="text-sm lg:text-base font-bold leading-tight" style="font-family: 'Inter', sans-serif;">
               Construir una red humana y ética.
             </h3>
+            <p class="text-xs lg:text-sm leading-relaxed opacity-90 hidden lg:block mt-2">
+              Profesionales comprometidos colaborando bajo un mismo propósito: ayudar y crecer juntos.
+            </p>
           </div>
 
           <!-- Card 04 -->
-          <div class="bg-blue-300 rounded-2xl p-4 text-left shadow-xl">
-            <div class="text-3xl font-black mb-1" style="font-family: 'Inter', sans-serif;">04</div>
-            <span class="material-icons text-2xl mb-2">trending_up</span>
-            <h3 class="text-sm font-bold leading-tight" style="font-family: 'Inter', sans-serif;">
+          <div class="bg-blue-300 rounded-2xl p-4 lg:p-5 text-left shadow-xl hover:scale-105 transition-transform duration-500">
+            <div class="text-3xl lg:text-5xl font-black mb-1 lg:mb-2" style="font-family: 'Inter', sans-serif;">04</div>
+            <span class="material-icons text-2xl lg:text-3xl mb-2">trending_up</span>
+            <h3 class="text-sm lg:text-base font-bold leading-tight" style="font-family: 'Inter', sans-serif;">
               Lograr rentabilidad con responsabilidad.
             </h3>
+            <p class="text-xs lg:text-sm leading-relaxed opacity-90 hidden lg:block mt-2">
+              Un modelo sostenible que premia el esfuerzo colectivo y refuerza el impacto positivo.
+            </p>
           </div>
 
         </div>
 
-        <!-- CTA Emotivo Final Mobile -->
+        <!-- CTA Emotivo Final -->
         <div class="text-center">
-          <p class="text-white/80 text-sm mb-4 px-2">
+          <p class="text-white/80 text-sm lg:text-xl mb-4 lg:mb-6 px-2 max-w-2xl mx-auto">
             Cada persona que ayudas a empezar de cero es una vida que transformas.
             <span class="font-semibold text-white">¿Estás listo para ser parte del cambio?</span>
           </p>
-          <a href="#registro" class="inline-flex items-center gap-2 bg-white text-primary font-bold text-sm px-6 py-4 rounded-full hover:bg-yellow-400 transition-all duration-300 shadow-xl">
-            <span class="material-icons text-lg">favorite</span>
+          <a href="#registro" class="inline-flex items-center gap-2 lg:gap-3 bg-white text-primary font-bold text-sm lg:text-lg px-6 lg:px-10 py-4 lg:py-5 rounded-full hover:bg-yellow-400 transition-all duration-300 shadow-xl lg:shadow-2xl hover:shadow-white/30 hover:scale-105">
+            <span class="material-icons text-lg lg:text-2xl">favorite</span>
             <span>Quiero ser parte de esta misión</span>
+            <span class="material-icons text-lg lg:text-2xl hidden sm:inline">arrow_forward</span>
           </a>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- SECCIÓN ESPECIAL: NUESTRO SUEÑO - Versión DESKTOP (scroll horizontal) -->
-  <section id="sueno-section" class="hidden lg:block relative overflow-hidden" style="background: linear-gradient(135deg, #0A2463 0%, #0d2d6e 50%, #051330 100%);">
-    <!-- Fondo con patrón sutil -->
-    <div class="absolute inset-0 opacity-5">
-      <div class="absolute top-0 left-0 w-full h-full" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 50px 50px;"></div>
-    </div>
-
-    <!-- Contenedor que se mueve horizontalmente -->
-    <div id="horizontal-container" class="flex h-screen">
-      
-      <!-- Panel 1: TENEMOS UN SUEÑO -->
-      <div class="panel min-w-full h-screen flex items-center justify-center px-8 relative">
-        <!-- Imágenes decorativas flotantes -->
-        <div class="absolute top-20 left-10 w-48 h-48 rounded-3xl overflow-hidden opacity-30 transform -rotate-6">
-          <img src="src/img/ayuda.jpg" alt="" class="w-full h-full object-cover">
-        </div>
-        <div class="absolute bottom-20 right-10 w-56 h-56 rounded-3xl overflow-hidden opacity-30 transform rotate-6">
-          <img src="src/img/Personas_celebrando.png" alt="" class="w-full h-full object-cover">
-        </div>
-        <div class="absolute top-1/4 right-20 w-32 h-32 rounded-2xl overflow-hidden opacity-20 transform rotate-12 hidden xl:block">
-          <img src="src/img/equipo.jpg" alt="" class="w-full h-full object-cover">
-        </div>
-        
-        <div class="max-w-5xl mx-auto text-center relative z-10">
-          <p class="text-white/60 text-base font-semibold tracking-[0.2em] uppercase mb-4">
-            En Empieza de Cero
-          </p>
-          <h2 class="text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-6" 
-              style="font-family: 'Inter', sans-serif;">
-            TENEMOS UN SUEÑO
-          </h2>
-          <p class="text-3xl text-white/90 font-light max-w-3xl mx-auto mb-2">
-            Construir un verdadero ecosistema
-          </p>
-          <p class="text-3xl text-white font-semibold max-w-3xl mx-auto">
-            de segundas oportunidades
-          </p>
-          <div class="mt-10 flex justify-center">
-            <div class="w-24 h-1 bg-gradient-to-r from-transparent via-white to-transparent rounded"></div>
-          </div>
-          <div class="mt-10 animate-bounce">
-            <span class="material-icons text-white/50 text-3xl">expand_more</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Panel 2: ¿QUIERES SER PARTE DEL CAMBIO? -->
-      <div class="panel min-w-full h-screen flex items-center justify-center px-8 relative">
-        <!-- Imágenes decorativas flotantes -->
-        <div class="absolute top-16 left-16 w-52 h-52 rounded-3xl overflow-hidden opacity-30 transform rotate-3">
-          <img src="src/img/conector.jpg" alt="" class="w-full h-full object-cover">
-        </div>
-        <div class="absolute bottom-24 left-20 w-36 h-36 rounded-2xl overflow-hidden opacity-25 transform -rotate-6 hidden xl:block">
-          <img src="src/img/ayuda.jpg" alt="" class="w-full h-full object-cover">
-        </div>
-        <div class="absolute top-1/3 right-16 w-48 h-48 rounded-3xl overflow-hidden opacity-30 transform -rotate-3">
-          <img src="src/img/equipo.jpg" alt="" class="w-full h-full object-cover">
-        </div>
-        <div class="absolute bottom-20 right-24 w-32 h-32 rounded-2xl overflow-hidden opacity-20 transform rotate-12 hidden xl:block">
-          <img src="src/img/Personas_celebrando.png" alt="" class="w-full h-full object-cover">
-        </div>
-        
-        <div class="max-w-5xl mx-auto text-center relative z-10">
-          <p class="text-white/60 text-base font-semibold tracking-[0.2em] uppercase mb-4">
-            ¿Quieres ser parte del cambio?
-          </p>
-          <h2 class="text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-6" 
-              style="font-family: 'Inter', sans-serif;">
-            ÚNETE AL SUEÑO
-          </h2>
-          <p class="text-3xl text-white/90 font-light max-w-3xl mx-auto">
-            Juntos podemos llegar más lejos
-          </p>
-          <div class="mt-10 flex justify-center">
-            <div class="w-24 h-1 bg-gradient-to-r from-transparent via-white to-transparent rounded"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Panel 3: CÓMO CONSTRUIREMOS ESE ECOSISTEMA -->
-      <div class="panel min-w-full h-screen flex items-center justify-center px-8 py-16 relative">
-        <div class="max-w-7xl mx-auto w-full relative z-10">
-          <!-- Título del panel -->
-          <div class="text-center mb-12">
-            <p class="text-white/60 text-sm font-semibold tracking-[0.2em] uppercase mb-3">
-              Primer Paso
-            </p>
-            <h2 class="text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-4" 
-                style="font-family: 'Inter', sans-serif;">
-              CÓMO CONSTRUIREMOS ESE ECOSISTEMA...
-            </h2>
-          </div>
-
-          <!-- Grid de 2 columnas -->
-          <div class="grid lg:grid-cols-2 gap-8">
-            
-            <!-- Columna 1: Ayudando a personas -->
-            <div class="bg-white/95 backdrop-blur-sm rounded-3xl overflow-hidden shadow-2xl hover:shadow-white/20 hover:scale-105 transition-all duration-500 group">
-              <div class="relative h-64 overflow-hidden">
-                <div class="absolute top-6 left-6 z-10">
-                  <span class="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-2xl text-white font-black text-2xl shadow-lg">
-                    01
-                  </span>
-                </div>
-                <img src="src/img/ayuda.jpg" alt="Ayudando a personas" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-              </div>
-              <div class="p-8">
-                <h3 class="text-2xl font-bold text-primary mb-4 leading-tight" style="font-family: 'Inter', sans-serif;">
-                  AYUDANDO A PERSONAS CON DEUDAS A EMPEZAR DE NUEVO.
-                </h3>
-                <p class="text-gray-700 text-base leading-relaxed">
-                  Cada caso es una historia de esperanza. Queremos darles las herramientas legales, financieras y emocionales para que transformen el peso de sus obligaciones en el impulso de una nueva etapa.
-                </p>
-              </div>
-            </div>
-
-            <!-- Icono central separador (visible solo en pantallas grandes) -->
-            <div class="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-              <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-2xl">
-                <span class="material-icons text-primary text-4xl">handshake</span>
-              </div>
-            </div>
-
-            <!-- Columna 2: Contar con profesionales -->
-            <div class="bg-white/95 backdrop-blur-sm rounded-3xl overflow-hidden shadow-2xl hover:shadow-white/20 hover:scale-105 transition-all duration-500 group">
-              <div class="relative h-64 overflow-hidden">
-                <div class="absolute top-6 left-6 z-10">
-                  <span class="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-2xl text-white font-black text-2xl shadow-lg">
-                    02
-                  </span>
-                </div>
-                <img src="src/img/conector.jpg" alt="Profesionales comprometidos" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-              </div>
-              <div class="p-8">
-                <h3 class="text-2xl font-bold text-primary mb-4 leading-tight" style="font-family: 'Inter', sans-serif;">
-                  CONTAR CON PROFESIONALES Y PERSONAS COMPROMETIDAS
-                </h3>
-                <p class="text-gray-700 text-base leading-relaxed">
-                  Abogados de extranjería, asesores fiscales, psicólogos y cada persona de buena voluntad que sienta el llamado a ser un conector son piezas clave de esta red. Con una remuneración justa y transparente, reforzamos su labor y ofreciéndoles un modelo de ingresos sostenibles.
-                </p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <!-- Panel 4: CTA EMOTIVO FINAL -->
-      <div class="panel min-w-full h-screen flex items-center justify-center px-8 py-12 relative">
-        <div class="max-w-6xl mx-auto w-full relative z-10">
-          
-          <!-- Título superior -->
-          <div class="text-center mb-10">
-            <p class="text-white/60 text-sm font-semibold tracking-[0.2em] uppercase mb-3">
-              Nuestro Propósito
-            </p>
-            <h2 class="text-3xl lg:text-4xl font-extrabold text-white leading-tight mb-2" 
-                style="font-family: 'Inter', sans-serif;">
-              NO VENDEMOS UN SERVICIO LEGAL.
-            </h2>
-            <p class="text-xl lg:text-2xl text-white/90 font-light">
-              Creamos un camino de transformación:
-            </p>
-          </div>
-
-          <!-- Contenedor principal con diseño de 4 tarjetas -->
-          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5 mb-10">
-            
-            <!-- Card 01 -->
-            <div class="bg-yellow-300 rounded-2xl p-4 lg:p-5 text-left shadow-xl hover:scale-105 transition-transform duration-500">
-              <div class="text-4xl lg:text-5xl font-black mb-2" style="font-family: 'Inter', sans-serif;">01</div>
-              <div class="flex items-center gap-2 mb-2">
-                <span class="material-icons text-2xl lg:text-3xl">volunteer_activism</span>
-              </div>
-              <h3 class="text-sm lg:text-base font-bold mb-2 leading-tight" style="font-family: 'Inter', sans-serif;">
-                Recuperar la dignidad financiera.
-              </h3>
-              <p class="text-xs lg:text-sm leading-relaxed opacity-90 hidden lg:block">
-                Devolver a cada persona la seguridad y confianza que pierden ante una deuda interminable.
-              </p>
-            </div>
-
-            <!-- Card 02 -->
-            <div class="bg-green-300 rounded-2xl p-4 lg:p-5 text-left shadow-xl hover:scale-105 transition-transform duration-500">
-              <div class="text-4xl lg:text-5xl font-black mb-2" style="font-family: 'Inter', sans-serif;">02</div>
-              <div class="flex items-center gap-2 mb-2">
-                <span class="material-icons text-2xl lg:text-3xl">autorenew</span>
-              </div>
-              <h3 class="text-sm lg:text-base font-bold mb-2 leading-tight" style="font-family: 'Inter', sans-serif;">
-                Convertir clientes en agentes de cambio.
-              </h3>
-              <p class="text-xs lg:text-sm leading-relaxed opacity-90 hidden lg:block">
-                Quienes salen adelante se convierten en inspiración para otros, cerrando el ciclo de solidaridad.
-              </p>
-            </div>
-
-            <!-- Card 03 -->
-            <div class="bg-cyan-300 rounded-2xl p-4 lg:p-5 text-left shadow-xl hover:scale-105 transition-transform duration-500">
-              <div class="text-4xl lg:text-5xl font-black mb-2" style="font-family: 'Inter', sans-serif;">03</div>
-              <div class="flex items-center gap-2 mb-2">
-                <span class="material-icons text-2xl lg:text-3xl">diversity_3</span>
-              </div>
-              <h3 class="text-sm lg:text-base font-bold mb-2 leading-tight" style="font-family: 'Inter', sans-serif;">
-                Construir una red humana y ética.
-              </h3>
-              <p class="text-xs lg:text-sm leading-relaxed opacity-90 hidden lg:block">
-                Profesionales comprometidos colaborando bajo un mismo propósito: ayudar y crecer juntos.
-              </p>
-            </div>
-
-            <!-- Card 04 -->
-            <div class="bg-blue-300 rounded-2xl p-4 lg:p-5 text-left shadow-xl hover:scale-105 transition-transform duration-500">
-              <div class="text-4xl lg:text-5xl font-black mb-2" style="font-family: 'Inter', sans-serif;">04</div>
-              <div class="flex items-center gap-2 mb-2">
-                <span class="material-icons text-2xl lg:text-3xl">trending_up</span>
-              </div>
-              <h3 class="text-sm lg:text-base font-bold mb-2 leading-tight" style="font-family: 'Inter', sans-serif;">
-                Lograr rentabilidad con responsabilidad social.
-              </h3>
-              <p class="text-xs lg:text-sm leading-relaxed opacity-90 hidden lg:block">
-                Un modelo sostenible que premia el esfuerzo colectivo y refuerza el impacto positivo.
-              </p>
-            </div>
-
-          </div>
-
-          <!-- CTA Emotivo Final -->
-          <div class="text-center">
-            <p class="text-white/80 text-lg lg:text-xl mb-6 max-w-2xl mx-auto">
-              Cada persona que ayudas a empezar de cero es una vida que transformas.
-              <span class="font-semibold text-white">¿Estás listo para ser parte del cambio?</span>
-            </p>
-            <a href="#registro" class="inline-flex items-center gap-3 bg-white text-primary font-bold text-lg px-10 py-5 rounded-full hover:bg-yellow-400 hover:text-primary transition-all duration-300 shadow-2xl hover:shadow-white/30 hover:scale-105">
-              <span class="material-icons text-2xl">favorite</span>
-              <span>Quiero ser parte de esta misión</span>
-              <span class="material-icons text-2xl">arrow_forward</span>
-            </a>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Indicador de progreso (solo desktop) -->
-    <div id="progress-indicators" class="fixed bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-50 opacity-0">
-      <div id="ind-1" class="w-8 h-1 rounded-full bg-white transition-all duration-300"></div>
-      <div id="ind-2" class="w-8 h-1 rounded-full bg-white/30 transition-all duration-300"></div>
-      <div id="ind-3" class="w-8 h-1 rounded-full bg-white/30 transition-all duration-300"></div>
-      <div id="ind-4" class="w-8 h-1 rounded-full bg-white/30 transition-all duration-300"></div>
-    </div>
-  </section>
-
-  <script>
-    // Solo inicializar GSAP ScrollTrigger en desktop (>= 1024px)
-    if (window.innerWidth >= 1024) {
-      gsap.registerPlugin(ScrollTrigger);
-
-      // Seleccionar elementos
-      const section = document.getElementById('sueno-section');
-      const container = document.getElementById('horizontal-container');
-      const indicators = document.getElementById('progress-indicators');
-      const ind1 = document.getElementById('ind-1');
-      const ind2 = document.getElementById('ind-2');
-      const ind3 = document.getElementById('ind-3');
-      const ind4 = document.getElementById('ind-4');
-
-      // Calcular el ancho total a desplazar + espacio extra para pausa
-      const totalWidth = container.scrollWidth - window.innerWidth;
-      const extraPause = window.innerHeight * 0.8; // 80% de la altura de pantalla extra para leer
-
-      // Crear la animación de scroll horizontal
-      gsap.to(container, {
-        x: -totalWidth,
-        ease: "none",
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: () => "+=" + (totalWidth + extraPause),
-          pin: true,
-          scrub: 1,
-          anticipatePin: 1,
-          onUpdate: (self) => {
-            // Actualizar indicadores (4 paneles)
-            if (self.progress < 0.25) {
-              ind1.style.background = 'white';
-              ind2.style.background = 'rgba(255,255,255,0.3)';
-              ind3.style.background = 'rgba(255,255,255,0.3)';
-              ind4.style.background = 'rgba(255,255,255,0.3)';
-            } else if (self.progress < 0.5) {
-              ind1.style.background = 'rgba(255,255,255,0.3)';
-              ind2.style.background = 'white';
-              ind3.style.background = 'rgba(255,255,255,0.3)';
-              ind4.style.background = 'rgba(255,255,255,0.3)';
-            } else if (self.progress < 0.75) {
-              ind1.style.background = 'rgba(255,255,255,0.3)';
-              ind2.style.background = 'rgba(255,255,255,0.3)';
-              ind3.style.background = 'white';
-              ind4.style.background = 'rgba(255,255,255,0.3)';
-            } else {
-              ind1.style.background = 'rgba(255,255,255,0.3)';
-              ind2.style.background = 'rgba(255,255,255,0.3)';
-              ind3.style.background = 'rgba(255,255,255,0.3)';
-              ind4.style.background = 'white';
-            }
-          },
-          onEnter: () => {
-            gsap.to(indicators, { opacity: 1, duration: 0.3 });
-          },
-          onLeave: () => {
-            gsap.to(indicators, { opacity: 0, duration: 0.3 });
-          },
-          onEnterBack: () => {
-            gsap.to(indicators, { opacity: 1, duration: 0.3 });
-          },
-          onLeaveBack: () => {
-            gsap.to(indicators, { opacity: 0, duration: 0.3 });
-          }
-        }
-      });
-    }
-  </script>
 
   <!-- 🧩 3. CÓMO FUNCIONA TU PAPEL COMO CONECTOR -->
   <section class="py-20 md:py-28 bg-gray-50 overflow-hidden">
