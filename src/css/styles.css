@@ -443,3 +443,89 @@ body {
         opacity: 0;
     }
 }
+
+/* ============================================
+   HUBSPOT FORM CUSTOMIZATION
+   ============================================ */
+/* Estilos para personalizar el formulario de HubSpot */
+.hs-form-frame .hs-form fieldset {
+    max-width: 100% !important;
+}
+
+.hs-form-frame .hs-form .hs-input {
+    width: 100% !important;
+    padding: 0.75rem 1rem !important;
+    background-color: #F9FAFB !important;
+    border: 1px solid #E5E7EB !important;
+    border-radius: 0.75rem !important;
+    font-size: 1rem !important;
+    color: #374151 !important;
+    transition: all 0.3s ease !important;
+}
+
+.hs-form-frame .hs-form .hs-input:focus {
+    outline: none !important;
+    border-color: #0A2463 !important;
+    box-shadow: 0 0 0 3px rgba(10, 36, 99, 0.1) !important;
+}
+
+.hs-form-frame .hs-form .hs-field-desc {
+    font-size: 0.875rem !important;
+    color: #6B7280 !important;
+}
+
+.hs-form-frame .hs-form label {
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+    color: #374151 !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.hs-form-frame .hs-form .hs-button {
+    width: 100% !important;
+    background-color: #0A2463 !important;
+    color: white !important;
+    font-weight: 700 !important;
+    font-size: 1.125rem !important;
+    padding: 1rem 2rem !important;
+    border-radius: 0.75rem !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 10px 15px -3px rgba(10, 36, 99, 0.3) !important;
+}
+
+.hs-form-frame .hs-form .hs-button:hover {
+    background-color: rgba(10, 36, 99, 0.9) !important;
+    box-shadow: 0 20px 25px -5px rgba(10, 36, 99, 0.4) !important;
+    transform: translateY(-2px) !important;
+}
+
+.hs-form-frame .hs-form .hs-error-msgs {
+    list-style: none !important;
+    padding: 0 !important;
+    margin-top: 0.5rem !important;
+}
+
+.hs-form-frame .hs-form .hs-error-msg {
+    color: #EF4444 !important;
+    font-size: 0.875rem !important;
+}
+
+.hs-form-frame .hs-form .hs-form-field {
+    margin-bottom: 1.5rem !important;
+}
+
+/* Grid layout para campos en 2 columnas */
+.hs-form-frame .hs-form .hs-form-required {
+    color: #EF4444 !important;
+}
+
+/* Mensaje de éxito */
+.hs-form-frame .submitted-message {
+    text-align: center !important;
+    padding: 3rem 0 !important;
+    color: #059669 !important;
+    font-size: 1.125rem !important;
+    font-weight: 600 !important;
+}
