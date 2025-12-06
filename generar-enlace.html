@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Generador de Enlaces para Afiliados - Empieza de Cero</title>
+
+  <!-- Preconnect para CDNs críticos -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#0A2463",
+            "background-light": "#F8F9FA",
+            "background-dark": "#05143A",
+          },
+          fontFamily: {
+            display: ["IBM Plex Sans", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.5rem",
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 600 800;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuFuYAZ9hjp-Ek-_EeA.woff2) format('woff2');
+    }
+
+    body {
+      font-family: 'IBM Plex Sans', system-ui, sans-serif;
+      margin: 0;
+      background: #F8F9FA;
+    }
+
+    .hero-gradient {
+      background-image: linear-gradient(to right, #0A2463 50%, #0d2e7a 100%);
+    }
+
+    .material-icons {
+      font-family: 'Material Icons';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 24px;
+      display: inline-block;
+      line-height: 1;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@600;700;800&display=swap"
+    rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@600;700;800&display=swap"
+      rel="stylesheet" />
+  </noscript>
+
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" media="print"
+    onload="this.media='all'" />
+  <noscript>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  </noscript>
+</head>
+
+<body class="bg-background-light">
+
+  <!-- Hero Section -->
+  <section class="hero-gradient py-12">
+    <div class="container mx-auto px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm font-medium mb-6">
+          <span class="material-icons text-lg">link</span>
+          Generador de Enlaces
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
+          Genera tu Enlace de Afiliado
+        </h1>
+        <p class="text-xl text-white/80">
+          Crea enlaces personalizados para enviar contactos al área de Segunda Oportunidad
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formulario Principal -->
+  <section class="py-16">
+    <div class="container mx-auto px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        
+        <!-- Card del Formulario -->
+        <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+              <span class="material-icons text-primary">settings</span>
+            </div>
+            <div>
+              <h2 class="text-2xl font-bold text-gray-800">Configura tu Enlace</h2>
+              <p class="text-gray-600 text-sm">Completa los datos para generar tu enlace personalizado</p>
+            </div>
+          </div>
+
+          <form id="generadorForm" class="space-y-6">
+            <!-- Nombre del Asesor -->
+            <div>
+              <label for="asesor" class="block text-sm font-semibold text-gray-700 mb-2">
+                Nombre del Asesor Jurídico <span class="text-red-500">*</span>
+              </label>
+              <input type="text" id="asesor" name="asesor" required
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                placeholder="Ej: María Morillo">
+              <p class="text-xs text-gray-500 mt-1">El asesor jurídico que gestionará los casos</p>
+            </div>
+
+            <!-- Tipo de Conector -->
+            <div>
+              <label for="type" class="block text-sm font-semibold text-gray-700 mb-2">
+                Tipo de Afiliado <span class="text-red-500">*</span>
+              </label>
+              <select id="type" name="type" required
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all">
+                <option value="">Selecciona un tipo</option>
+                <option value="comercial">Comercial</option>
+                <option value="conector">Conector</option>
+                <option value="conector_pro">Conector Pro</option>
+              </select>
+              <div class="mt-2 space-y-1">
+                <p class="text-xs text-gray-500"><strong>Comercial:</strong> Colaboradores comerciales externos</p>
+                <p class="text-xs text-gray-500"><strong>Conector:</strong> Afiliados estándar con comisión básica</p>
+                <p class="text-xs text-gray-500"><strong>Conector Pro:</strong> Afiliados premium con mejores condiciones</p>
+              </div>
+            </div>
+
+            <!-- Nombre del Conector -->
+            <div>
+              <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">
+                Nombre del Conector/Comercial <span class="text-red-500">*</span>
+              </label>
+              <input type="text" id="name" name="name" required
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                placeholder="Ej: José González">
+              <p class="text-xs text-gray-500 mt-1">Nombre del afiliado/conector que enviará contactos</p>
+            </div>
+
+            <!-- Botón Generar -->
+            <button type="submit"
+              class="w-full px-8 py-4 bg-primary text-white rounded-xl font-semibold hover:bg-primary/90 transition-colors shadow-lg flex items-center justify-center gap-2">
+              <span class="material-icons">auto_awesome</span>
+              Generar Enlace
+            </button>
+          </form>
+        </div>
+
+        <!-- Card de Resultado (oculto inicialmente) -->
+        <div id="resultCard" class="hidden bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl shadow-xl p-8 border-2 border-green-200 fade-in">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center">
+              <span class="material-icons text-white">check_circle</span>
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold text-gray-800">¡Enlace Generado!</h3>
+              <p class="text-gray-600 text-sm">Tu enlace personalizado está listo para usar</p>
+            </div>
+          </div>
+
+          <!-- Información del Enlace -->
+          <div class="bg-white/80 backdrop-blur rounded-xl p-6 mb-6">
+            <div class="space-y-3">
+              <div class="flex items-start gap-3">
+                <span class="material-icons text-primary text-lg mt-0.5">person</span>
+                <div class="flex-1">
+                  <p class="text-xs text-gray-500 font-semibold">ASESOR JURÍDICO</p>
+                  <p id="resultAsesor" class="text-gray-800 font-semibold"></p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="material-icons text-primary text-lg mt-0.5">badge</span>
+                <div class="flex-1">
+                  <p class="text-xs text-gray-500 font-semibold">TIPO DE AFILIADO</p>
+                  <p id="resultType" class="text-gray-800 font-semibold"></p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="material-icons text-primary text-lg mt-0.5">account_circle</span>
+                <div class="flex-1">
+                  <p class="text-xs text-gray-500 font-semibold">CONECTOR/COMERCIAL</p>
+                  <p id="resultName" class="text-gray-800 font-semibold"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Enlace Generado -->
+          <div class="bg-white rounded-xl p-6 mb-6">
+            <p class="text-sm font-semibold text-gray-700 mb-3">Tu Enlace Personalizado:</p>
+            <div class="flex gap-2">
+              <input type="text" id="generatedLink" readonly
+                class="flex-1 px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 text-sm font-mono focus:outline-none focus:border-primary">
+              <button id="copyBtn"
+                class="px-6 py-3 bg-primary text-white rounded-xl font-semibold hover:bg-primary/90 transition-colors flex items-center gap-2 whitespace-nowrap">
+                <span class="material-icons text-lg">content_copy</span>
+                Copiar
+              </button>
+            </div>
+            <p class="text-xs text-gray-500 mt-2">Comparte este enlace con tus contactos para que activen el servicio</p>
+          </div>
+
+          <!-- Acciones -->
+          <div class="flex gap-3">
+            <button id="newLinkBtn"
+              class="flex-1 px-6 py-3 bg-white text-primary border-2 border-primary rounded-xl font-semibold hover:bg-primary/5 transition-colors flex items-center justify-center gap-2">
+              <span class="material-icons">add</span>
+              Generar Otro
+            </button>
+            <a href="index.html"
+              class="flex-1 px-6 py-3 bg-gray-200 text-gray-700 rounded-xl font-semibold hover:bg-gray-300 transition-colors flex items-center justify-center gap-2">
+              <span class="material-icons">home</span>
+              Inicio
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-primary py-8 mt-16">
+    <div class="container mx-auto px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <img src="src/img/logo.svg" alt="Empieza de Cero" class="w-32 h-auto" />
+        <p class="text-white/60 text-sm">
+          © 2025 Empieza de Cero. Todos los derechos reservados.
+        </p>
+        <div class="flex gap-4 text-sm">
+          <a href="#" class="text-white/60 hover:text-white transition-colors">Aviso Legal</a>
+          <a href="#" class="text-white/60 hover:text-white transition-colors">Privacidad</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script del Generador -->
+  <script src="src/js/generador-enlaces.js"></script>
+
+</body>
+</html>
