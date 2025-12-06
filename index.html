@@ -48,7 +48,7 @@
       font-display: swap;
       src: url(https://fonts.gstatic.com/s/ibmplexsans/v19/zYXgKVElMYYaJe8bpLHnCwDKhdHeFaxOedc.woff2) format('woff2');
     }
-    
+
     @font-face {
       font-family: 'Inter';
       font-style: normal;
@@ -90,10 +90,12 @@
   <link href="src/css/styles.css" rel="stylesheet" />
 
   <!-- Google Fonts - Carga diferida con media print trick -->
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@600;700;800&display=swap"
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@600;700;800&display=swap"
     rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@600;700;800&display=swap"
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@600;700;800&display=swap"
       rel="stylesheet" />
   </noscript>
 
@@ -146,7 +148,7 @@
     <div class="container mx-auto px-6 lg:px-8">
       <div class="flex flex-col lg:flex-row items-center min-h-screen">
         <div class="relative z-10 w-full lg:w-1/2 pt-20 pb-12 lg:py-24 text-white text-center lg:text-left">
-          
+
           <!-- Pre-título con icono de balanza -->
           <div
             class="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-full py-2 px-4 mb-6 mt-4 md:mt-0"
@@ -157,9 +159,10 @@
           </div>
 
           <!-- H1 - Título principal -->
-          <h1 class="font-extrabold text-[28px] md:text-[38px] leading-tight mb-4 md:mb-6" style="font-family: 'Inter', sans-serif;" data-aos="fade-up"
-            data-aos-delay="200">
-            Gana <span class="text-yellow-400">300€</span> por recomendarnos mientras ayudas a personas a cancelar sus deudas legalmente.
+          <h1 class="font-extrabold text-[28px] md:text-[38px] leading-tight mb-4 md:mb-6"
+            style="font-family: 'Inter', sans-serif;" data-aos="fade-up" data-aos-delay="200">
+            Gana <span class="text-yellow-400">300€</span> por recomendarnos mientras ayudas a personas a cancelar sus
+            deudas legalmente.
           </h1>
 
           <!-- H2 - Subtítulo -->
@@ -169,7 +172,8 @@
           </p>
           <p class="text-base md:text-lg text-white/70 max-w-xl mb-8 leading-relaxed" data-aos="fade-up"
             data-aos-delay="400">
-            Tú solo creas el contacto. Nuestro equipo jurídico se encarga de todo el proceso legal de la Ley de la Segunda Oportunidad. Cuando esa persona contrata el procedimiento, tú recibes 300€.
+            Tú solo creas el contacto. Nuestro equipo jurídico se encarga de todo el proceso legal de la Ley de la
+            Segunda Oportunidad. Cuando esa persona contrata el procedimiento, tú recibes 300€.
           </p>
 
           <!-- CTA Principal -->
@@ -178,8 +182,8 @@
             <a href="#registro"
               class="group inline-flex items-center justify-center gap-1 md:gap-2 bg-white text-primary font-bold text-base md:text-lg px-4 md:px-8 py-3 md:py-4 rounded-full shadow-lg hover:bg-yellow-400 hover:text-primary hover:scale-105 transition-all duration-300 tracking-tight md:tracking-normal whitespace-nowrap">
               <span>QUIERO SER CONECTOR Y GANAR 300€</span>
-              <svg class="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform flex-shrink-0" fill="none" stroke="currentColor"
-                viewBox="0 0 24 24">
+              <svg class="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform flex-shrink-0"
+                fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3">
                 </path>
               </svg>
@@ -215,31 +219,32 @@
               </svg>
               <span>Impacto real</span>
             </div>
+            <div class="flex items-center gap-2 bg-white/10 rounded-full py-2 px-4">
+              <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"
+                  stroke-width="2"></path>
+              </svg>
+              <span>Acción Solidaria</span>
+            </div>
           </div>
         </div>
 
       </div>
     </div>
-    
+
     <!-- Fondo decorativo detrás de la mujer - visible en móvil y desktop -->
     <div class="absolute right-0 bottom-0 w-full lg:w-1/2 h-[40%] lg:h-full z-[5]">
-      <img 
-        src="src/img/fondo-hero-header.png" 
-        alt="" 
-        class="w-full h-full object-cover object-center lg:object-bottom opacity-15 lg:opacity-20"
-      />
+      <img src="src/img/fondo-hero-header.png" alt=""
+        class="w-full h-full object-cover object-center lg:object-bottom opacity-15 lg:opacity-20" />
     </div>
-    
+
     <!-- Imagen de la mujer abogada - posicionada al bottom del hero -->
-    <div class="hidden lg:flex absolute right-0 bottom-0 w-1/2 h-[96vh] items-end justify-center z-10" data-aos="fade-left" data-aos-delay="400"
-      data-aos-duration="1000">
-      <img 
-        src="src/img/mujer abogada.png" 
-        alt="Abogada profesional de Empieza de Cero" 
-        class="max-h-full w-auto object-contain object-bottom drop-shadow-2xl"
-      />
+    <div class="hidden lg:flex absolute right-0 bottom-0 w-1/2 h-[96vh] items-end justify-center z-10"
+      data-aos="fade-left" data-aos-delay="400" data-aos-duration="1000">
+      <img src="src/img/mujer abogada.png" alt="Abogada profesional de Empieza de Cero"
+        class="max-h-full w-auto object-contain object-bottom drop-shadow-2xl" />
     </div>
-    
+
     <div class="absolute bottom-0 left-0 w-full bg-primary/80 backdrop-blur-sm z-20">
       <div class="container mx-auto px-4 lg:px-8 py-3 lg:py-4">
         <!-- Desktop: una fila -->
@@ -289,21 +294,24 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
   <!-- SECCIÓN NUESTRO SUEÑO - UNIFICADA -->
-  <section id="sueno-section" class="relative overflow-hidden py-16 lg:py-24" style="background: linear-gradient(135deg, #0A2463 0%, #0d2d6e 50%, #051330 100%);">
+  <section id="sueno-section" class="relative overflow-hidden py-16 lg:py-24"
+    style="background: linear-gradient(135deg, #0A2463 0%, #0d2d6e 50%, #051330 100%);">
     <!-- Fondo con patrón sutil -->
     <div class="absolute inset-0 opacity-5">
-      <div class="absolute top-0 left-0 w-full h-full" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 50px 50px;"></div>
+      <div class="absolute top-0 left-0 w-full h-full"
+        style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 50px 50px;">
+      </div>
     </div>
 
     <div class="container mx-auto px-6 lg:px-8 relative z-10">
-      
+
       <!-- Panel 1: TENEMOS UN SUEÑO -->
       <div class="text-center mb-12 lg:mb-20" data-aos="fade-up">
         <p class="text-white/60 text-sm lg:text-base font-semibold tracking-[0.2em] uppercase mb-4">
           En Empieza de Cero
         </p>
-        <h2 class="text-3xl sm:text-4xl lg:text-6xl font-extrabold text-white leading-tight mb-4 lg:mb-6" 
-            style="font-family: 'Inter', sans-serif;">
+        <h2 class="text-3xl sm:text-4xl lg:text-6xl font-extrabold text-white leading-tight mb-4 lg:mb-6"
+          style="font-family: 'Inter', sans-serif;">
           TENEMOS UN SUEÑO
         </h2>
         <p class="text-lg lg:text-2xl text-white/90 font-light mb-2">
@@ -329,8 +337,8 @@
         <p class="text-white/60 text-sm lg:text-base font-semibold tracking-[0.2em] uppercase mb-4">
           ¿Quieres ser parte del cambio?
         </p>
-        <h2 class="text-3xl sm:text-4xl lg:text-6xl font-extrabold text-white leading-tight mb-4" 
-            style="font-family: 'Inter', sans-serif;">
+        <h2 class="text-3xl sm:text-4xl lg:text-6xl font-extrabold text-white leading-tight mb-4"
+          style="font-family: 'Inter', sans-serif;">
           ÚNETE AL SUEÑO
         </h2>
         <p class="text-lg lg:text-2xl text-white/90 font-light">
@@ -344,31 +352,37 @@
           <p class="text-white/60 text-xs lg:text-sm font-semibold tracking-[0.15em] uppercase mb-2 lg:mb-3">
             Primer Paso
           </p>
-          <h2 class="text-2xl sm:text-3xl lg:text-5xl font-extrabold text-white leading-tight" 
-              style="font-family: 'Inter', sans-serif;">
+          <h2 class="text-2xl sm:text-3xl lg:text-5xl font-extrabold text-white leading-tight"
+            style="font-family: 'Inter', sans-serif;">
             CÓMO CONSTRUIREMOS ESE ECOSISTEMA...
           </h2>
         </div>
 
         <!-- 2 Cards: Ayudando personas + Profesionales -->
-        <div class="grid md:grid-cols-2 gap-4 lg:gap-8 max-w-5xl mx-auto relative" data-aos="fade-up" data-aos-delay="100">
-          
+        <div class="grid md:grid-cols-2 gap-4 lg:gap-8 max-w-5xl mx-auto relative" data-aos="fade-up"
+          data-aos-delay="100">
+
           <!-- Card 01: Ayudando a personas -->
-          <div class="bg-white/95 backdrop-blur-sm rounded-2xl lg:rounded-3xl overflow-hidden shadow-xl lg:shadow-2xl hover:scale-105 transition-all duration-500 group">
+          <div
+            class="bg-white/95 backdrop-blur-sm rounded-2xl lg:rounded-3xl overflow-hidden shadow-xl lg:shadow-2xl hover:scale-105 transition-all duration-500 group">
             <div class="relative h-40 lg:h-64 overflow-hidden">
               <div class="absolute top-4 left-4 lg:top-6 lg:left-6 z-10">
-                <span class="inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 bg-primary rounded-xl lg:rounded-2xl text-white font-black text-lg lg:text-2xl shadow-lg">
+                <span
+                  class="inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 bg-primary rounded-xl lg:rounded-2xl text-white font-black text-lg lg:text-2xl shadow-lg">
                   01
                 </span>
               </div>
-              <img src="src/img/ayuda.jpg" alt="Ayudando a personas" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+              <img src="src/img/ayuda.jpg" alt="Ayudando a personas"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
             </div>
             <div class="p-5 lg:p-8">
-              <h3 class="text-lg lg:text-2xl font-bold text-primary mb-2 lg:mb-4 leading-tight" style="font-family: 'Inter', sans-serif;">
+              <h3 class="text-lg lg:text-2xl font-bold text-primary mb-2 lg:mb-4 leading-tight"
+                style="font-family: 'Inter', sans-serif;">
                 AYUDANDO A PERSONAS CON DEUDAS A EMPEZAR DE NUEVO.
               </h3>
               <p class="text-gray-700 text-sm lg:text-base leading-relaxed">
-                Cada caso es una historia de esperanza. Queremos darles las herramientas legales, financieras y emocionales para una nueva etapa.
+                Cada caso es una historia de esperanza. Queremos darles las herramientas legales, financieras y
+                emocionales para una nueva etapa.
               </p>
             </div>
           </div>
@@ -381,21 +395,26 @@
           </div>
 
           <!-- Card 02: Profesionales comprometidos -->
-          <div class="bg-white/95 backdrop-blur-sm rounded-2xl lg:rounded-3xl overflow-hidden shadow-xl lg:shadow-2xl hover:scale-105 transition-all duration-500 group">
+          <div
+            class="bg-white/95 backdrop-blur-sm rounded-2xl lg:rounded-3xl overflow-hidden shadow-xl lg:shadow-2xl hover:scale-105 transition-all duration-500 group">
             <div class="relative h-40 lg:h-64 overflow-hidden">
               <div class="absolute top-4 left-4 lg:top-6 lg:left-6 z-10">
-                <span class="inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 bg-primary rounded-xl lg:rounded-2xl text-white font-black text-lg lg:text-2xl shadow-lg">
+                <span
+                  class="inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 bg-primary rounded-xl lg:rounded-2xl text-white font-black text-lg lg:text-2xl shadow-lg">
                   02
                 </span>
               </div>
-              <img src="src/img/conector.jpg" alt="Profesionales comprometidos" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+              <img src="src/img/conector.jpg" alt="Profesionales comprometidos"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
             </div>
             <div class="p-5 lg:p-8">
-              <h3 class="text-lg lg:text-2xl font-bold text-primary mb-2 lg:mb-4 leading-tight" style="font-family: 'Inter', sans-serif;">
+              <h3 class="text-lg lg:text-2xl font-bold text-primary mb-2 lg:mb-4 leading-tight"
+                style="font-family: 'Inter', sans-serif;">
                 CONTAR CON PROFESIONALES Y PERSONAS COMPROMETIDAS
               </h3>
               <p class="text-gray-700 text-sm lg:text-base leading-relaxed">
-                Abogados, asesores fiscales, psicólogos y conectores son piezas clave de esta red con remuneración justa y transparente.
+                Abogados, asesores fiscales, psicólogos y conectores son piezas clave de esta red con remuneración justa
+                y transparente.
               </p>
             </div>
           </div>
@@ -409,8 +428,8 @@
           <p class="text-white/60 text-xs lg:text-sm font-semibold tracking-[0.15em] uppercase mb-2 lg:mb-3">
             Nuestro Propósito
           </p>
-          <h2 class="text-xl sm:text-2xl lg:text-4xl font-extrabold text-white leading-tight mb-2" 
-              style="font-family: 'Inter', sans-serif;">
+          <h2 class="text-xl sm:text-2xl lg:text-4xl font-extrabold text-white leading-tight mb-2"
+            style="font-family: 'Inter', sans-serif;">
             NO SOLO SOMOS UN SERVICIO LEGAL
           </h2>
           <p class="text-base lg:text-2xl text-white/90 font-light">
@@ -419,10 +438,12 @@
         </div>
 
         <!-- Grid de 4 tarjetas -->
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-5 mb-8 lg:mb-10 max-w-5xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-          
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-5 mb-8 lg:mb-10 max-w-5xl mx-auto" data-aos="fade-up"
+          data-aos-delay="100">
+
           <!-- Card 01 -->
-          <div class="bg-yellow-300 rounded-2xl p-4 lg:p-5 text-left shadow-xl hover:scale-105 transition-transform duration-500">
+          <div
+            class="bg-yellow-300 rounded-2xl p-4 lg:p-5 text-left shadow-xl hover:scale-105 transition-transform duration-500">
             <div class="text-3xl lg:text-5xl font-black mb-1 lg:mb-2" style="font-family: 'Inter', sans-serif;">01</div>
             <span class="material-icons text-2xl lg:text-3xl mb-2">volunteer_activism</span>
             <h3 class="text-sm lg:text-base font-bold leading-tight" style="font-family: 'Inter', sans-serif;">
@@ -434,7 +455,8 @@
           </div>
 
           <!-- Card 02 -->
-          <div class="bg-green-300 rounded-2xl p-4 lg:p-5 text-left shadow-xl hover:scale-105 transition-transform duration-500">
+          <div
+            class="bg-green-300 rounded-2xl p-4 lg:p-5 text-left shadow-xl hover:scale-105 transition-transform duration-500">
             <div class="text-3xl lg:text-5xl font-black mb-1 lg:mb-2" style="font-family: 'Inter', sans-serif;">02</div>
             <span class="material-icons text-2xl lg:text-3xl mb-2">autorenew</span>
             <h3 class="text-sm lg:text-base font-bold leading-tight" style="font-family: 'Inter', sans-serif;">
@@ -446,7 +468,8 @@
           </div>
 
           <!-- Card 03 -->
-          <div class="bg-cyan-300 rounded-2xl p-4 lg:p-5 text-left shadow-xl hover:scale-105 transition-transform duration-500">
+          <div
+            class="bg-cyan-300 rounded-2xl p-4 lg:p-5 text-left shadow-xl hover:scale-105 transition-transform duration-500">
             <div class="text-3xl lg:text-5xl font-black mb-1 lg:mb-2" style="font-family: 'Inter', sans-serif;">03</div>
             <span class="material-icons text-2xl lg:text-3xl mb-2">diversity_3</span>
             <h3 class="text-sm lg:text-base font-bold leading-tight" style="font-family: 'Inter', sans-serif;">
@@ -458,7 +481,8 @@
           </div>
 
           <!-- Card 04 -->
-          <div class="bg-blue-300 rounded-2xl p-4 lg:p-5 text-left shadow-xl hover:scale-105 transition-transform duration-500">
+          <div
+            class="bg-blue-300 rounded-2xl p-4 lg:p-5 text-left shadow-xl hover:scale-105 transition-transform duration-500">
             <div class="text-3xl lg:text-5xl font-black mb-1 lg:mb-2" style="font-family: 'Inter', sans-serif;">04</div>
             <span class="material-icons text-2xl lg:text-3xl mb-2">trending_up</span>
             <h3 class="text-sm lg:text-base font-bold leading-tight" style="font-family: 'Inter', sans-serif;">
@@ -477,7 +501,8 @@
             Cada persona que ayudas a empezar de cero es una vida que transformas.
             <span class="font-semibold text-white">¿Estás listo para ser parte del cambio?</span>
           </p>
-          <a href="#registro" class="inline-flex items-center gap-2 lg:gap-3 bg-white text-primary font-bold text-sm lg:text-lg px-6 lg:px-10 py-4 lg:py-5 rounded-full hover:bg-yellow-400 transition-all duration-300 shadow-xl lg:shadow-2xl hover:shadow-white/30 hover:scale-105">
+          <a href="#registro"
+            class="inline-flex items-center gap-2 lg:gap-3 bg-white text-primary font-bold text-sm lg:text-lg px-6 lg:px-10 py-4 lg:py-5 rounded-full hover:bg-yellow-400 transition-all duration-300 shadow-xl lg:shadow-2xl hover:shadow-white/30 hover:scale-105">
             <span class="material-icons text-lg lg:text-2xl">favorite</span>
             <span>Quiero ser parte de esta misión</span>
             <span class="material-icons text-lg lg:text-2xl hidden sm:inline">arrow_forward</span>
@@ -508,14 +533,18 @@
         <div class="relative mb-12">
           <!-- Contenedor de pasos -->
           <div class="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12">
-            
+
             <!-- Paso 1 -->
-            <div class="relative flex flex-col items-center w-full lg:min-w-[207px]" data-aos="fade-up" data-aos-delay="0" data-aos-duration="600">
-              <div class="relative bg-white border border-primary/20 rounded-2xl p-6 hover:bg-gray-50 hover:border-primary/40 transition-all duration-300 w-full h-full min-h-[280px] group shadow-lg">
+            <div class="relative flex flex-col items-center w-full lg:min-w-[207px]" data-aos="fade-up"
+              data-aos-delay="0" data-aos-duration="600">
+              <div
+                class="relative bg-white border border-primary/20 rounded-2xl p-6 hover:bg-gray-50 hover:border-primary/40 transition-all duration-300 w-full h-full min-h-[280px] group shadow-lg">
                 <!-- Número de fondo -->
-                <span class="absolute top-3 right-3 text-[80px] font-black text-primary/5 leading-none select-none">1</span>
+                <span
+                  class="absolute top-3 right-3 text-[80px] font-black text-primary/5 leading-none select-none">1</span>
                 <!-- Icono -->
-                <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                <div
+                  class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                   <span class="material-icons text-primary text-2xl">search</span>
                 </div>
                 <span class="text-primary font-bold text-sm mb-2 block">PASO 01</span>
@@ -526,25 +555,32 @@
               </div>
               <!-- Flecha hacia abajo (móvil) -->
               <div class="flex md:hidden items-center justify-center py-4" data-aos="fade-down" data-aos-delay="200">
-                <div class="step-arrow-circle w-11 h-11 bg-primary rounded-full flex items-center justify-center shadow-lg relative z-10">
+                <div
+                  class="step-arrow-circle w-11 h-11 bg-primary rounded-full flex items-center justify-center shadow-lg relative z-10">
                   <span class="material-icons text-white text-2xl step-arrow-vertical">keyboard_arrow_down</span>
                 </div>
               </div>
               <!-- Flecha hacia derecha (desktop) -->
-              <div class="hidden md:flex absolute -right-[26px] top-1/2 -translate-y-1/2 z-10" data-aos="zoom-in" data-aos-delay="300">
-                <div class="step-arrow-circle w-10 h-10 bg-primary rounded-full flex items-center justify-center shadow-lg relative">
+              <div class="hidden md:flex absolute -right-[26px] top-1/2 -translate-y-1/2 z-10" data-aos="zoom-in"
+                data-aos-delay="300">
+                <div
+                  class="step-arrow-circle w-10 h-10 bg-primary rounded-full flex items-center justify-center shadow-lg relative">
                   <span class="material-icons text-white text-xl step-arrow-horizontal">arrow_forward</span>
                 </div>
               </div>
             </div>
 
             <!-- Paso 2 -->
-            <div class="relative flex flex-col items-center w-full lg:min-w-[207px]" data-aos="fade-up" data-aos-delay="200" data-aos-duration="600">
-              <div class="relative bg-white border border-primary/20 rounded-2xl p-6 hover:bg-gray-50 hover:border-primary/40 transition-all duration-300 w-full h-full min-h-[280px] group shadow-lg">
+            <div class="relative flex flex-col items-center w-full lg:min-w-[207px]" data-aos="fade-up"
+              data-aos-delay="200" data-aos-duration="600">
+              <div
+                class="relative bg-white border border-primary/20 rounded-2xl p-6 hover:bg-gray-50 hover:border-primary/40 transition-all duration-300 w-full h-full min-h-[280px] group shadow-lg">
                 <!-- Número de fondo -->
-                <span class="absolute top-3 right-3 text-[80px] font-black text-primary/5 leading-none select-none">2</span>
+                <span
+                  class="absolute top-3 right-3 text-[80px] font-black text-primary/5 leading-none select-none">2</span>
                 <!-- Icono -->
-                <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                <div
+                  class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                   <span class="material-icons text-primary text-2xl">edit_note</span>
                 </div>
                 <span class="text-primary font-bold text-sm mb-2 block">PASO 02</span>
@@ -555,25 +591,32 @@
               </div>
               <!-- Flecha hacia abajo (móvil) -->
               <div class="flex md:hidden items-center justify-center py-4" data-aos="fade-down" data-aos-delay="400">
-                <div class="step-arrow-circle w-11 h-11 bg-primary rounded-full flex items-center justify-center shadow-lg relative z-10">
+                <div
+                  class="step-arrow-circle w-11 h-11 bg-primary rounded-full flex items-center justify-center shadow-lg relative z-10">
                   <span class="material-icons text-white text-2xl step-arrow-vertical">keyboard_arrow_down</span>
                 </div>
               </div>
               <!-- Flecha hacia derecha (desktop) -->
-              <div class="hidden md:flex absolute -right-[26px] top-1/2 -translate-y-1/2 z-10" data-aos="zoom-in" data-aos-delay="500">
-                <div class="step-arrow-circle w-10 h-10 bg-primary rounded-full flex items-center justify-center shadow-lg relative">
+              <div class="hidden md:flex absolute -right-[26px] top-1/2 -translate-y-1/2 z-10" data-aos="zoom-in"
+                data-aos-delay="500">
+                <div
+                  class="step-arrow-circle w-10 h-10 bg-primary rounded-full flex items-center justify-center shadow-lg relative">
                   <span class="material-icons text-white text-xl step-arrow-horizontal">arrow_forward</span>
                 </div>
               </div>
             </div>
 
             <!-- Paso 3 -->
-            <div class="relative flex flex-col items-center w-full lg:min-w-[207px]" data-aos="fade-up" data-aos-delay="400" data-aos-duration="600">
-              <div class="relative bg-white border border-primary/20 rounded-2xl p-6 hover:bg-gray-50 hover:border-primary/40 transition-all duration-300 w-full h-full min-h-[280px] group shadow-lg">
+            <div class="relative flex flex-col items-center w-full lg:min-w-[207px]" data-aos="fade-up"
+              data-aos-delay="400" data-aos-duration="600">
+              <div
+                class="relative bg-white border border-primary/20 rounded-2xl p-6 hover:bg-gray-50 hover:border-primary/40 transition-all duration-300 w-full h-full min-h-[280px] group shadow-lg">
                 <!-- Número de fondo -->
-                <span class="absolute top-3 right-3 text-[80px] font-black text-primary/5 leading-none select-none">3</span>
+                <span
+                  class="absolute top-3 right-3 text-[80px] font-black text-primary/5 leading-none select-none">3</span>
                 <!-- Icono -->
-                <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                <div
+                  class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                   <span class="material-icons text-primary text-2xl">send</span>
                 </div>
                 <span class="text-primary font-bold text-sm mb-2 block">PASO 03</span>
@@ -584,25 +627,32 @@
               </div>
               <!-- Flecha hacia abajo (móvil) -->
               <div class="flex md:hidden items-center justify-center py-4" data-aos="fade-down" data-aos-delay="600">
-                <div class="step-arrow-circle w-11 h-11 bg-primary rounded-full flex items-center justify-center shadow-lg relative z-10">
+                <div
+                  class="step-arrow-circle w-11 h-11 bg-primary rounded-full flex items-center justify-center shadow-lg relative z-10">
                   <span class="material-icons text-white text-2xl step-arrow-vertical">keyboard_arrow_down</span>
                 </div>
               </div>
               <!-- Flecha hacia derecha (desktop) -->
-              <div class="hidden md:flex absolute -right-[26px] top-1/2 -translate-y-1/2 z-10" data-aos="zoom-in" data-aos-delay="700">
-                <div class="step-arrow-circle w-10 h-10 bg-primary rounded-full flex items-center justify-center shadow-lg relative">
+              <div class="hidden md:flex absolute -right-[26px] top-1/2 -translate-y-1/2 z-10" data-aos="zoom-in"
+                data-aos-delay="700">
+                <div
+                  class="step-arrow-circle w-10 h-10 bg-primary rounded-full flex items-center justify-center shadow-lg relative">
                   <span class="material-icons text-white text-xl step-arrow-horizontal">arrow_forward</span>
                 </div>
               </div>
             </div>
 
             <!-- Paso 4 -->
-            <div class="relative flex flex-col items-center w-full lg:min-w-[207px]" data-aos="fade-up" data-aos-delay="600" data-aos-duration="600">
-              <div class="relative bg-white border border-primary/20 rounded-2xl p-6 hover:bg-gray-50 hover:border-primary/40 transition-all duration-300 w-full h-full min-h-[280px] group shadow-lg">
+            <div class="relative flex flex-col items-center w-full lg:min-w-[207px]" data-aos="fade-up"
+              data-aos-delay="600" data-aos-duration="600">
+              <div
+                class="relative bg-white border border-primary/20 rounded-2xl p-6 hover:bg-gray-50 hover:border-primary/40 transition-all duration-300 w-full h-full min-h-[280px] group shadow-lg">
                 <!-- Número de fondo -->
-                <span class="absolute top-3 right-3 text-[80px] font-black text-primary/5 leading-none select-none">4</span>
+                <span
+                  class="absolute top-3 right-3 text-[80px] font-black text-primary/5 leading-none select-none">4</span>
                 <!-- Icono -->
-                <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                <div
+                  class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                   <span class="material-icons text-primary text-2xl">gavel</span>
                 </div>
                 <span class="text-primary font-bold text-sm mb-2 block">PASO 04</span>
@@ -613,31 +663,38 @@
               </div>
               <!-- Flecha hacia abajo (móvil) -->
               <div class="flex md:hidden items-center justify-center py-4" data-aos="fade-down" data-aos-delay="800">
-                <div class="step-arrow-circle w-11 h-11 bg-primary rounded-full flex items-center justify-center shadow-lg relative z-10">
+                <div
+                  class="step-arrow-circle w-11 h-11 bg-primary rounded-full flex items-center justify-center shadow-lg relative z-10">
                   <span class="material-icons text-white text-2xl step-arrow-vertical">keyboard_arrow_down</span>
                 </div>
               </div>
               <!-- Flecha hacia derecha (desktop) -->
-              <div class="hidden md:flex absolute -right-[26px] top-1/2 -translate-y-1/2 z-10" data-aos="zoom-in" data-aos-delay="900">
-                <div class="step-arrow-circle w-10 h-10 bg-primary rounded-full flex items-center justify-center shadow-lg relative">
+              <div class="hidden md:flex absolute -right-[26px] top-1/2 -translate-y-1/2 z-10" data-aos="zoom-in"
+                data-aos-delay="900">
+                <div
+                  class="step-arrow-circle w-10 h-10 bg-primary rounded-full flex items-center justify-center shadow-lg relative">
                   <span class="material-icons text-white text-xl step-arrow-horizontal">arrow_forward</span>
                 </div>
               </div>
             </div>
 
             <!-- Paso 5 - Destacado -->
-            <div class="relative flex flex-col items-center w-full lg:min-w-[207px]" data-aos="fade-up" data-aos-delay="800" data-aos-duration="600">
+            <div class="relative flex flex-col items-center w-full lg:min-w-[207px]" data-aos="fade-up"
+              data-aos-delay="800" data-aos-duration="600">
               <div class="relative bg-primary rounded-2xl p-6 shadow-lg w-full h-full min-h-[280px] group">
                 <!-- Número de fondo -->
-                <span class="absolute top-3 right-3 text-[80px] font-black text-white/10 leading-none select-none">5</span>
+                <span
+                  class="absolute top-3 right-3 text-[80px] font-black text-white/10 leading-none select-none">5</span>
                 <!-- Icono -->
-                <div class="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-white/30 transition-colors">
+                <div
+                  class="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-white/30 transition-colors">
                   <span class="material-icons text-white text-2xl">payments</span>
                 </div>
                 <span class="text-white font-bold text-sm mb-2 block">PASO 05</span>
                 <h3 class="typo-h4 text-white mb-2">Cobras 300 €</h3>
                 <p class="text-white/90 text-sm leading-relaxed">
-                  Si paga 1.000 € obtienes 300 € de inmediato. Si paga fraccionado: 150 € al llegar a 500 € y otros 150 € al llegar a 1.000 €.
+                  Si paga 1.000 € obtienes 300 € de inmediato. Si paga fraccionado: 150 € al llegar a 500 € y otros 150
+                  € al llegar a 1.000 €.
                 </p>
               </div>
             </div>
@@ -646,7 +703,9 @@
         </div>
 
         <!-- Barra inferior con CTA -->
-        <div class="bg-white border border-primary/20 rounded-2xl p-5 flex flex-col md:flex-row items-center justify-between gap-4 shadow-lg" data-aos="fade-up" data-aos-delay="1000">
+        <div
+          class="bg-white border border-primary/20 rounded-2xl p-5 flex flex-col md:flex-row items-center justify-between gap-4 shadow-lg"
+          data-aos="fade-up" data-aos-delay="1000">
           <div class="flex items-center gap-4">
             <div class="flex -space-x-3">
               <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white">
@@ -663,7 +722,8 @@
               Únete a la red de Conectores que <strong class="text-primary">cambian vidas</strong>
             </p>
           </div>
-          <a href="#formulario" class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white font-bold px-6 py-3 rounded-full transition-all duration-300 group shadow-md">
+          <a href="#formulario"
+            class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white font-bold px-6 py-3 rounded-full transition-all duration-300 group shadow-md">
             <span>QUIERO SER CONECTOR</span>
             <span class="material-icons text-xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
           </a>
@@ -671,6 +731,148 @@
       </div>
     </div>
   </section>
+
+  <!-- 4. EJEMPLOS DE CASOS - Casos que puedes referir -->
+  <section class="py-24 md:py-32 bg-white">
+    <div class="container mx-auto px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto">
+
+        <!-- Encabezado -->
+        <div class="text-center mb-12">
+          <span class="inline-block px-4 py-2 bg-primary/10 text-primary typo-badge rounded-full mb-4"
+            data-aos="fade-down">EJEMPLOS DE CASOS</span>
+          <h2 class="typo-h2 text-primary mb-4" data-aos="fade-up">
+            ¿Quién puede acogerse?
+          </h2>
+          <p class="typo-body text-gray-600 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+            Si conoces a alguien que la esté pasando mal con deudas, aquí verás si puede acogerse y cómo ayudarle.
+          </p>
+        </div>
+
+        <!-- Requisitos trasladados -->
+        <div class="max-w-3xl mx-auto bg-gray-50 rounded-3xl p-8 mb-12 border border-gray-100" data-aos="fade-up">
+          <p class="typo-body text-gray-600 mb-6 text-center">Cualquier persona mayor de edad endeudada en España que
+            cumpla:</p>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span class="material-icons text-green-600 text-lg">check</span>
+              </div>
+              <div>
+                <span class="font-semibold text-gray-800 text-base">Deudas superiores a 15.000€</span>
+                <p class="typo-body text-gray-500">Mínimo necesario para iniciar el proceso</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span class="material-icons text-green-600 text-lg">check</span>
+              </div>
+              <div>
+                <span class="font-semibold text-gray-800 text-base">2 o más acreedores</span>
+                <p class="typo-body text-gray-500">Bancos, financieras, hacienda, etc.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span class="material-icons text-green-600 text-lg">check</span>
+              </div>
+              <div>
+                <span class="font-semibold text-gray-800 text-base">Capacidad de pago mínima de 200€/mes</span>
+                <p class="typo-body text-gray-500">Para el plan de pagos inicial</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Grid de ejemplos -->
+        <div class="text-center mb-8" data-aos="fade-up">
+          <h3 class="text-xl md:text-2xl font-bold text-primary max-w-3xl mx-auto leading-tight">
+            Estos son algunos ejemplos de personas que pueden beneficiarse de la Ley de Segunda Oportunidad.
+          </h3>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up" data-aos-delay="200">
+
+          <!-- Ejemplo 1 -->
+          <div
+            class="group bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 border border-gray-100 hover:shadow-lg hover:border-primary/20 transition-all duration-300">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                <span class="material-icons text-primary text-2xl">credit_card</span>
+              </div>
+              <div>
+                <h4 class="typo-h4 text-primary mb-2">Tarjetas y minicréditos</h4>
+                <p class="typo-body text-gray-600">Persona con más de <strong class="text-primary">18.000€</strong> en
+                  tarjetas y minicréditos acumulados.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ejemplo 2 -->
+          <div
+            class="group bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 border border-gray-100 hover:shadow-lg hover:border-primary/20 transition-all duration-300">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                <span class="material-icons text-primary text-2xl">store</span>
+              </div>
+              <div>
+                <h4 class="typo-h4 text-primary mb-2">Autónomo con múltiples acreedores</h4>
+                <p class="typo-body text-gray-600">Autónomo con <strong class="text-primary">70.000€</strong> de deuda y
+                  <strong class="text-primary">4 acreedores</strong> diferentes.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ejemplo 3 -->
+          <div
+            class="group bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 border border-gray-100 hover:shadow-lg hover:border-primary/20 transition-all duration-300">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                <span class="material-icons text-primary text-2xl">person</span>
+              </div>
+              <div>
+                <h4 class="typo-h4 text-primary mb-2">Empleado sin bienes</h4>
+                <p class="typo-body text-gray-600">Empleado sin bienes con <strong class="text-primary">30.000€</strong>
+                  en préstamos personales.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ejemplo 4 -->
+          <div
+            class="group bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 border border-gray-100 hover:shadow-lg hover:border-primary/20 transition-all duration-300">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                <span class="material-icons text-primary text-2xl">business</span>
+              </div>
+              <div>
+                <h4 class="typo-h4 text-primary mb-2">Empresario con deuda alta</h4>
+                <p class="typo-body text-gray-600">Empresario con deuda acumulada de <strong
+                    class="text-primary">450.000€</strong> entre proveedores y entidades financieras.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Mensaje motivador -->
+        <div class="text-center mt-12 bg-primary/5 rounded-2xl p-8" data-aos="fade-up" data-aos-delay="300">
+          <div class="flex items-center justify-center gap-3 mb-4">
+            <span class="material-icons text-primary text-3xl">lightbulb</span>
+            <p class="typo-h4 text-primary">¿Conoces a alguien en una situación similar?</p>
+          </div>
+          <p class="typo-body text-gray-600 mb-6">Puedes ayudarle a empezar de cero y ganar 300€ por cada referido.</p>
+          <a href="#registro"
+            class="inline-flex items-center justify-center gap-2 bg-primary text-white font-bold text-base uppercase tracking-wide px-8 py-4 rounded-full shadow-lg hover:bg-primary/90 hover:scale-105 transition-all duration-300">
+            <span>QUIERO SER CONECTOR</span>
+            <span class="material-icons">arrow_forward</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
 
   <!-- 1.5 LA SEGUNDA OPORTUNIDAD - Información de la Ley -->
   <section class="py-24 md:py-32 bg-gray-50">
@@ -682,59 +884,16 @@
           <span class="typo-badge inline-block px-4 py-2 bg-primary/10 text-primary font-semibold rounded-full mb-4"
             data-aos="fade-down">LEY DE SEGUNDA OPORTUNIDAD</span>
           <h2 class="typo-h2 text-primary mb-4" data-aos="fade-up">
-             A quién puedes referir
+            A quién puedes referir
           </h2>
-          <p class="typo-body text-gray-600 max-w-3xl mx-auto" data-aos="fade-up"
-            data-aos-delay="100">
-            Criterios basados en la Ley de la Segunda Oportunidad y el documento oficial del despacho 
+          <p class="typo-body text-gray-600 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+            Criterios basados en la Ley de la Segunda Oportunidad y el documento oficial del despacho
           </p>
         </div>
 
-        <!-- Grid de 2 columnas: Requisitos -->
-        <div class="grid lg:grid-cols-2 gap-8 mb-16">
-
-          <!-- Columna 1: ¿Quién puede acogerse? -->
-          <div class="bg-white rounded-3xl p-8 shadow-lg border border-gray-100" data-aos="fade-right">
-            <div class="flex items-center gap-4 mb-6">
-              <div class="w-14 h-14 bg-primary rounded-2xl flex items-center justify-center">
-                <span class="material-icons text-white text-3xl">how_to_reg</span>
-              </div>
-              <h3 class="typo-h3 text-primary">¿Quién puede acogerse?</h3>
-            </div>
-            <p class="typo-body text-gray-600 mb-6">Cualquier persona mayor de edad endeudada en España que cumpla:</p>
-            <ul class="space-y-4">
-              <li class="flex items-start gap-3">
-                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span class="material-icons text-green-600 text-lg">check</span>
-                </div>
-                <div>
-                  <span class="font-semibold text-gray-800 text-base">Deudas superiores a 15.000€</span>
-                  <p class="typo-body text-gray-500">Mínimo necesario para iniciar el proceso</p>
-                </div>
-              </li>
-              <li class="flex items-start gap-3">
-                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span class="material-icons text-green-600 text-lg">check</span>
-                </div>
-                <div>
-                  <span class="font-semibold text-gray-800 text-base">2 o más acreedores</span>
-                  <p class="typo-body text-gray-500">Bancos, financieras, hacienda, etc.</p>
-                </div>
-              </li>
-              <li class="flex items-start gap-3">
-                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span class="material-icons text-green-600 text-lg">check</span>
-                </div>
-                <div>
-                  <span class="font-semibold text-gray-800 text-base">Capacidad de pago mínima de 200€/mes</span>
-                  <p class="typo-body text-gray-500">Para el plan de pagos inicial</p>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Columna 2: Requisitos de la Ley -->
-          <div class="bg-white rounded-3xl p-8 shadow-lg border border-gray-100" data-aos="fade-left">
+        <!-- Contenedor centrado: Requisitos de la Ley -->
+        <div class="max-w-3xl mx-auto mb-16">
+          <div class="bg-white rounded-3xl p-8 border border-gray-100" data-aos="fade-up">
             <div class="flex items-center gap-4 mb-6">
               <div class="w-14 h-14 bg-primary rounded-2xl flex items-center justify-center">
                 <span class="material-icons text-white text-2xl">gavel</span>
@@ -745,7 +904,8 @@
               <li class="flex items-start gap-3">
                 <span
                   class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-primary font-bold text-sm">1</span>
-                <span class="typo-body text-gray-700">Demostrar <strong class="text-primary">buena fe</strong> (no haber causado
+                <span class="typo-body text-gray-700">Demostrar <strong class="text-primary">buena fe</strong> (no haber
+                  causado
                   el sobreendeudamiento intencionalmente)</span>
               </li>
               <li class="flex items-start gap-3">
@@ -757,7 +917,8 @@
               <li class="flex items-start gap-3">
                 <span
                   class="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-primary font-bold text-sm">3</span>
-                <span class="typo-body text-gray-700">No tener condenas por delitos contra <strong class="text-primary">Hacienda o
+                <span class="typo-body text-gray-700">No tener condenas por delitos contra <strong
+                    class="text-primary">Hacienda o
                     Seguridad Social</strong></span>
               </li>
               <li class="flex items-start gap-3">
@@ -780,17 +941,17 @@
               </li>
             </ul>
           </div>
-
         </div>
 
         <!-- Tipos de casos: Válidos vs No válidos -->
         <div class="text-center mb-12" data-aos="fade-up">
           <h3 class="typo-h3 text-primary mb-4">¿Qué casos son válidos para la Segunda Oportunidad?</h3>
-          <p class="typo-body text-gray-600 max-w-2xl mx-auto">Conoce qué perfiles pueden beneficiarse y cuáles no cumplen los requisitos.</p>
+          <p class="typo-body text-gray-600 max-w-2xl mx-auto">Conoce qué perfiles pueden beneficiarse y cuáles no
+            cumplen los requisitos.</p>
         </div>
 
         <div class="grid md:grid-cols-2 gap-8" data-aos="fade-up" data-aos-delay="100">
-          
+
           <!-- Columna 1: Casos que SÍ aplican -->
           <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100">
             <!-- Header verde -->
@@ -809,25 +970,29 @@
                   <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span class="material-icons text-green-600 text-sm">check</span>
                   </div>
-                  <span class="typo-body text-gray-700">Empleados <strong class="text-primary">sin bienes</strong> a su nombre</span>
+                  <span class="typo-body text-gray-700">Empleados <strong class="text-primary">sin bienes</strong> a su
+                    nombre</span>
                 </li>
                 <li class="flex items-start gap-3">
                   <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span class="material-icons text-green-600 text-sm">check</span>
                   </div>
-                  <span class="typo-body text-gray-700">Empleados <strong class="text-primary">con patrimonio liquidable</strong></span>
+                  <span class="typo-body text-gray-700">Empleados <strong class="text-primary">con patrimonio
+                      liquidable</strong></span>
                 </li>
                 <li class="flex items-start gap-3">
                   <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span class="material-icons text-green-600 text-sm">check</span>
                   </div>
-                  <span class="typo-body text-gray-700"><strong class="text-primary">Autónomos y empresarios</strong></span>
+                  <span class="typo-body text-gray-700"><strong class="text-primary">Autónomos y
+                      empresarios</strong></span>
                 </li>
                 <li class="flex items-start gap-3">
                   <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span class="material-icons text-green-600 text-sm">check</span>
                   </div>
-                  <span class="typo-body text-gray-700">Personas físicas <strong class="text-primary">con actividad económica</strong></span>
+                  <span class="typo-body text-gray-700">Personas físicas <strong class="text-primary">con actividad
+                      económica</strong></span>
                 </li>
               </ul>
               <!-- Precios -->
@@ -866,7 +1031,8 @@
                   <div class="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span class="material-icons text-red-600 text-sm">close</span>
                   </div>
-                  <span class="typo-body text-gray-700">Deuda <strong class="text-red-600">menor a 15.000€</strong></span>
+                  <span class="typo-body text-gray-700">Deuda <strong class="text-red-600">menor a
+                      15.000€</strong></span>
                 </li>
                 <li class="flex items-start gap-3">
                   <div class="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -878,26 +1044,30 @@
                   <div class="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span class="material-icons text-red-600 text-sm">close</span>
                   </div>
-                  <span class="typo-body text-gray-700">Personas <strong class="text-red-600">sin ingresos estables</strong></span>
+                  <span class="typo-body text-gray-700">Personas <strong class="text-red-600">sin ingresos
+                      estables</strong></span>
                 </li>
                 <li class="flex items-start gap-3">
                   <div class="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span class="material-icons text-red-600 text-sm">close</span>
                   </div>
-                  <span class="typo-body text-gray-700">Imposibilidad total de demostrar <strong class="text-red-600">capacidad de pago</strong></span>
+                  <span class="typo-body text-gray-700">Imposibilidad total de demostrar <strong
+                      class="text-red-600">capacidad de pago</strong></span>
                 </li>
                 <li class="flex items-start gap-3">
                   <div class="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span class="material-icons text-red-600 text-sm">close</span>
                   </div>
-                  <span class="typo-body text-gray-700">Deudas exclusivamente con <strong class="text-red-600">Hacienda y Seguridad Social sin posibilidad de acuerdo</strong></span>
+                  <span class="typo-body text-gray-700">Deudas exclusivamente con <strong class="text-red-600">Hacienda
+                      y Seguridad Social sin posibilidad de acuerdo</strong></span>
                 </li>
               </ul>
               <!-- Nota informativa -->
               <div class="mt-8 pt-6 border-t border-gray-100">
                 <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start gap-3">
                   <span class="material-icons text-amber-600 flex-shrink-0">info</span>
-                  <p class="text-sm text-amber-800">Si no estás seguro de tu caso, <strong>consúltanos gratis</strong>. Evaluamos cada situación de forma personalizada.</p>
+                  <p class="text-sm text-amber-800">Si no estás seguro de tu caso, <strong>consúltanos gratis</strong>.
+                    Evaluamos cada situación de forma personalizada.</p>
                 </div>
               </div>
             </div>
@@ -919,113 +1089,22 @@
     </div>
   </section>
 
-  <!-- 4. EJEMPLOS DE CASOS - Casos que puedes referir -->
-  <section class="py-24 md:py-32 bg-white">
-    <div class="container mx-auto px-6 lg:px-8">
-      <div class="max-w-5xl mx-auto">
 
-        <!-- Encabezado -->
-        <div class="text-center mb-12">
-          <span class="inline-block px-4 py-2 bg-primary/10 text-primary typo-badge rounded-full mb-4" data-aos="fade-down">EJEMPLOS DE CASOS</span>
-          <h2 class="typo-h2 text-primary mb-4" data-aos="fade-up">
-            Ejemplos rápidos de casos que puedes referir
-          </h2>
-          <p class="typo-body text-gray-600 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-            Estos son ejemplos típicos de personas que pueden beneficiarse de la Ley de Segunda Oportunidad.
-          </p>
-        </div>
-
-        <!-- Grid de ejemplos -->
-        <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up" data-aos-delay="200">
-
-          <!-- Ejemplo 1 -->
-          <div class="group bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 border border-gray-100 hover:shadow-lg hover:border-primary/20 transition-all duration-300">
-            <div class="flex items-start gap-4">
-              <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                <span class="material-icons text-primary text-2xl">credit_card</span>
-              </div>
-              <div>
-                <h4 class="typo-h4 text-primary mb-2">Tarjetas y minicréditos</h4>
-                <p class="typo-body text-gray-600">Persona con más de <strong class="text-primary">18.000€</strong> en tarjetas y minicréditos acumulados.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Ejemplo 2 -->
-          <div class="group bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 border border-gray-100 hover:shadow-lg hover:border-primary/20 transition-all duration-300">
-            <div class="flex items-start gap-4">
-              <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                <span class="material-icons text-primary text-2xl">store</span>
-              </div>
-              <div>
-                <h4 class="typo-h4 text-primary mb-2">Autónomo con múltiples acreedores</h4>
-                <p class="typo-body text-gray-600">Autónomo con <strong class="text-primary">70.000€</strong> de deuda y <strong class="text-primary">4 acreedores</strong> diferentes.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Ejemplo 3 -->
-          <div class="group bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 border border-gray-100 hover:shadow-lg hover:border-primary/20 transition-all duration-300">
-            <div class="flex items-start gap-4">
-              <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                <span class="material-icons text-primary text-2xl">person</span>
-              </div>
-              <div>
-                <h4 class="typo-h4 text-primary mb-2">Empleado sin bienes</h4>
-                <p class="typo-body text-gray-600">Empleado sin bienes con <strong class="text-primary">30.000€</strong> en préstamos personales.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Ejemplo 4 -->
-          <div class="group bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 border border-gray-100 hover:shadow-lg hover:border-primary/20 transition-all duration-300">
-            <div class="flex items-start gap-4">
-              <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                <span class="material-icons text-primary text-2xl">business</span>
-              </div>
-              <div>
-                <h4 class="typo-h4 text-primary mb-2">Empresario con deuda alta</h4>
-                <p class="typo-body text-gray-600">Empresario con deuda acumulada de <strong class="text-primary">450.000€</strong> entre proveedores y entidades financieras.</p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Mensaje motivador -->
-        <div class="text-center mt-12 bg-primary/5 rounded-2xl p-8" data-aos="fade-up" data-aos-delay="300">
-          <div class="flex items-center justify-center gap-3 mb-4">
-            <span class="material-icons text-primary text-3xl">lightbulb</span>
-            <p class="typo-h4 text-primary">¿Conoces a alguien en una situación similar?</p>
-          </div>
-          <p class="typo-body text-gray-600 mb-6">Puedes ayudarle a empezar de cero y ganar 300€ por cada referido.</p>
-          <a href="#registro"
-            class="inline-flex items-center justify-center gap-2 bg-primary text-white font-bold text-base uppercase tracking-wide px-8 py-4 rounded-full shadow-lg hover:bg-primary/90 hover:scale-105 transition-all duration-300">
-            <span>QUIERO SER CONECTOR</span>
-            <span class="material-icons">arrow_forward</span>
-          </a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- 2. EL CONTEXTO - El Problema en el Mercado -->
+  <!-- SECCION OCULTA: 2. EL CONTEXTO - El Problema en el Mercado
   <section class="py-24 md:py-32 bg-white">
     <div class="container mx-auto px-6 lg:px-8">
       <div class="max-w-4xl mx-auto text-center">
-        <!-- Pre-título -->
+        <!- - Pre-título - ->
         <span class="inline-block px-4 py-2 bg-primary/10 text-primary typo-badge rounded-full mb-4"
           data-aos="fade-down">MIRA A TU ALREDEDOR</span>
 
-        <!-- Título -->
+        <!- - Título - ->
         <h2 class="typo-h2 text-primary mb-8 text-center" data-aos="fade-up">
           Seguro conoces a alguien que necesita un respiro.
         </h2>
 
-        <!-- Texto principal -->
-        <div class="space-y-6 text-base text-gray-600 leading-relaxed" data-aos="fade-up"
-          data-aos-delay="100">
+        <!- - Texto principal - ->
+        <div class="space-y-6 text-base text-gray-600 leading-relaxed" data-aos="fade-up" data-aos-delay="100">
           <p>
             Vivimos tiempos difíciles. Es muy probable que tengas un <strong class="text-primary">amigo, un familiar, un
               compañero de trabajo o un vecino</strong> que está atrapado en una espiral de deudas, llamadas de acoso y
@@ -1037,7 +1116,7 @@
           </p>
         </div>
 
-        <!-- Destacado -->
+        <!- - Destacado - ->
         <div class="mt-12 bg-gradient-to-r from-primary to-primary/90 rounded-2xl p-8 md:p-10 text-white"
           data-aos="fade-up" data-aos-delay="200">
           <div class="flex flex-col md:flex-row items-center md:items-start gap-4 text-center md:text-left">
@@ -1056,7 +1135,7 @@
           </div>
         </div>
 
-        <!-- Estadísticas visuales -->
+        <!- - Estadísticas visuales - ->
         <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4" data-aos="fade-up" data-aos-delay="300">
           <div class="text-center p-6 bg-gray-50 rounded-xl">
             <div class="text-3xl font-bold text-primary mb-2">1 de 4</div>
@@ -1076,7 +1155,7 @@
           </div>
         </div>
 
-        <!-- CTA después de contexto -->
+        <!- - CTA después de contexto - ->
         <div class="text-center mt-12" data-aos="fade-up" data-aos-delay="300">
           <a href="#registro"
             class="inline-flex items-center justify-center gap-2 bg-primary text-white font-bold text-base uppercase tracking-wide px-8 py-4 rounded-full shadow-lg hover:bg-primary/90 hover:scale-105 transition-all duration-300">
@@ -1087,6 +1166,7 @@
       </div>
     </div>
   </section>
+  -->
 
   <!-- 5. BENEFICIOS DEL CONECTOR - ¿Qué gano yo? (WIIFM) -->
   <section id="beneficios" class="py-24 bg-white">
@@ -1216,7 +1296,7 @@
           <span class="typo-badge inline-block px-4 py-2 bg-primary/10 text-primary font-semibold rounded-full mb-4"
             data-aos="fade-down">NUESTRA AUTORIDAD</span>
           <h2 class="typo-h2 text-primary mb-4" data-aos="fade-up">
-            Respalda tu recomendación con expertos reales
+            ¿Por qué nosotros?
           </h2>
         </div>
 
@@ -1228,7 +1308,8 @@
             <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
               <span class="material-icons text-3xl text-primary">verified</span>
             </div>
-            <h3 class="text-lg font-bold text-primary mb-2"><strong>Despacho especializado</strong><br>100 % en Ley de la Segunda Oportunidad</h3>
+            <h3 class="text-lg font-bold text-primary mb-2"><strong>Despacho especializado</strong><br>100 % en Ley de
+              la Segunda Oportunidad</h3>
           </div>
 
           <!-- Dato 2 -->
@@ -1237,7 +1318,8 @@
             <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
               <span class="material-icons text-3xl text-primary">gavel</span>
             </div>
-            <h3 class="text-lg font-bold text-primary mb-2">Abogados colegiados</h3>
+            <h3 class="text-lg font-bold text-primary mb-2">Equipo de abogados y procuradores expertos en Ley de Segunda
+              Oportunidad</h3>
           </div>
 
           <!-- Dato 3 -->
@@ -1593,34 +1675,38 @@
           <h2 class="typo-h2 text-white mb-4" data-aos="fade-up">
             Únete como Conector
           </h2>
-          <p class="text-white"  data-aos="fade-up" data-aos-delay="80">
-            Completa tus datos y, al finalizar, <b class="font-bold text-yellow-400 text-lg mb-2">agenda tu llamada de bienvenida con nuestro responsable de atención al conector
+          <p class="text-white" data-aos="fade-up" data-aos-delay="80">
+            Completa tus datos y, al finalizar, <b class="font-bold text-yellow-400 text-lg mb-2">agenda tu llamada de
+              bienvenida con nuestro responsable de atención al conector
               para recibir tu ID</b> personal, activar tu enlace y comenzar a ganar 300 € por cada cliente que refieras.
           </p>
         </div>
 
         <!-- Formulario -->
         <div class="bg-white rounded-3xl p-8 md:p-12 shadow-2xl" data-aos="fade-up" data-aos-delay="200">
-          
+
           <!-- Indicador de Pasos -->
           <div class="mb-10">
             <div class="flex items-center justify-center gap-4 mb-4">
               <!-- Paso 1 -->
               <div id="step1Indicator" class="flex items-center gap-2">
-                <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold transition-all">
+                <div
+                  class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold transition-all">
                   1
                 </div>
                 <span class="text-sm font-semibold text-primary">Tus Datos</span>
               </div>
-              
+
               <!-- Línea conectora -->
               <div class="w-16 h-1 bg-gray-300 rounded-full">
-                <div id="progressBar" class="h-full bg-primary rounded-full transition-all duration-500" style="width: 0%"></div>
+                <div id="progressBar" class="h-full bg-primary rounded-full transition-all duration-500"
+                  style="width: 0%"></div>
               </div>
-              
+
               <!-- Paso 2 -->
               <div id="step2Indicator" class="flex items-center gap-2">
-                <div class="w-10 h-10 rounded-full bg-gray-300 text-gray-500 flex items-center justify-center font-bold transition-all">
+                <div
+                  class="w-10 h-10 rounded-full bg-gray-300 text-gray-500 flex items-center justify-center font-bold transition-all">
                   2
                 </div>
                 <span class="text-sm font-semibold text-gray-500">Agendar Cita de Bienvenida</span>
@@ -1633,166 +1719,175 @@
 
           <!-- PASO 1: Formulario de Datos -->
           <div id="formStep1">
-          <form id="contactForm" class="space-y-6">
-            <!-- Fila 1: Nombre y Email -->
-            <div class="grid md:grid-cols-2 gap-6">
-              <div>
-                <label for="nombre" class="block text-sm font-semibold text-gray-700 mb-2">
-                  Nombre completo <span class="text-red-500">*</span>
-                </label>
-                <input type="text" id="nombre" name="nombre" required
-                  class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                  placeholder="Tu nombre completo">
-              </div>
-              <div>
-                <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
-                  Email <span class="text-red-500">*</span>
-                </label>
-                <input type="email" id="email" name="email" required
-                  class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                  placeholder="tu@email.com">
-              </div>
-            </div>
+            <form id="contactForm" class="space-y-6">
 
-            <!-- Fila 2: Teléfono y Provincia -->
-            <div class="grid md:grid-cols-2 gap-6">
-              <div>
-                <label for="telefono" class="block text-sm font-semibold text-gray-700 mb-2">
-                  Teléfono <span class="text-red-500">*</span>
-                </label>
-                <input type="tel" id="telefono" name="telefono" required
-                  class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                  placeholder="Ej: 612 345 678">
-              </div>
-              <div>
-                <label for="provincia" class="block text-sm font-semibold text-gray-700 mb-2">
-                  Provincia
-                </label>
-                <select id="provincia" name="provincia"
-                  class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
-                  <option value="">Selecciona tu provincia</option>
-                  <option value="alava">Álava</option>
-                  <option value="albacete">Albacete</option>
-                  <option value="alicante">Alicante</option>
-                  <option value="almeria">Almería</option>
-                  <option value="asturias">Asturias</option>
-                  <option value="avila">Ávila</option>
-                  <option value="badajoz">Badajoz</option>
-                  <option value="barcelona">Barcelona</option>
-                  <option value="burgos">Burgos</option>
-                  <option value="caceres">Cáceres</option>
-                  <option value="cadiz">Cádiz</option>
-                  <option value="cantabria">Cantabria</option>
-                  <option value="castellon">Castellón</option>
-                  <option value="ceuta">Ceuta</option>
-                  <option value="ciudad-real">Ciudad Real</option>
-                  <option value="cordoba">Córdoba</option>
-                  <option value="cuenca">Cuenca</option>
-                  <option value="girona">Girona</option>
-                  <option value="granada">Granada</option>
-                  <option value="guadalajara">Guadalajara</option>
-                  <option value="guipuzcoa">Guipúzcoa</option>
-                  <option value="huelva">Huelva</option>
-                  <option value="huesca">Huesca</option>
-                  <option value="illes-balears">Illes Balears</option>
-                  <option value="jaen">Jaén</option>
-                  <option value="la-coruna">La Coruña</option>
-                  <option value="la-rioja">La Rioja</option>
-                  <option value="las-palmas">Las Palmas</option>
-                  <option value="leon">León</option>
-                  <option value="lleida">Lleida</option>
-                  <option value="lugo">Lugo</option>
-                  <option value="madrid">Madrid</option>
-                  <option value="malaga">Málaga</option>
-                  <option value="melilla">Melilla</option>
-                  <option value="murcia">Murcia</option>
-                  <option value="navarra">Navarra</option>
-                  <option value="ourense">Ourense</option>
-                  <option value="palencia">Palencia</option>
-                  <option value="pontevedra">Pontevedra</option>
-                  <option value="salamanca">Salamanca</option>
-                  <option value="santa-cruz-tenerife">Santa Cruz de Tenerife</option>
-                  <option value="segovia">Segovia</option>
-                  <option value="sevilla">Sevilla</option>
-                  <option value="soria">Soria</option>
-                  <option value="tarragona">Tarragona</option>
-                  <option value="teruel">Teruel</option>
-                  <option value="toledo">Toledo</option>
-                  <option value="valencia">Valencia</option>
-                  <option value="valladolid">Valladolid</option>
-                  <option value="vizcaya">Vizcaya</option>
-                  <option value="zamora">Zamora</option>
-                  <option value="zaragoza">Zaragoza</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- Fila 3: Preguntas adicionales -->
-            <div class="space-y-6">
-              <div>
-                <label for="tiene_contacto" class="block text-sm font-semibold text-gray-700 mb-2">
-                  ¿Tienes ya a alguien que quieras ayudar y facilitarnos su contacto?
-                </label>
-                <select id="tiene_contacto" name="tiene_contacto"
-                  class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
-                  <option value="">Selecciona una opción</option>
-                  <option value="si">Sí</option>
-                  <option value="no">No</option>
-                  <option value="quizas">Quizás</option>
-                </select>
+              <div style="opacity: 0; position: absolute; top: 0; left: 0; height: 0; width: 0; z-index: -1;">
+                <label for="hp_website">Website</label>
+                <input type="text" id="hp_website" name="hp_website" tabindex="-1" autocomplete="off">
+                <label for="hp_confirm_email">Confirm Email</label>
+                <input type="text" id="hp_confirm_email" name="hp_confirm_email" tabindex="-1" autocomplete="off">
               </div>
 
-              <div>
-                <label for="autonomo_empresa" class="block text-sm font-semibold text-gray-700 mb-2">
-                  ¿Eres autónomo o tienes empresa?
-                </label>
-                <select id="autonomo_empresa" name="autonomo_empresa"
-                  class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
-                  <option value="">Selecciona una opción</option>
-                  <option value="autonomo">Soy autónomo</option>
-                  <option value="empresa">Tengo empresa</option>
-                  <option value="ambos">Autónomo con empresa</option>
-                  <option value="ninguno">Ninguno</option>
-                </select>
+              <!-- Fila 1: Nombre y Email -->
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label for="nombre" class="block text-sm font-semibold text-gray-700 mb-2">
+                    Nombre completo <span class="text-red-500">*</span>
+                  </label>
+                  <input type="text" id="nombre" name="nombre" required
+                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                    placeholder="Tu nombre completo">
+                </div>
+                <div>
+                  <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
+                    Email <span class="text-red-500">*</span>
+                  </label>
+                  <input type="email" id="email" name="email" required
+                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                    placeholder="tu@email.com">
+                </div>
               </div>
-            </div>
 
-            <!-- Checkboxes -->
-            <div class="space-y-4 pt-4">
-              <!-- Política de privacidad -->
-              <label class="flex items-start gap-3 cursor-pointer group">
-                <input type="checkbox" id="privacidad" name="privacidad" required
-                  class="mt-1 w-5 h-5 text-primary border-gray-300 rounded focus:ring-primary/20 cursor-pointer">
-                <span class="text-sm text-gray-600">
-                  Acepto la <a href="#" class="text-primary font-semibold hover:underline">política de privacidad</a> <span class="text-red-500">*</span>
-                </span>
-              </label>
+              <!-- Fila 2: Teléfono y Provincia -->
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label for="telefono" class="block text-sm font-semibold text-gray-700 mb-2">
+                    Teléfono <span class="text-red-500">*</span>
+                  </label>
+                  <input type="tel" id="telefono" name="telefono" required
+                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                    placeholder="Ej: 612 345 678">
+                </div>
+                <div>
+                  <label for="provincia" class="block text-sm font-semibold text-gray-700 mb-2">
+                    Provincia
+                  </label>
+                  <select id="provincia" name="provincia"
+                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
+                    <option value="">Selecciona tu provincia</option>
+                    <option value="alava">Álava</option>
+                    <option value="albacete">Albacete</option>
+                    <option value="alicante">Alicante</option>
+                    <option value="almeria">Almería</option>
+                    <option value="asturias">Asturias</option>
+                    <option value="avila">Ávila</option>
+                    <option value="badajoz">Badajoz</option>
+                    <option value="barcelona">Barcelona</option>
+                    <option value="burgos">Burgos</option>
+                    <option value="caceres">Cáceres</option>
+                    <option value="cadiz">Cádiz</option>
+                    <option value="cantabria">Cantabria</option>
+                    <option value="castellon">Castellón</option>
+                    <option value="ceuta">Ceuta</option>
+                    <option value="ciudad-real">Ciudad Real</option>
+                    <option value="cordoba">Córdoba</option>
+                    <option value="cuenca">Cuenca</option>
+                    <option value="girona">Girona</option>
+                    <option value="granada">Granada</option>
+                    <option value="guadalajara">Guadalajara</option>
+                    <option value="guipuzcoa">Guipúzcoa</option>
+                    <option value="huelva">Huelva</option>
+                    <option value="huesca">Huesca</option>
+                    <option value="illes-balears">Illes Balears</option>
+                    <option value="jaen">Jaén</option>
+                    <option value="la-coruna">La Coruña</option>
+                    <option value="la-rioja">La Rioja</option>
+                    <option value="las-palmas">Las Palmas</option>
+                    <option value="leon">León</option>
+                    <option value="lleida">Lleida</option>
+                    <option value="lugo">Lugo</option>
+                    <option value="madrid">Madrid</option>
+                    <option value="malaga">Málaga</option>
+                    <option value="melilla">Melilla</option>
+                    <option value="murcia">Murcia</option>
+                    <option value="navarra">Navarra</option>
+                    <option value="ourense">Ourense</option>
+                    <option value="palencia">Palencia</option>
+                    <option value="pontevedra">Pontevedra</option>
+                    <option value="salamanca">Salamanca</option>
+                    <option value="santa-cruz-tenerife">Santa Cruz de Tenerife</option>
+                    <option value="segovia">Segovia</option>
+                    <option value="sevilla">Sevilla</option>
+                    <option value="soria">Soria</option>
+                    <option value="tarragona">Tarragona</option>
+                    <option value="teruel">Teruel</option>
+                    <option value="toledo">Toledo</option>
+                    <option value="valencia">Valencia</option>
+                    <option value="valladolid">Valladolid</option>
+                    <option value="vizcaya">Vizcaya</option>
+                    <option value="zamora">Zamora</option>
+                    <option value="zaragoza">Zaragoza</option>
+                  </select>
+                </div>
+              </div>
 
-              <!-- Newsletter opcional -->
-              <label class="flex items-start gap-3 cursor-pointer group">
-                <input type="checkbox" id="newsletter" name="newsletter"
-                  class="mt-1 w-5 h-5 text-primary border-gray-300 rounded focus:ring-primary/20 cursor-pointer">
-                <span class="text-sm text-gray-600">
-                  Deseo recibir noticias y actualizaciones
-                </span>
-              </label>
-            </div>
+              <!-- Fila 3: Preguntas adicionales -->
+              <div class="space-y-6">
+                <div>
+                  <label for="tiene_contacto" class="block text-sm font-semibold text-gray-700 mb-2">
+                    ¿Tienes ya a alguien que quieras ayudar y facilitarnos su contacto?
+                  </label>
+                  <select id="tiene_contacto" name="tiene_contacto"
+                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
+                    <option value="">Selecciona una opción</option>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                    <option value="quizas">Quizás</option>
+                  </select>
+                </div>
 
-            <!-- Botón de envío -->
-            <div class="pt-4">
-              <button type="submit"
-                class="w-full bg-primary text-white font-bold text-lg py-4 px-8 rounded-xl shadow-lg hover:bg-primary/90 hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2">
-                <span>CONTINUAR AL PASO 2</span>
-                <span class="material-icons">arrow_forward</span>
-              </button>
-            </div>
+                <div>
+                  <label for="autonomo_empresa" class="block text-sm font-semibold text-gray-700 mb-2">
+                    ¿Eres autónomo o tienes empresa?
+                  </label>
+                  <select id="autonomo_empresa" name="autonomo_empresa"
+                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
+                    <option value="">Selecciona una opción</option>
+                    <option value="autonomo">Soy autónomo</option>
+                    <option value="empresa">Tengo empresa</option>
+                    <option value="ambos">Autónomo con empresa</option>
+                    <option value="ninguno">Ninguno</option>
+                  </select>
+                </div>
+              </div>
 
-            <!-- Nota de seguridad -->
-            <p class="text-center text-sm text-gray-400 flex items-center justify-center gap-2">
-              <span class="material-icons text-lg">lock</span>
-              Tus datos están seguros y nunca serán compartidos.
-            </p>
-          </form>
+              <!-- Checkboxes -->
+              <div class="space-y-4 pt-4">
+                <!-- Política de privacidad -->
+                <label class="flex items-start gap-3 cursor-pointer group">
+                  <input type="checkbox" id="privacidad" name="privacidad" required
+                    class="mt-1 w-5 h-5 text-primary border-gray-300 rounded focus:ring-primary/20 cursor-pointer">
+                  <span class="text-sm text-gray-600">
+                    Acepto la <a href="#" class="text-primary font-semibold hover:underline">política de privacidad</a>
+                    <span class="text-red-500">*</span>
+                  </span>
+                </label>
+
+                <!-- Newsletter opcional -->
+                <label class="flex items-start gap-3 cursor-pointer group">
+                  <input type="checkbox" id="newsletter" name="newsletter"
+                    class="mt-1 w-5 h-5 text-primary border-gray-300 rounded focus:ring-primary/20 cursor-pointer">
+                  <span class="text-sm text-gray-600">
+                    Deseo recibir noticias y actualizaciones
+                  </span>
+                </label>
+              </div>
+
+              <!-- Botón de envío -->
+              <div class="pt-4">
+                <button type="submit"
+                  class="w-full bg-primary text-white font-bold text-lg py-4 px-8 rounded-xl shadow-lg hover:bg-primary/90 hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2">
+                  <span>CONTINUAR AL PASO 2</span>
+                  <span class="material-icons">arrow_forward</span>
+                </button>
+              </div>
+
+              <!-- Nota de seguridad -->
+              <p class="text-center text-sm text-gray-400 flex items-center justify-center gap-2">
+                <span class="material-icons text-lg">lock</span>
+                Tus datos están seguros y nunca serán compartidos.
+              </p>
+            </form>
           </div>
           <!-- FIN PASO 1 -->
 
@@ -1807,14 +1902,13 @@
             </div>
 
             <!-- Widget de Calendly -->
-            <div class="calendly-inline-widget rounded-2xl overflow-hidden border-2 border-gray-200" 
-                 data-url="https://calendly.com/conectores-empiezadecero/30min" 
-                 style="min-width:320px;height:700px;">
+            <div class="calendly-inline-widget rounded-2xl overflow-hidden border-2 border-gray-200"
+              data-url="https://calendly.com/conectores-empiezadecero/30min" style="min-width:320px;height:700px;">
             </div>
 
             <!-- Botón volver -->
             <div class="mt-6 text-center">
-              <button id="backToStep1" 
+              <button id="backToStep1"
                 class="text-primary font-semibold hover:underline flex items-center gap-2 mx-auto">
                 <span class="material-icons">arrow_back</span>
                 Volver a editar datos
@@ -1880,7 +1974,8 @@
             <div class="faq-content hidden">
               <div class="px-6 pb-6 text-gray-600 leading-relaxed">
                 <strong>Si el pago inicial es de 1.000 €:</strong> Obtienes tus 300 € de inmediato.<br><br>
-                <strong>Si el cliente paga de forma fraccionada:</strong> Al llegar a 500 € recibirás 150 € y al llegar a los 1.000 € los otros 150 €.
+                <strong>Si el cliente paga de forma fraccionada:</strong> Al llegar a 500 € recibirás 150 € y al llegar
+                a los 1.000 € los otros 150 €.
               </div>
             </div>
           </div>
@@ -1891,7 +1986,8 @@
               class="faq-trigger w-full flex items-center justify-between p-6 text-left bg-white hover:bg-gray-50 transition-colors"
               onclick="toggleFaq(this)">
               <span class="typo-faq text-primary pr-4">¿Qué tipo de casos puedo enviar?</span>
-              <span class="faq-icon w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 transition-transform">
+              <span
+                class="faq-icon w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 transition-transform">
                 <span class="material-icons text-primary">expand_more</span>
               </span>
             </button>
@@ -1908,7 +2004,8 @@
               class="faq-trigger w-full flex items-center justify-between p-6 text-left bg-white hover:bg-gray-50 transition-colors"
               onclick="toggleFaq(this)">
               <span class="typo-faq text-primary pr-4">¿Puedo enviar contactos con solo un acreedor?</span>
-              <span class="faq-icon w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 transition-transform">
+              <span
+                class="faq-icon w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 transition-transform">
                 <span class="material-icons text-primary">expand_more</span>
               </span>
             </button>
@@ -1925,7 +2022,8 @@
               class="faq-trigger w-full flex items-center justify-between p-6 text-left bg-white hover:bg-gray-50 transition-colors"
               onclick="toggleFaq(this)">
               <span class="typo-faq text-primary pr-4">¿Hay límite de referidos?</span>
-              <span class="faq-icon w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 transition-transform">
+              <span
+                class="faq-icon w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 transition-transform">
                 <span class="material-icons text-primary">expand_more</span>
               </span>
             </button>
@@ -1942,7 +2040,8 @@
               class="faq-trigger w-full flex items-center justify-between p-6 text-left bg-white hover:bg-gray-50 transition-colors"
               onclick="toggleFaq(this)">
               <span class="typo-faq text-primary pr-4">¿Es legal lo que ofrecéis?</span>
-              <span class="faq-icon w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 transition-transform">
+              <span
+                class="faq-icon w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 transition-transform">
                 <span class="material-icons text-primary">expand_more</span>
               </span>
             </button>
@@ -2014,7 +2113,8 @@
             <li><a href="#beneficios" class="text-gray-400 hover:text-white transition-colors">Beneficios</a></li>
             <li><a href="#testimonios" class="text-gray-400 hover:text-white transition-colors">Testimonios</a></li>
             <li><a href="#registro" class="text-gray-400 hover:text-white transition-colors">Ser Conector</a></li>
-            <li><a href="activacion.html" class="text-gray-400 hover:text-white transition-colors">Activar Cliente</a></li>
+            <li><a href="activacion.html" class="text-gray-400 hover:text-white transition-colors">Activar Cliente</a>
+            </li>
           </ul>
         </div>
 

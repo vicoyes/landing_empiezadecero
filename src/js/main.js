@@ -10,16 +10,16 @@ function iniciarHelloBar() {
         const bar = document.getElementById('helloBar');
         const mensaje = document.getElementById('helloBarMessage');
         const link = document.getElementById('helloBarLink');
-        
+
         if (bar && mensaje && link) {
             mensaje.textContent = CONFIG.helloBar.mensaje;
             link.textContent = CONFIG.helloBar.textoBoton;
             link.href = CONFIG.helloBar.enlace;
-            
+
             // Solo mostrar en desktop (md+), mantener hidden en móviles
             bar.classList.remove('hidden');
             bar.classList.add('hidden', 'md:block');
-            
+
             // Ajustar padding solo en desktop
             if (window.innerWidth >= 768) {
                 document.body.style.paddingTop = bar.offsetHeight + 'px';
@@ -47,30 +47,30 @@ function animateTimeline() {
     const timelineContainer = document.querySelector('.timeline-container');
     const timelineProgress = document.getElementById('timelineProgress');
     const timelineSteps = document.querySelectorAll('.timeline-step');
-    
+
     if (!timelineContainer || !timelineProgress) return;
-    
+
     const containerRect = timelineContainer.getBoundingClientRect();
     const containerTop = containerRect.top;
     const containerHeight = containerRect.height;
     const windowHeight = window.innerHeight;
-    
+
     // Calcular progreso de la línea vertical
-    const scrollProgress = Math.max(0, Math.min(1, 
+    const scrollProgress = Math.max(0, Math.min(1,
         (windowHeight * 0.5 - containerTop) / containerHeight
     ));
-    
+
     timelineProgress.style.height = (scrollProgress * 100) + '%';
-    
+
     // Animar cada paso
     timelineSteps.forEach((step, index) => {
         const stepRect = step.getBoundingClientRect();
         const stepCenter = stepRect.top + stepRect.height / 2;
         const triggerPoint = windowHeight * 0.6;
-        
+
         const horizontalLine = step.querySelector('.timeline-horizontal');
         const dot = step.querySelector('.timeline-dot');
-        
+
         if (stepCenter < triggerPoint) {
             if (dot) dot.classList.add('active');
             setTimeout(() => {
@@ -131,16 +131,16 @@ function initSwiper() {
 }
 
 // Inicialización principal
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Iniciar Hello Bar (no depende de librerías externas)
     iniciarHelloBar();
-    
+
     // Iniciar animación del timeline
     animateTimeline();
-    
+
     // Iniciar AOS (carga diferida)
     initAOS();
-    
+
     // Iniciar Swiper (carga diferida)
     initSwiper();
 });
@@ -156,7 +156,7 @@ function toggleFaq(button) {
     const faqItem = button.closest('.faq-item');
     const content = faqItem.querySelector('.faq-content');
     const icon = faqItem.querySelector('.faq-icon');
-    
+
     // Cerrar otros items abiertos
     document.querySelectorAll('.faq-item').forEach(item => {
         if (item !== faqItem) {
@@ -165,7 +165,7 @@ function toggleFaq(button) {
             item.classList.remove('faq-active');
         }
     });
-    
+
     // Toggle el item actual
     content.classList.toggle('hidden');
     icon.classList.toggle('rotate-180');
@@ -178,17 +178,17 @@ function toggleFaq(button) {
 function initWebhookForm() {
     const form = document.getElementById('contactForm');
     if (!form) return;
-    
-    form.addEventListener('submit', async function(e) {
+
+    form.addEventListener('submit', async function (e) {
         e.preventDefault();
-        
+
         const submitBtn = form.querySelector('button[type="submit"]');
         const originalText = submitBtn.innerHTML;
-        
+
         // Estado de carga
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<span class="material-icons animate-spin">sync</span> Enviando...';
-        
+
         // Recoger datos del formulario
         const formData = {
             nombre: document.getElementById('nombre').value,
@@ -201,23 +201,26 @@ function initWebhookForm() {
             newsletter: document.getElementById('newsletter').checked,
             timestamp: new Date().toISOString(),
             page_url: window.location.href,
-            page_title: document.title
+            page_title: document.title,
+            // Honeypot fields (para filtrado en n8n)
+            hp_website: document.getElementById('hp_website')?.value || '',
+            hp_confirm_email: document.getElementById('hp_confirm_email')?.value || ''
         };
-        
+
         try {
             console.log('Enviando datos a n8n (Test Mode)...', formData);
-            
+
             const response = await fetch(
                 'https://n8n.empiezadecero.cat/webhook/75123388-942d-4d53-be3a-b34a445d6d73',
                 {
                     method: 'POST',
-                    headers: { 
+                    headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(formData)
                 }
             );
-            
+
             // Aceptar cualquier respuesta exitosa (200-299) o incluso sin respuesta
             if (response.ok || response.status === 0) {
                 // Éxito - Pasar al Paso 2 (Calendly)
@@ -231,7 +234,7 @@ function initWebhookForm() {
             }
         } catch (error) {
             console.error('Error detallado:', error);
-            
+
             // Si el error es de red pero los datos se enviaron, mostrar paso 2 de todos modos
             if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
                 console.log('Posible error de CORS, pero datos enviados. Mostrando paso 2.');
