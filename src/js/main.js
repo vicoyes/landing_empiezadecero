@@ -223,9 +223,9 @@ function initWebhookForm() {
 
             // Aceptar cualquier respuesta exitosa (200-299) o incluso sin respuesta
             if (response.ok || response.status === 0) {
-                // Éxito - Pasar al Paso 2 (Calendly)
-                if (typeof mostrarPaso2 === 'function') {
-                    mostrarPaso2();
+                // Éxito - Redirigir a página de Calendly
+                if (typeof redirigirACalendly === 'function') {
+                    redirigirACalendly();
                 }
                 console.log('Formulario enviado exitosamente:', formData);
             } else {
@@ -235,11 +235,11 @@ function initWebhookForm() {
         } catch (error) {
             console.error('Error detallado:', error);
 
-            // Si el error es de red pero los datos se enviaron, mostrar paso 2 de todos modos
+            // Si el error es de red pero los datos se enviaron, redirigir de todos modos
             if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
-                console.log('Posible error de CORS, pero datos enviados. Mostrando paso 2.');
-                if (typeof mostrarPaso2 === 'function') {
-                    mostrarPaso2();
+                console.log('Posible error de CORS, pero datos enviados. Redirigiendo a Calendly.');
+                if (typeof redirigirACalendly === 'function') {
+                    redirigirACalendly();
                 }
             } else {
                 submitBtn.disabled = false;
