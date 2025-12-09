@@ -804,8 +804,9 @@
           </p>
         </div>
 
-        <!-- Requisitos trasladados -->
-        <div class="max-w-3xl mx-auto bg-gray-50 rounded-3xl p-8 mb-12 border border-gray-100" data-aos="fade-up">
+        <!-- Requisitos trasladados - OCULTO -->
+        <div class="hidden max-w-3xl mx-auto bg-gray-50 rounded-3xl p-8 mb-12 border border-gray-100"
+          data-aos="fade-up">
           <p class="typo-body text-gray-600 mb-6 text-center">Cualquier persona mayor de edad endeudada en España que
             cumpla:</p>
           <ul class="space-y-4">
@@ -946,8 +947,8 @@
           </p>
         </div>
 
-        <!-- Contenedor centrado: Requisitos de la Ley -->
-        <div class="max-w-3xl mx-auto mb-16">
+        <!-- Contenedor centrado: Requisitos de la Ley - OCULTO -->
+        <div class="hidden max-w-3xl mx-auto mb-16">
           <div class="bg-white rounded-3xl p-8 border border-gray-100" data-aos="fade-up">
             <div class="flex items-center gap-4 mb-6">
               <div class="w-14 h-14 bg-primary rounded-2xl flex items-center justify-center">
@@ -1025,29 +1026,36 @@
                   <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span class="material-icons text-green-600 text-sm">check</span>
                   </div>
-                  <span class="typo-body text-gray-700">Empleados <strong class="text-primary">sin bienes</strong> a su
-                    nombre</span>
+                  <span class="typo-body text-gray-700">Personas de <strong class="text-primary">buena fe</strong> (no
+                    causaron el sobreendeudamiento intencionalmente)</span>
                 </li>
                 <li class="flex items-start gap-3">
                   <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span class="material-icons text-green-600 text-sm">check</span>
                   </div>
-                  <span class="typo-body text-gray-700">Empleados <strong class="text-primary">con patrimonio
-                      liquidable</strong></span>
+                  <span class="typo-body text-gray-700">Demuestran que <strong class="text-primary">no pueden vivir
+                      dignamente</strong> pagando toda la deuda</span>
                 </li>
                 <li class="flex items-start gap-3">
                   <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span class="material-icons text-green-600 text-sm">check</span>
                   </div>
-                  <span class="typo-body text-gray-700"><strong class="text-primary">Autónomos y
+                  <span class="typo-body text-gray-700">Deuda <strong class="text-primary">inferior a 5 millones de
+                      euros</strong></span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span class="material-icons text-green-600 text-sm">check</span>
+                  </div>
+                  <span class="typo-body text-gray-700">Empleados, <strong class="text-primary">autónomos y
                       empresarios</strong></span>
                 </li>
                 <li class="flex items-start gap-3">
                   <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span class="material-icons text-green-600 text-sm">check</span>
                   </div>
-                  <span class="typo-body text-gray-700">Personas físicas <strong class="text-primary">con actividad
-                      económica</strong></span>
+                  <span class="typo-body text-gray-700">Con o <strong class="text-primary">sin bienes</strong> a su
+                    nombre</span>
                 </li>
               </ul>
               <!-- Precios -->
@@ -1086,35 +1094,36 @@
                   <div class="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span class="material-icons text-red-600 text-sm">close</span>
                   </div>
-                  <span class="typo-body text-gray-700">Deuda <strong class="text-red-600">menor a
-                      15.000€</strong></span>
+                  <span class="typo-body text-gray-700">Personas con <strong class="text-red-600">delitos
+                      socioeconómicos</strong></span>
                 </li>
                 <li class="flex items-start gap-3">
                   <div class="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span class="material-icons text-red-600 text-sm">close</span>
                   </div>
-                  <span class="typo-body text-gray-700">Solo <strong class="text-red-600">un acreedor</strong></span>
+                  <span class="typo-body text-gray-700">Condenas por delitos contra <strong
+                      class="text-red-600">Hacienda o Seguridad Social</strong></span>
                 </li>
                 <li class="flex items-start gap-3">
                   <div class="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span class="material-icons text-red-600 text-sm">close</span>
                   </div>
-                  <span class="typo-body text-gray-700">Personas <strong class="text-red-600">sin ingresos
-                      estables</strong></span>
+                  <span class="typo-body text-gray-700">Personas con <strong class="text-red-600">derivación de
+                      deuda</strong></span>
                 </li>
                 <li class="flex items-start gap-3">
                   <div class="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span class="material-icons text-red-600 text-sm">close</span>
                   </div>
-                  <span class="typo-body text-gray-700">Imposibilidad total de demostrar <strong
-                      class="text-red-600">capacidad de pago</strong></span>
+                  <span class="typo-body text-gray-700">Deuda <strong class="text-red-600">superior a 5 millones de
+                      euros</strong></span>
                 </li>
                 <li class="flex items-start gap-3">
                   <div class="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span class="material-icons text-red-600 text-sm">close</span>
                   </div>
-                  <span class="typo-body text-gray-700">Deudas exclusivamente con <strong class="text-red-600">Hacienda
-                      y Seguridad Social sin posibilidad de acuerdo</strong></span>
+                  <span class="typo-body text-gray-700">Sobreendeudamiento causado <strong
+                      class="text-red-600">intencionalmente</strong> (mala fe)</span>
                 </li>
               </ul>
               <!-- Nota informativa -->
