@@ -189,6 +189,10 @@ function initWebhookForm() {
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<span class="material-icons animate-spin">sync</span> Enviando...';
 
+        // Obtener parámetro tag de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const tag = urlParams.get('tag') || 'NA';
+
         // Recoger datos del formulario
         const formData = {
             nombre: document.getElementById('nombre').value,
@@ -199,6 +203,7 @@ function initWebhookForm() {
             autonomo_empresa: document.getElementById('autonomo_empresa').value,
             privacidad: document.getElementById('privacidad').checked,
             newsletter: document.getElementById('newsletter').checked,
+            tag: tag,
             timestamp: new Date().toISOString(),
             page_url: window.location.href,
             page_title: document.title,

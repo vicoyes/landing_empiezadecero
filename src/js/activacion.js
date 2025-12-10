@@ -175,7 +175,7 @@ async function enviarFormulario(form) {
   
   try {
     const response = await fetch(
-      'https://n8n.empiezadecero.cat/webhook-test/6f3fee4b-0ae5-47f2-9841-6ada8ec89ff5',
+      'https://n8n.empiezadecero.cat/webhook/6f3fee4b-0ae5-47f2-9841-6ada8ec89ff5',
       {
         method: 'POST',
         headers: { 

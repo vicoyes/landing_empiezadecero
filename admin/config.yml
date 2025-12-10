@@ -1,0 +1,47 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "src/img"
+public_folder: "src/img"
+
+# Local backend for testing (uncomment to use with 'npx decap-server')
+local_backend: true
+
+collections:
+  - name: "pages"
+    label: "Páginas"
+    files:
+      - file: "src/data/home.json"
+        label: "Página de Inicio"
+        name: "home"
+        fields:
+          - {label: "Sección Hero", name: "hero", widget: "object", collapsed: false, fields: [
+              {label: "Badge Superior", name: "badge", widget: "string"},
+              {label: "Título (Parte 1)", name: "title_part1", widget: "string"},
+              {label: "Título (Resaltado)", name: "title_highlight", widget: "string"},
+              {label: "Título (Parte 2)", name: "title_part2", widget: "string"},
+              {label: "Subtítulo (Negrita)", name: "subtitle_bold", widget: "string"},
+              {label: "Descripción Principal", name: "description", widget: "text"},
+              {label: "Texto Botón CTA", name: "cta_text", widget: "string"},
+              {label: "Microtexto (bajo botón)", name: "microtext", widget: "string"}
+            ]}
+          - {label: "Sección Nuestro Sueño", name: "dream", widget: "object", collapsed: true, fields: [
+              {label: "Pretítulo", name: "pretitle", widget: "string"},
+              {label: "Título Principal", name: "title", widget: "string"},
+              {label: "Subtítulo (Light)", name: "subtitle_light", widget: "string"},
+              {label: "Subtítulo (Bold)", name: "subtitle_bold", widget: "string"},
+              {label: "Sección Únete - Pretítulo", name: "join_pretitle", widget: "string"},
+              {label: "Sección Únete - Título", name: "join_title", widget: "string"},
+              {label: "Sección Únete - Subtítulo", name: "join_subtitle", widget: "string"}
+            ]}
+          - {label: "Sección Cómo Funciona", name: "steps", widget: "object", collapsed: true, fields: [
+              {label: "Pretítulo", name: "pretitle", widget: "string"},
+              {label: "Título", name: "title", widget: "string"},
+              {label: "Lista de Pasos", name: "list", widget: "list", fields: [
+                  {label: "Número", name: "number", widget: "string"},
+                  {label: "Título del Paso", name: "title", widget: "string"},
+                  {label: "Descripción", name: "description", widget: "text"},
+                  {label: "Icono Material", name: "icon", widget: "string"}
+                ]}
+            ]}
