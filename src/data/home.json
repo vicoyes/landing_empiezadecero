@@ -19,7 +19,7 @@
     "join_subtitle": "Juntos podemos llegar más lejos"
   },
   "steps": {
-    "pretitle": "5 PASOS SIMPLES",
+    "pretitle": "4 PASOS SIMPLES",
     "title": "Cómo funciona tu papel como Conector",
     "list": [
       {
@@ -30,24 +30,18 @@
       },
       {
         "number": "02",
-        "title": "Recoge datos",
-        "description": "Nombre, DNI, teléfono, email, dirección de empadronamiento, estado civil y deuda aproximada.",
+        "title": "Recoge datos y envía",
+        "description": "Recoge nombre, DNI, teléfono, email, dirección de empadronamiento, estado civil y deuda aproximada. Luego usa tu enlace privado o formulario de Conector para enviar el contacto.",
         "icon": "edit_note"
       },
       {
         "number": "03",
-        "title": "Envía el contacto",
-        "description": "Usa tu enlace privado o formulario de Conector.",
-        "icon": "send"
-      },
-      {
-        "number": "04",
         "title": "Nosotros actuamos",
-        "description": "Análisis jurídico, documentación y tramitación legal completa.",
+        "description": "Nosotros contactamos con tu referido y realizamos el análisis jurídico, documentación y tramitación legal completa.",
         "icon": "gavel"
       },
       {
-        "number": "05",
+        "number": "04",
         "title": "Cobras 300 €",
         "description": "Si paga 1.000 € obtienes 300 € de inmediato. Si paga fraccionado: 150 € al llegar a 500 € y otros 150 € al llegar a 1.000 €.",
         "icon": "payments"
