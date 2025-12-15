@@ -122,6 +122,43 @@
       direction: ltr;
       -webkit-font-smoothing: antialiased;
     }
+
+    /* Ocultar flecha nativa del select de código de país */
+    #codigo_pais {
+      -webkit-appearance: none !important;
+      -moz-appearance: none !important;
+      appearance: none !important;
+      background-image: none !important;
+      background: transparent !important;
+    }
+    
+    /* Firefox: ocultar flecha nativa */
+    #codigo_pais::-moz-focus-inner {
+      border: 0;
+    }
+    
+    /* IE/Edge: ocultar flecha nativa */
+    #codigo_pais::-ms-expand {
+      display: none;
+    }
+
+    /* Ajustar z-index para evitar que el autocompletado de Chrome tape otros campos */
+    .grid.md\:grid-cols-2 > div:first-child {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .grid.md\:grid-cols-2 > div:last-child {
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Cuando el campo de teléfono está en focus, asegurar que el autocompletado no tape */
+    #telefono:focus,
+    #telefono:-webkit-autofill {
+      position: relative;
+      z-index: 1;
+    }
   </style>
 
   <!-- Estilos personalizados - Críticos -->
@@ -1405,16 +1442,64 @@
               </div>
 
               <!-- Fila 2: Teléfono y Provincia -->
-              <div class="grid md:grid-cols-2 gap-6">
-                <div>
+              <div class="grid md:grid-cols-2 gap-6" style="isolation: isolate;">
+                <div class="relative" style="z-index: 1;">
                   <label for="telefono" class="block text-sm font-semibold text-gray-700 mb-2">
                     Teléfono <span class="text-red-500">*</span>
                   </label>
-                  <input type="tel" id="telefono" name="telefono" required
-                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                    placeholder="Ej: 612 345 678">
+                  <!-- Campo unificado de teléfono con código de país -->
+                  <div class="relative flex items-center bg-gray-50 border border-gray-200 rounded-xl focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 transition-all">
+                    <!-- Contenedor del selector de código de país -->
+                    <div class="relative">
+                      <select id="codigo_pais" name="codigo_pais" required
+                        class="appearance-none bg-transparent border-none px-4 py-3 pr-8 text-gray-700 focus:outline-none cursor-pointer focus:ring-0"
+                        style="min-width: 110px; -webkit-appearance: none; -moz-appearance: none; appearance: none; background-image: none; background: transparent;">
+                        <option value="+34" selected>🇪🇸 +34</option>
+                        <option value="+1">🇺🇸 +1</option>
+                        <option value="+44">🇬🇧 +44</option>
+                        <option value="+33">🇫🇷 +33</option>
+                        <option value="+39">🇮🇹 +39</option>
+                        <option value="+49">🇩🇪 +49</option>
+                        <option value="+351">🇵🇹 +351</option>
+                        <option value="+31">🇳🇱 +31</option>
+                        <option value="+32">🇧🇪 +32</option>
+                        <option value="+41">🇨🇭 +41</option>
+                        <option value="+43">🇦🇹 +43</option>
+                        <option value="+45">🇩🇰 +45</option>
+                        <option value="+46">🇸🇪 +46</option>
+                        <option value="+47">🇳🇴 +47</option>
+                        <option value="+358">🇫🇮 +358</option>
+                        <option value="+353">🇮🇪 +353</option>
+                        <option value="+30">🇬🇷 +30</option>
+                        <option value="+48">🇵🇱 +48</option>
+                        <option value="+420">🇨🇿 +420</option>
+                        <option value="+36">🇭🇺 +36</option>
+                        <option value="+40">🇷🇴 +40</option>
+                        <option value="+7">🇷🇺 +7</option>
+                        <option value="+90">🇹🇷 +90</option>
+                        <option value="+52">🇲🇽 +52</option>
+                        <option value="+54">🇦🇷 +54</option>
+                        <option value="+55">🇧🇷 +55</option>
+                        <option value="+56">🇨🇱 +56</option>
+                        <option value="+57">🇨🇴 +57</option>
+                        <option value="+51">🇵🇪 +51</option>
+                      </select>
+                      <!-- Icono de flecha para el select (personalizado) -->
+                      <div class="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                      </div>
+                    </div>
+                    <!-- Separador vertical -->
+                    <div class="h-6 w-px bg-gray-300"></div>
+                    <!-- Campo de número de teléfono -->
+                    <input type="tel" id="telefono" name="telefono" required
+                      class="flex-1 bg-transparent border-none px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0"
+                      placeholder="612 345 678">
+                  </div>
                 </div>
-                <div>
+                <div class="relative" style="z-index: 2;">
                   <label for="provincia" class="block text-sm font-semibold text-gray-700 mb-2">
                     Provincia
                   </label>

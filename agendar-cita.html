@@ -267,41 +267,8 @@
     <!-- Calendly Widget JS -->
     <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
-    <!-- Script para personalizar con datos del usuario -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Obtener parámetros de la URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const nombre = urlParams.get('nombre');
-            const email = urlParams.get('email');
-
-            // Personalizar el mensaje de bienvenida
-            if (nombre) {
-                const nombreElement = document.getElementById('nombreUsuario');
-                if (nombreElement) {
-                    // Obtener solo el primer nombre
-                    const primerNombre = nombre.split(' ')[0];
-                    nombreElement.textContent = primerNombre;
-                }
-            }
-
-            // Configurar Calendly con los datos pre-rellenados
-            const calendlyWidget = document.querySelector('.calendly-inline-widget');
-            if (calendlyWidget) {
-                let calendlyUrl = 'https://calendly.com/conectores-empiezadecero/30min';
-                const params = new URLSearchParams();
-
-                if (nombre) params.append('name', nombre);
-                if (email) params.append('email', email);
-
-                if (params.toString()) {
-                    calendlyUrl += '?' + params.toString();
-                }
-
-                calendlyWidget.setAttribute('data-url', calendlyUrl);
-            }
-        });
-    </script>
+    <!-- Script para gestión de Calendly y detección de eventos -->
+    <script src="src/js/agendar-cita.js"></script>
 
 </body>
 
