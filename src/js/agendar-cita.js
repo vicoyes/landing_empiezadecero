@@ -9,7 +9,20 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Obtener parámetros de la URL
     const urlParams = new URLSearchParams(window.location.search);
-    const nombre = urlParams.get('nombre');
+    // Decodificar el nombre: convertir los + en espacios
+    let nombre = urlParams.get('nombre');
+    if (nombre) {
+        // Reemplazar + por espacios (URLSearchParams puede dejar + en lugar de espacios)
+        nombre = nombre.replace(/\+/g, ' ');
+        // Decodificar cualquier carácter codificado (como %40 para @)
+        try {
+            nombre = decodeURIComponent(nombre);
+        } catch (e) {
+            // Si falla la decodificación, usar el nombre tal cual
+            console.log('No se pudo decodificar el nombre:', e);
+        }
+        console.log('Nombre decodificado:', nombre);
+    }
     const email = urlParams.get('email');
     const telefonoValue = urlParams.get('telefono'); // Variable para el teléfono
     const formId = urlParams.get('form_id'); // ID único del formulario - SOLO para URL
