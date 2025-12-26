@@ -31,6 +31,22 @@ const CONFIG = {
         once: true,
         offset: 50,
         delay: 0
+    },
+    
+    // ============================================
+    // SUPABASE - CONFIGURACIÓN DE BASE DE DATOS
+    // ============================================
+    supabase: {
+        enabled: true,                    // true para activar, false para desactivar
+        url: "http://supabasekong-wo8ws00kcscw880k44gwc0go.5.189.140.120.sslip.io",           // URL interna de Supabase (Kong)
+        anonKey: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzdXBhYmFzZSIsImlhdCI6MTc2Njc2OTQ4MCwiZXhwIjo0OTIyNDQzMDgwLCJyb2xlIjoiYW5vbiJ9.RmRHum6IRnIsdmHn4veDmAw2zngZR07onJpUO4sIRBw"   // Clave anónima pública de Supabase
+    },
+    
+    // ============================================
+    // N8N - WEBHOOKS
+    // ============================================
+    n8n: {
+        webhookForm: "https://n8n.empiezadecero.cat/webhook/75123388-942d-4d53-be3a-b34a445d6d73"  // Webhook para formulario (también usado para verificación de email)
     }
 };
 
