@@ -632,6 +632,7 @@ function initWebhookForm() {
             privacidad: document.getElementById('privacidad').checked,
             newsletter: document.getElementById('newsletter').checked,
             tag: tag,
+            perfil: 'Conector', // Perfil fijo para este landing page
             form_id: formIdUnico, // ID único del formulario
             user_code: userCode, // Código único del usuario (para Supabase y HubSpot)
             referral_code: referralCode, // Código único de referido (para Supabase y HubSpot)

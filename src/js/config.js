@@ -46,7 +46,8 @@ const CONFIG = {
     // N8N - WEBHOOKS
     // ============================================
     n8n: {
-        webhookForm: "https://n8n.empiezadecero.cat/webhook/75123388-942d-4d53-be3a-b34a445d6d73"  // Webhook para formulario (también usado para verificación de email)
+        webhookForm: "https://n8n.empiezadecero.cat/webhook/75123388-942d-4d53-be3a-b34a445d6d73",  // Webhook para formulario (también usado para verificación de email)
+        webhookGetUser: "https://n8n.empiezadecero.cat/webhook/14e3ea06-6d70-491b-be82-d4f4ea1555fa"  // Webhook para consultar usuario por email (GET) - PRODUCCIÓN
     }
 };
 
