@@ -446,10 +446,9 @@ async function generarEnlace() {
     const nombre = usuarioEncontrado.nombre || usuarioEncontrado.name || '';
 
     // Construir la URL con parámetros
-    // Usar 'perfil' en lugar de 'type' para el parámetro type del enlace
     const params = new URLSearchParams({
       asesor: asesor,
-      type: usuarioEncontrado.perfil || usuarioEncontrado.type || '',
+      type: usuarioEncontrado.type || '',
       name: nombre,
       user_code: usuarioEncontrado.user_code || ''
     });
@@ -458,11 +457,8 @@ async function generarEnlace() {
 
     console.log('Enlace generado:', enlaceCompleto);
 
-    // Usar 'perfil' en lugar de 'type' para mostrar
-    const perfil = usuarioEncontrado.perfil || usuarioEncontrado.type || '';
-
     // Mostrar resultados (usando la variable 'nombre' ya declarada arriba)
-    mostrarResultado(asesor, perfil, nombre, usuarioEncontrado.user_code, enlaceCompleto);
+    mostrarResultado(asesor, usuarioEncontrado.type, nombre, usuarioEncontrado.user_code, enlaceCompleto);
 
   } catch (error) {
     console.error('Error al generar enlace:', error);
