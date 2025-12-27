@@ -390,22 +390,41 @@ async function enviarFormulario(form) {
       }
     );
     
-    if (response.ok || response.status === 0) {
-      // Éxito
+    // Leer la respuesta del webhook
+    let responseData = null;
+    try {
+      const responseText = await response.text();
+      if (responseText) {
+        responseData = JSON.parse(responseText);
+        console.log('Respuesta del webhook:', responseData);
+      }
+    } catch (parseError) {
+      console.warn('No se pudo parsear la respuesta como JSON:', parseError);
+    }
+    
+    // Verificar que la respuesta sea exitosa
+    if (!response.ok && response.status !== 0) {
+      throw new Error(`Error en el envío: ${response.status} ${response.statusText}`);
+    }
+    
+    // Procesar la respuesta del webhook
+    const resultado = procesarRespuestaWebhook(responseData);
+    
+    if (resultado.exito) {
+      // Registro creado correctamente (confirmado con create_row: true)
       mostrarMensajeExito(form);
+    } else if (resultado.error) {
+      // Hay un error en la respuesta (ej: duplicado)
+      mostrarMensajeErrorDuplicado(form, submitBtn, originalText, resultado);
     } else {
-      throw new Error('Error en el envío: ' + response.status);
+      // No hay confirmación de éxito (no hay create_row: true)
+      throw new Error('No se recibió confirmación de que el registro se creó correctamente. Por favor, verifica que el webhook esté activo.');
     }
   } catch (error) {
     console.error('Error detallado:', error);
     
-    if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
-      // Posible error de CORS, mostrar éxito de todos modos
-      mostrarMensajeExito(form);
-    } else {
-      // Error real
-      mostrarMensajeError(submitBtn, originalText, error);
-    }
+    // Mostrar error real - no asumir éxito
+    mostrarMensajeErrorEnvio(form, submitBtn, originalText, error);
   }
 }
 
@@ -443,6 +462,65 @@ function recogerDatosFormulario() {
 }
 
 /**
+ * Procesar respuesta del webhook para detectar errores o éxito
+ * @param {Object|Array|null} responseData - Respuesta del webhook
+ * @returns {Object} {exito: boolean, error: string|null, mensaje: string|null}
+ */
+function procesarRespuestaWebhook(responseData) {
+  // Si no hay respuesta, NO asumir éxito - requerir confirmación explícita
+  if (!responseData) {
+    console.warn('⚠️ No se recibió respuesta del webhook');
+    return { exito: false, error: null, mensaje: null };
+  }
+  
+  // Normalizar a array si es necesario
+  let datos = Array.isArray(responseData) ? responseData : [responseData];
+  
+  // Buscar si hay create_row: true (éxito confirmado)
+  const registroCreado = datos.some(item => item && item.create_row === true);
+  if (registroCreado) {
+    console.log('✅ Registro creado correctamente (create_row: true)');
+    return { exito: true, error: null, mensaje: null };
+  }
+  
+  // Buscar si hay error en algún objeto
+  for (const item of datos) {
+    if (item && item.error) {
+      const errorMessage = item.error;
+      console.error('❌ Error en respuesta del webhook:', errorMessage);
+      
+      // Detectar error de duplicado
+      if (errorMessage.includes('duplicate key value violates unique constraint')) {
+        if (errorMessage.includes('ux_referrals_cliente_dni_norm')) {
+          return { 
+            exito: false, 
+            error: 'DUPLICADO_DNI',
+            mensaje: 'Ya existe un registro con este DNI/NIE en nuestra base de datos. Por favor, verifica que no hayas enviado este contacto anteriormente.'
+          };
+        } else {
+          return { 
+            exito: false, 
+            error: 'DUPLICADO',
+            mensaje: 'Este registro ya existe en nuestra base de datos. Por favor, verifica que no hayas enviado este contacto anteriormente.'
+          };
+        }
+      }
+      
+      // Otro tipo de error
+      return { 
+        exito: false, 
+        error: 'OTRO_ERROR',
+        mensaje: 'Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo o contacta con soporte.'
+      };
+    }
+  }
+  
+  // Si no hay create_row ni error, NO asumir éxito - requerir confirmación explícita
+  console.warn('⚠️ Respuesta recibida pero sin create_row: true ni error');
+  return { exito: false, error: null, mensaje: null };
+}
+
+/**
  * Mostrar mensaje de éxito
  * @param {HTMLFormElement} form - Formulario donde mostrar el mensaje
  */
@@ -467,13 +545,123 @@ function mostrarMensajeExito(form) {
 }
 
 /**
- * Mostrar mensaje de error
+ * Mostrar mensaje de error por duplicado
+ * @param {HTMLFormElement} form - Formulario donde mostrar el mensaje
+ * @param {HTMLButtonElement} submitBtn - Botón de envío
+ * @param {string} originalText - Texto original del botón
+ * @param {Object} errorInfo - Información del error {error: string, mensaje: string}
+ */
+function mostrarMensajeErrorDuplicado(form, submitBtn, originalText, errorInfo) {
+  const asesorMensaje = asesorJuridico 
+    ? `del área de asesoramiento jurídico de <strong class="text-primary">${asesorJuridico}</strong>` 
+    : 'de nuestro equipo legal';
+  
+  form.innerHTML = `
+    <div class="text-center py-12">
+      <div class="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6">
+        <span class="material-icons text-yellow-600 text-4xl">warning</span>
+      </div>
+      <h3 class="text-2xl font-bold text-yellow-800 mb-4">Registro Duplicado</h3>
+      <p class="text-gray-700 mb-4 text-lg">${errorInfo.mensaje || 'Este registro ya existe en nuestra base de datos.'}</p>
+      <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-4 mb-6">
+        <p class="text-sm text-gray-700 mb-3">
+          <strong>¿Qué significa esto?</strong><br>
+          El cliente que intentas registrar ya está en nuestro sistema. Esto puede ocurrir si:
+        </p>
+        <ul class="text-sm text-gray-600 text-left max-w-md mx-auto space-y-2">
+          <li>• Ya enviaste este contacto anteriormente</li>
+          <li>• Otro conector ya registró a este cliente</li>
+          <li>• El cliente se registró directamente en nuestro sistema</li>
+        </ul>
+      </div>
+      <div class="bg-white rounded-xl p-4 mb-6 border border-gray-200">
+        <p class="text-sm text-gray-700 mb-3">
+          Si crees que esto es un error o necesitas ayuda, puedes contactarnos:
+        </p>
+        <a href="https://wa.me/34685555362" target="_blank" 
+           class="inline-flex items-center gap-2 px-6 py-3 bg-green-500 text-white rounded-xl font-semibold hover:bg-green-600 transition-colors shadow-lg mb-4">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          <span>📲 Contactar por WhatsApp</span>
+        </a>
+      </div>
+      <div class="flex gap-4 justify-center">
+        <button onclick="location.reload()" class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-xl font-semibold hover:bg-primary/90 transition-colors shadow-lg">
+          <span class="material-icons">refresh</span>
+          Intentar de Nuevo
+        </button>
+        <a href="index.html" class="inline-flex items-center gap-2 px-6 py-3 bg-gray-200 text-gray-700 rounded-xl font-semibold hover:bg-gray-300 transition-colors">
+          <span class="material-icons">home</span>
+          Volver al Inicio
+        </a>
+      </div>
+    </div>
+  `;
+}
+
+/**
+ * Mostrar mensaje de error al enviar el formulario
+ * @param {HTMLFormElement} form - Formulario donde mostrar el mensaje
  * @param {HTMLButtonElement} submitBtn - Botón de envío
  * @param {string} originalText - Texto original del botón
  * @param {Error} error - Error ocurrido
  */
-function mostrarMensajeError(submitBtn, originalText, error) {
-  alert('Hubo un error al enviar el formulario. Por favor, inténtalo de nuevo.');
-  submitBtn.disabled = false;
-  submitBtn.innerHTML = originalText;
+function mostrarMensajeErrorEnvio(form, submitBtn, originalText, error) {
+  const asesorMensaje = asesorJuridico 
+    ? `del área de asesoramiento jurídico de <strong class="text-primary">${asesorJuridico}</strong>` 
+    : 'de nuestro equipo legal';
+  
+  // Determinar el mensaje según el tipo de error
+  let titulo = 'Error al Enviar el Formulario';
+  let mensaje = 'No se pudo enviar el formulario. Por favor, verifica tu conexión a internet e inténtalo de nuevo.';
+  
+  if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+    titulo = 'Error de Conexión';
+    mensaje = 'No se pudo conectar con el servidor. Por favor, verifica tu conexión a internet e inténtalo de nuevo.';
+  } else if (error.message.includes('webhook esté activo')) {
+    titulo = 'Servicio Temporalmente No Disponible';
+    mensaje = 'El servicio de registro no está disponible en este momento. Por favor, inténtalo más tarde o contacta con soporte.';
+  } else if (error.message.includes('Error en el envío:')) {
+    titulo = 'Error del Servidor';
+    mensaje = `El servidor respondió con un error (${error.message}). Por favor, inténtalo de nuevo o contacta con soporte.`;
+  }
+  
+  form.innerHTML = `
+    <div class="text-center py-12">
+      <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+        <span class="material-icons text-red-500 text-4xl">error</span>
+      </div>
+      <h3 class="text-2xl font-bold text-red-800 mb-4">${titulo}</h3>
+      <p class="text-gray-700 mb-4 text-lg">${mensaje}</p>
+      <div class="bg-red-50 border border-red-200 rounded-xl p-4 mb-6">
+        <p class="text-sm text-gray-700 mb-3">
+          <strong>Detalles técnicos:</strong><br>
+          <code class="text-xs text-gray-600">${error.message}</code>
+        </p>
+      </div>
+      <div class="bg-white rounded-xl p-4 mb-6 border border-gray-200">
+        <p class="text-sm text-gray-700 mb-3">
+          Si el problema persiste, puedes contactarnos:
+        </p>
+        <a href="https://wa.me/34685555362" target="_blank" 
+           class="inline-flex items-center gap-2 px-6 py-3 bg-green-500 text-white rounded-xl font-semibold hover:bg-green-600 transition-colors shadow-lg mb-4">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          <span>📲 Contactar por WhatsApp</span>
+        </a>
+      </div>
+      <div class="flex gap-4 justify-center">
+        <button onclick="location.reload()" class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-xl font-semibold hover:bg-primary/90 transition-colors shadow-lg">
+          <span class="material-icons">refresh</span>
+          Intentar de Nuevo
+        </button>
+        <a href="index.html" class="inline-flex items-center gap-2 px-6 py-3 bg-gray-200 text-gray-700 rounded-xl font-semibold hover:bg-gray-300 transition-colors">
+          <span class="material-icons">home</span>
+          Volver al Inicio
+        </a>
+      </div>
+    </div>
+  `;
 }
