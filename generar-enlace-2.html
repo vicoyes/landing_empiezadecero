@@ -339,7 +339,15 @@
   </footer>
 
   <!-- Scripts -->
+  <!-- IMPORTANTE: config.js debe cargarse ANTES de generador-enlaces-2.js -->
   <script src="src/js/config.js"></script>
+  <script>
+    // Verificar que CONFIG se haya cargado antes de continuar
+    if (typeof CONFIG === 'undefined') {
+      console.error('❌ ERROR: config.js no se ha cargado correctamente');
+      document.body.innerHTML = '<div style="padding: 2rem; text-align: center; color: red;"><h1>Error de Configuración</h1><p>El archivo de configuración no se ha cargado. Por favor, recarga la página.</p></div>';
+    }
+  </script>
   <script src="src/js/generador-enlaces-2.js"></script>
 
 </body>

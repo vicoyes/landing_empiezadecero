@@ -7,9 +7,41 @@
 const BASE_URL = window.location.origin + window.location.pathname.replace('generar-enlace-2.html', 'activacion.html');
 
 /**
+ * Verificar que CONFIG esté disponible
+ */
+function verificarConfiguracion() {
+  if (typeof CONFIG === 'undefined') {
+    console.error('❌ CONFIG no está definido. Verifica que config.js se esté cargando correctamente.');
+    mostrarError('Error de configuración: El archivo de configuración no se ha cargado correctamente. Por favor, recarga la página.');
+    return false;
+  }
+  
+  if (!CONFIG.n8n) {
+    console.error('❌ CONFIG.n8n no está definido.');
+    mostrarError('Error de configuración: La sección n8n no está configurada en config.js.');
+    return false;
+  }
+  
+  if (!CONFIG.n8n.webhookGetUser) {
+    console.error('❌ CONFIG.n8n.webhookGetUser no está definido.');
+    mostrarError('Error de configuración: El webhook webhookGetUser no está configurado en config.js.');
+    return false;
+  }
+  
+  console.log('✅ Configuración verificada correctamente');
+  console.log('Webhook GetUser:', CONFIG.n8n.webhookGetUser);
+  return true;
+}
+
+/**
  * Inicializar el generador cuando el DOM esté listo
  */
 document.addEventListener('DOMContentLoaded', function() {
+  // Verificar configuración antes de inicializar
+  if (!verificarConfiguracion()) {
+    return; // Detener inicialización si no hay configuración
+  }
+  
   configurarFormulario();
   configurarBotones();
 });
@@ -78,7 +110,12 @@ async function consultarUsuarioPorEmail(email) {
   }
 
   // Verificar que el webhook esté configurado
-  if (!CONFIG || !CONFIG.n8n || !CONFIG.n8n.webhookGetUser) {
+  if (typeof CONFIG === 'undefined') {
+    throw new Error('CONFIG no está definido. Verifica que config.js se esté cargando correctamente.');
+  }
+  
+  if (!CONFIG.n8n || !CONFIG.n8n.webhookGetUser) {
+    console.error('CONFIG.n8n:', CONFIG.n8n);
     throw new Error('Webhook de n8n no configurado. Configura CONFIG.n8n.webhookGetUser en config.js');
   }
 
@@ -127,19 +164,26 @@ async function consultarUsuarioPorEmail(email) {
     // La respuesta viene como array: [{...}]
     let usuario;
     if (Array.isArray(responseData)) {
+      // Array vacío: []
       if (responseData.length === 0) {
-        throw new Error('Usuario no encontrado');
+        throw new Error('USUARIO_NO_ENCONTRADO');
       }
+      
+      // Array con objeto vacío: [{}]
       usuario = responseData[0];
+      if (!usuario || Object.keys(usuario).length === 0) {
+        throw new Error('USUARIO_NO_ENCONTRADO');
+      }
     } else if (responseData.error) {
-      throw new Error(responseData.message || responseData.error || 'Usuario no encontrado');
+      throw new Error(responseData.message || responseData.error || 'USUARIO_NO_ENCONTRADO');
     } else {
       usuario = responseData;
     }
 
     // Validar que tenga los campos necesarios
-    if (!usuario.user_code || !usuario.email) {
-      throw new Error('Datos incompletos del usuario en la respuesta');
+    // Si el objeto está vacío o no tiene user_code, no existe en la BD
+    if (!usuario || Object.keys(usuario).length === 0 || !usuario.user_code || !usuario.email) {
+      throw new Error('USUARIO_NO_ENCONTRADO');
     }
 
     // Normalizar campos (nombre vs name)
@@ -395,10 +439,13 @@ async function buscarUsuario() {
     // Determinar mensaje de error apropiado
     let mensajeError = 'Error al consultar los datos del usuario';
     
-    if (error.message.includes('no encontrado') || error.message.includes('Usuario no encontrado')) {
-      mensajeError = 'No se encontró ningún usuario con ese email en la base de datos. Verifica que el email esté correcto o usa la versión 1 del generador.';
+    // Detectar cuando el usuario no existe en la base de datos
+    if (error.message === 'USUARIO_NO_ENCONTRADO' || 
+        error.message.includes('no encontrado') || 
+        error.message.includes('Usuario no encontrado')) {
+      mensajeError = 'No se encontró ningún usuario con ese email en nuestra base de datos. Por favor, verifica que el email esté correcto o contacta con el administrador si crees que es un error.';
     } else if (error.message.includes('Error en la respuesta de n8n')) {
-      mensajeError = 'Error al comunicarse con el servidor. Por favor intenta nuevamente.';
+      mensajeError = 'Error al comunicarse con el servidor. Por favor intenta nuevamente en unos momentos.';
     } else if (error.message.includes('no configurado')) {
       mensajeError = 'Error de configuración. Por favor contacta al administrador.';
     } else if (error.message) {
@@ -442,23 +489,31 @@ async function generarEnlace() {
   mostrarCargaGenerar(true);
 
   try {
-    // Normalizar nombre (puede venir como 'nombre' o 'name')
+    // Normalizar nombre (puede venir como 'nombre' o 'name') - solo para mostrar
     const nombre = usuarioEncontrado.nombre || usuarioEncontrado.name || '';
+    // Obtener email del usuario encontrado
+    const email = usuarioEncontrado.email || '';
 
     // Construir la URL con parámetros
-    const params = new URLSearchParams({
-      asesor: asesor,
-      type: usuarioEncontrado.type || '',
-      name: nombre,
-      user_code: usuarioEncontrado.user_code || ''
-    });
+    // Nota: 'name' ya no se envía porque viene de la consulta de la base de datos
+    // IMPORTANTE: user_code va primero por seguridad (evitar que se borre por error al copiar)
+    const userCode = usuarioEncontrado.user_code || '';
+    const type = usuarioEncontrado.perfil || usuarioEncontrado.type || '';
+    
+    // Construir URL manualmente para controlar el orden (user_code primero)
+    const params = [
+      `user_code=${encodeURIComponent(userCode)}`,
+      `asesor=${encodeURIComponent(asesor)}`,
+      `type=${encodeURIComponent(type)}`,
+      `email=${encodeURIComponent(email)}`
+    ];
 
-    const enlaceCompleto = `${BASE_URL}?${params.toString()}`;
+    const enlaceCompleto = `${BASE_URL}?${params.join('&')}`;
 
     console.log('Enlace generado:', enlaceCompleto);
 
     // Mostrar resultados (usando la variable 'nombre' ya declarada arriba)
-    mostrarResultado(asesor, usuarioEncontrado.type, nombre, usuarioEncontrado.user_code, enlaceCompleto);
+    mostrarResultado(asesor, usuarioEncontrado.perfil || usuarioEncontrado.type, nombre, usuarioEncontrado.user_code, enlaceCompleto);
 
   } catch (error) {
     console.error('Error al generar enlace:', error);

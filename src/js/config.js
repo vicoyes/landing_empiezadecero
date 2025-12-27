@@ -52,6 +52,14 @@ const CONFIG = {
     }
 };
 
+// Verificación de carga (para debugging)
+if (typeof CONFIG !== 'undefined' && CONFIG.n8n) {
+    console.log('✅ CONFIG cargado correctamente');
+    console.log('✅ webhookGetUser:', CONFIG.n8n.webhookGetUser);
+} else {
+    console.error('❌ CONFIG no se cargó correctamente');
+}
+
 
 // Crea cuenta gratis: hubspot.com/products/crm
 // Crea formulario: Marketing → Formularios → Crear formulario
