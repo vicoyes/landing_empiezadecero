@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>Generador de Enlaces para Afiliados - Empieza de Cero</title>
+  <title>Generador de Enlaces v2 para Afiliados - Empieza de Cero</title>
 
   <!-- Preconnect para CDNs críticos -->
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
@@ -77,6 +77,21 @@
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    .spinner {
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #0A2463;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      animation: spin 1s linear infinite;
+      display: inline-block;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
   </style>
 
   <!-- Google Fonts -->
@@ -103,13 +118,13 @@
       <div class="max-w-4xl mx-auto text-center">
         <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm font-medium mb-6">
           <span class="material-icons text-lg">link</span>
-          Generador de Enlaces
+          Generador de Enlaces v2
         </div>
         <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
           Genera tu Enlace de Afiliado
         </h1>
         <p class="text-xl text-white/80">
-          Crea enlaces personalizados para enviar contactos al área de Segunda Oportunidad
+          Consulta datos desde la base de datos y crea enlaces personalizados
         </p>
       </div>
     </div>
@@ -128,11 +143,82 @@
             </div>
             <div>
               <h2 class="text-2xl font-bold text-gray-800">Configura tu Enlace</h2>
-              <p class="text-gray-600 text-sm">Completa los datos para generar tu enlace personalizado</p>
+              <p class="text-gray-600 text-sm">Ingresa el email del conector para consultar sus datos</p>
+            </div>
+          </div>
+
+          <!-- Mensaje de error (oculto inicialmente) -->
+          <div id="errorMessage" class="hidden mb-6 p-4 bg-red-50 border border-red-200 rounded-xl">
+            <div class="flex items-start gap-3">
+              <span class="material-icons text-red-500">error</span>
+              <div class="flex-1">
+                <p class="text-sm font-semibold text-red-800" id="errorText"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mensaje informativo (oculto inicialmente) -->
+          <div id="infoMessage" class="hidden mb-6 p-4 bg-blue-50 border border-blue-200 rounded-xl">
+            <div class="flex items-start gap-3">
+              <span class="material-icons text-blue-500">info</span>
+              <div class="flex-1">
+                <p class="text-sm font-semibold text-blue-800" id="infoText"></p>
+              </div>
             </div>
           </div>
 
           <form id="generadorForm" class="space-y-6">
+            <!-- Email del Conector con Botón Buscar -->
+            <div>
+              <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
+                Email del Conector/Afiliado <span class="text-red-500">*</span>
+              </label>
+              <div class="flex gap-2">
+                <input type="email" id="email" name="email" required
+                  class="flex-1 px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                  placeholder="Ej: jose.gonzalez@ejemplo.com">
+                <button type="button" id="buscarBtn"
+                  class="px-6 py-3 bg-primary text-white rounded-xl font-semibold hover:bg-primary/90 transition-colors flex items-center gap-2 whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed">
+                  <span id="buscarIcon" class="material-icons">search</span>
+                  <span id="buscarText">Buscar</span>
+                </button>
+              </div>
+              <p class="text-xs text-gray-500 mt-1">Ingresa el email y presiona "Buscar" para cargar los datos</p>
+            </div>
+
+            <!-- Sección de Datos Encontrados (oculta inicialmente) -->
+            <div id="datosEncontrados" class="hidden bg-green-50 border border-green-200 rounded-xl p-6">
+              <div class="flex items-start gap-3 mb-4">
+                <span class="material-icons text-green-600">check_circle</span>
+                <div class="flex-1">
+                  <h3 class="text-lg font-semibold text-gray-800 mb-2">Datos del Usuario Encontrados</h3>
+                  <p class="text-sm text-gray-600">Verifica los datos antes de generar el enlace</p>
+                </div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <p class="text-xs text-gray-500 font-semibold mb-1">CÓDIGO DEL CONECTOR</p>
+                  <p id="datosUserCode" class="text-gray-800 font-semibold font-mono text-lg"></p>
+                </div>
+                <div>
+                  <p class="text-xs text-gray-500 font-semibold mb-1">PERFIL</p>
+                  <p id="datosPerfil" class="text-gray-800 font-semibold"></p>
+                </div>
+                <div>
+                  <p class="text-xs text-gray-500 font-semibold mb-1">EMAIL</p>
+                  <p id="datosEmail" class="text-gray-800 font-semibold"></p>
+                </div>
+                <div>
+                  <p class="text-xs text-gray-500 font-semibold mb-1">TELÉFONO</p>
+                  <p id="datosTelefono" class="text-gray-800 font-semibold"></p>
+                </div>
+                <div>
+                  <p class="text-xs text-gray-500 font-semibold mb-1">NOMBRE</p>
+                  <p id="datosNombre" class="text-gray-800 font-semibold"></p>
+                </div>
+              </div>
+            </div>
+
             <!-- Nombre del Asesor -->
             <div>
               <label for="asesor" class="block text-sm font-semibold text-gray-700 mb-2">
@@ -144,41 +230,11 @@
               <p class="text-xs text-gray-500 mt-1">El asesor jurídico que gestionará los casos</p>
             </div>
 
-            <!-- Tipo de Conector -->
-            <div>
-              <label for="type" class="block text-sm font-semibold text-gray-700 mb-2">
-                Tipo de Afiliado <span class="text-red-500">*</span>
-              </label>
-              <select id="type" name="type" required
-                class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all">
-                <option value="">Selecciona un tipo</option>
-                <option value="comercial">Comercial</option>
-                <option value="conector">Conector</option>
-                <option value="conector_pro">Conector Pro</option>
-              </select>
-              <div class="mt-2 space-y-1">
-                <p class="text-xs text-gray-500"><strong>Comercial:</strong> Colaboradores comerciales externos</p>
-                <p class="text-xs text-gray-500"><strong>Conector:</strong> Afiliados estándar con comisión básica</p>
-                <p class="text-xs text-gray-500"><strong>Conector Pro:</strong> Afiliados premium con mejores condiciones</p>
-              </div>
-            </div>
-
-            <!-- Nombre del Conector -->
-            <div>
-              <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">
-                Nombre del Conector/Comercial <span class="text-red-500">*</span>
-              </label>
-              <input type="text" id="name" name="name" required
-                class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                placeholder="Ej: José González">
-              <p class="text-xs text-gray-500 mt-1">Nombre del afiliado/conector que enviará contactos</p>
-            </div>
-
-            <!-- Botón Generar -->
-            <button type="submit"
-              class="w-full px-8 py-4 bg-primary text-white rounded-xl font-semibold hover:bg-primary/90 transition-colors shadow-lg flex items-center justify-center gap-2">
-              <span class="material-icons">auto_awesome</span>
-              Generar Enlace
+            <!-- Botón Generar (deshabilitado hasta que se carguen datos) -->
+            <button type="submit" id="submitBtn" disabled
+              class="w-full px-8 py-4 bg-gray-300 text-gray-500 rounded-xl font-semibold cursor-not-allowed shadow-lg flex items-center justify-center gap-2 transition-all">
+              <span id="submitIcon" class="material-icons">lock</span>
+              <span id="submitText">Busca un usuario primero para generar el enlace</span>
             </button>
           </form>
         </div>
@@ -217,6 +273,13 @@
                 <div class="flex-1">
                   <p class="text-xs text-gray-500 font-semibold">CONECTOR/COMERCIAL</p>
                   <p id="resultName" class="text-gray-800 font-semibold"></p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="material-icons text-primary text-lg mt-0.5">qr_code</span>
+                <div class="flex-1">
+                  <p class="text-xs text-gray-500 font-semibold">CÓDIGO DEL CONECTOR</p>
+                  <p id="resultUserCode" class="text-gray-800 font-semibold font-mono"></p>
                 </div>
               </div>
             </div>
@@ -272,8 +335,18 @@
     </div>
   </footer>
 
-  <!-- Script del Generador -->
-  <script src="src/js/generador-enlaces.js"></script>
+  <!-- Scripts -->
+  <!-- IMPORTANTE: config.js debe cargarse ANTES de generador-enlaces-2.js -->
+  <script src="src/js/config.js"></script>
+  <script>
+    // Verificar que CONFIG se haya cargado antes de continuar
+    if (typeof CONFIG === 'undefined') {
+      console.error('❌ ERROR: config.js no se ha cargado correctamente');
+      document.body.innerHTML = '<div style="padding: 2rem; text-align: center; color: red;"><h1>Error de Configuración</h1><p>El archivo de configuración no se ha cargado. Por favor, recarga la página.</p></div>';
+    }
+  </script>
+  <script src="src/js/generador-enlaces-2.js"></script>
 
 </body>
 </html>
+
