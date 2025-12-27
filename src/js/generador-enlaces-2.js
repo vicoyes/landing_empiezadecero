@@ -1,10 +1,12 @@
 /**
- * Generador de Enlaces v2 para Afiliados
+ * Generador de Enlaces para Afiliados (Versión Principal)
  * Consulta datos desde Supabase vía n8n y crea enlaces personalizados
+ * Este es el generador principal que reemplazó a la versión legacy
  */
 
 // URL base del formulario de activación
-const BASE_URL = window.location.origin + window.location.pathname.replace('generar-enlace-2.html', 'activacion.html');
+// Construir la URL reemplazando el nombre del archivo actual por activacion.html
+const BASE_URL = window.location.origin + window.location.pathname.replace(/generar-enlace.*\.html$/, 'activacion.html');
 
 /**
  * Verificar que CONFIG esté disponible

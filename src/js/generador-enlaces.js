@@ -4,7 +4,8 @@
  */
 
 // URL base del formulario de activación
-const BASE_URL = window.location.origin + window.location.pathname.replace('generar-enlace.html', 'activacion.html');
+// Versión legacy: funciona con generar-enlace-legacy.html
+const BASE_URL = window.location.origin + window.location.pathname.replace(/generar-enlace.*\.html$/, 'activacion.html');
 
 /**
  * Inicializar el generador cuando el DOM esté listo
