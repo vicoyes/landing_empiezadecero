@@ -410,6 +410,18 @@
             </div>
             <p class="text-xs text-gray-500 mt-1">Introduce el DNI o NIE del usuario para completar el registro</p>
             <p id="dniError" class="text-xs text-red-500 mt-1 hidden">Por favor, introduce un DNI/NIE válido</p>
+            
+            <!-- Checkbox para usar código de seguimiento como DNI temporal -->
+            <label class="flex items-center gap-2 mt-3 cursor-pointer group">
+              <input type="checkbox" id="usarCodigoComoDni" 
+                class="w-4 h-4 text-amber-500 border-gray-300 rounded focus:ring-amber-500/20 cursor-pointer">
+              <span class="text-sm text-gray-600 group-hover:text-gray-800 transition-colors">
+                Usar código de seguimiento como DNI temporal
+              </span>
+            </label>
+            <p id="dniTemporalInfo" class="text-xs text-amber-600 mt-1 hidden">
+              ⚠️ Se usará el código de seguimiento. Recuerda actualizar el DNI real posteriormente.
+            </p>
           </div>
           
           <!-- Nota informativa -->
@@ -517,12 +529,23 @@
         // Limpiar campo DNI y errores
         const dniInput = document.getElementById('modalDni');
         const dniError = document.getElementById('dniError');
+        const usarCodigoCheckbox = document.getElementById('usarCodigoComoDni');
+        const dniTemporalInfo = document.getElementById('dniTemporalInfo');
+        
         if (dniInput) {
           dniInput.value = '';
           dniInput.classList.remove('border-red-500');
+          dniInput.disabled = false;
+          dniInput.classList.remove('bg-amber-50', 'text-amber-700');
         }
         if (dniError) {
           dniError.classList.add('hidden');
+        }
+        if (usarCodigoCheckbox) {
+          usarCodigoCheckbox.checked = false;
+        }
+        if (dniTemporalInfo) {
+          dniTemporalInfo.classList.add('hidden');
         }
         
         // Mostrar modal
@@ -533,6 +556,44 @@
         setTimeout(() => {
           if (dniInput) dniInput.focus();
         }, 100);
+      }
+      
+      // Manejar checkbox de usar código como DNI temporal
+      const usarCodigoCheckbox = document.getElementById('usarCodigoComoDni');
+      if (usarCodigoCheckbox) {
+        usarCodigoCheckbox.addEventListener('change', function() {
+          const dniInput = document.getElementById('modalDni');
+          const dniError = document.getElementById('dniError');
+          const dniTemporalInfo = document.getElementById('dniTemporalInfo');
+          const codigoSeguimiento = document.getElementById('modalCodigo').textContent || '';
+          
+          if (this.checked) {
+            // Usar código de seguimiento como DNI temporal
+            if (dniInput) {
+              dniInput.value = codigoSeguimiento;
+              dniInput.disabled = true;
+              dniInput.classList.add('bg-amber-50', 'text-amber-700');
+              dniInput.classList.remove('border-red-500');
+            }
+            if (dniError) {
+              dniError.classList.add('hidden');
+            }
+            if (dniTemporalInfo) {
+              dniTemporalInfo.classList.remove('hidden');
+            }
+          } else {
+            // Restaurar campo DNI normal
+            if (dniInput) {
+              dniInput.value = '';
+              dniInput.disabled = false;
+              dniInput.classList.remove('bg-amber-50', 'text-amber-700');
+              dniInput.focus();
+            }
+            if (dniTemporalInfo) {
+              dniTemporalInfo.classList.add('hidden');
+            }
+          }
+        });
       }
       
       // Función para cerrar el modal
@@ -603,11 +664,12 @@
         // Obtener y validar DNI
         const dniInput = document.getElementById('modalDni');
         const dniError = document.getElementById('dniError');
+        const usandoCodigoTemporal = document.getElementById('usarCodigoComoDni')?.checked || false;
         const dniValue = dniInput ? dniInput.value.trim().toUpperCase() : '';
         
         // Validar que el DNI no esté vacío
         if (!dniValue) {
-          if (dniInput) {
+          if (dniInput && !dniInput.disabled) {
             dniInput.classList.add('border-red-500');
             dniInput.focus();
           }
@@ -618,19 +680,22 @@
           return;
         }
         
-        // Validar formato básico de DNI/NIE (8 dígitos + letra o X/Y/Z + 7 dígitos + letra)
-        const dniRegex = /^[0-9]{8}[A-Z]$/;
-        const nieRegex = /^[XYZ][0-9]{7}[A-Z]$/;
-        if (!dniRegex.test(dniValue) && !nieRegex.test(dniValue)) {
-          if (dniInput) {
-            dniInput.classList.add('border-red-500');
-            dniInput.focus();
+        // Solo validar formato si NO está usando código temporal
+        if (!usandoCodigoTemporal) {
+          // Validar formato básico de DNI/NIE (8 dígitos + letra o X/Y/Z + 7 dígitos + letra)
+          const dniRegex = /^[0-9]{8}[A-Z]$/;
+          const nieRegex = /^[XYZ][0-9]{7}[A-Z]$/;
+          if (!dniRegex.test(dniValue) && !nieRegex.test(dniValue)) {
+            if (dniInput) {
+              dniInput.classList.add('border-red-500');
+              dniInput.focus();
+            }
+            if (dniError) {
+              dniError.textContent = 'Formato de DNI/NIE no válido (ej: 12345678A o X1234567A)';
+              dniError.classList.remove('hidden');
+            }
+            return;
           }
-          if (dniError) {
-            dniError.textContent = 'Formato de DNI/NIE no válido (ej: 12345678A o X1234567A)';
-            dniError.classList.remove('hidden');
-          }
-          return;
         }
         
         // Limpiar error si pasó la validación
@@ -652,6 +717,7 @@
           user_code: codigoSeguimiento,
           nombre_completo: nombreUsuario,
           dni: dniValue, // DNI/NIE ingresado en el modal
+          dni_temporal: usandoCodigoTemporal, // true si se usa código como DNI temporal
           telefono: telefonoUsuario ? Number(telefonoUsuario.replace(/\D/g, '')) : 0,
           email: emailUsuario,
           direccion: '', // No disponible en este contexto
