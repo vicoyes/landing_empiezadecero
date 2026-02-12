@@ -308,6 +308,44 @@ function ocultarDatosUsuario() {
   if (datosDiv) {
     datosDiv.classList.add('hidden');
   }
+  const countEl = document.getElementById('datosEnlacesGenerados');
+  if (countEl) {
+    countEl.textContent = '—';
+  }
+}
+
+/**
+ * Consultar cuántas veces se ha generado enlace para este conector y mostrarlo
+ * @param {string} userCode - user_code del conector
+ */
+async function actualizarCantidadEnlacesGenerados(userCode) {
+  const el = document.getElementById('datosEnlacesGenerados');
+  if (!el) return;
+
+  const url = typeof CONFIG !== 'undefined' && CONFIG.n8n && CONFIG.n8n.webhookGetLinkGenerationCount
+    ? CONFIG.n8n.webhookGetLinkGenerationCount
+    : '';
+  if (!url || !userCode) {
+    el.textContent = '—';
+    return;
+  }
+
+  try {
+    const res = await fetch(`${url}?user_code=${encodeURIComponent(userCode)}`, { method: 'GET' });
+    const data = await res.json().catch(function () { return {}; });
+    // Respuesta: [{ "cantidad_registros": N }] o { "cantidad_registros": N } (puede venir como número o string)
+    const obj = Array.isArray(data) && data.length > 0 ? data[0] : data;
+    const raw = obj?.cantidad_registros;
+    const total = typeof raw === 'number' ? raw : Math.max(0, parseInt(raw, 10) || 0);
+    if (total === 0) {
+      el.textContent = 'Ninguno aún';
+    } else {
+      el.textContent = total === 1 ? '1 vez' : total + ' veces';
+    }
+  } catch (err) {
+    console.warn('No se pudo cargar la cantidad de enlaces generados:', err);
+    el.textContent = '—';
+  }
 }
 
 /**
@@ -342,6 +380,37 @@ function deshabilitarGenerarEnlace() {
     submitIcon.textContent = 'lock';
     submitText.textContent = 'Busca un usuario primero para generar el enlace';
   }
+}
+
+/**
+ * Registrar en el backend que se generó un enlace (seguimiento).
+ * Envía POST al webhook si está configurado. No bloquea la UI.
+ * @param {Object} datos - user_code, email_conector, asesor, type, nombre_conector, enlace
+ */
+function registrarGeneracionEnlace(datos) {
+  const url = typeof CONFIG !== 'undefined' && CONFIG.n8n && CONFIG.n8n.webhookLogLinkGeneration
+    ? CONFIG.n8n.webhookLogLinkGeneration
+    : '';
+  if (!url) return;
+
+  const payload = {
+    event: 'link_generated',
+    user_code: datos.user_code || '',
+    email_conector: datos.email_conector || '',
+    asesor: datos.asesor || '',
+    type: datos.type || '',
+    nombre_conector: datos.nombre_conector || '',
+    enlace: datos.enlace || '',
+    generated_at: new Date().toISOString()
+  };
+
+  fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(function (err) {
+    console.warn('Seguimiento (generación enlace):', err);
+  });
 }
 
 /**
@@ -428,6 +497,9 @@ async function buscarUsuario() {
 
     // Mostrar datos del usuario
     mostrarDatosUsuario(usuario);
+
+    // Consultar y mostrar cuántas veces se ha generado enlace para este conector
+    actualizarCantidadEnlacesGenerados(usuario.user_code || '');
 
     // Habilitar botón de generar enlace
     habilitarGenerarEnlace();
@@ -516,6 +588,16 @@ async function generarEnlace() {
 
     // Mostrar resultados (usando la variable 'nombre' ya declarada arriba)
     mostrarResultado(asesor, usuarioEncontrado.perfil || usuarioEncontrado.type, nombre, usuarioEncontrado.user_code, enlaceCompleto);
+
+    // Seguimiento: registrar que se generó este enlace (fire-and-forget)
+    registrarGeneracionEnlace({
+      user_code: userCode,
+      email_conector: email,
+      asesor,
+      type,
+      nombre_conector: nombre,
+      enlace: enlaceCompleto
+    });
 
   } catch (error) {
     console.error('Error al generar enlace:', error);

@@ -30,6 +30,9 @@ document.addEventListener('DOMContentLoaded', async function() {
   // Obtener parámetros de URL (incluyendo user_code para enviarlo en el webhook)
   obtenerAsesorDesdeURL();
 
+  // Seguimiento: registrar que se abrió este enlace (fire-and-forget)
+  registrarAperturaEnlace();
+
   // Configurar el formulario
   configurarFormulario();
 });
@@ -222,6 +225,32 @@ function mostrarErrorValidacion(titulo = 'URL No Válida', mensaje = 'El enlace 
     alert(`${titulo}\n\n${mensaje}\n\n👉 Puedes contactar al conector que te facilitó el enlace o escribirnos directamente a nuestra empresa por WhatsApp:\n\n📲 +34 685 55 53 62`);
     window.location.href = 'index.html';
   }
+}
+
+/**
+ * Registrar en el backend que se abrió un enlace de activación (seguimiento).
+ * Envía POST al webhook si está configurado. No bloquea la UI.
+ */
+function registrarAperturaEnlace() {
+  const url = typeof CONFIG !== 'undefined' && CONFIG.n8n && CONFIG.n8n.webhookLogLinkOpen
+    ? CONFIG.n8n.webhookLogLinkOpen
+    : '';
+  if (!url || !userCode) return;
+
+  const payload = {
+    event: 'link_opened',
+    user_code: userCode,
+    page_url: window.location.href || '',
+    opened_at: new Date().toISOString()
+  };
+
+  fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(function (err) {
+    console.warn('Seguimiento (apertura enlace):', err);
+  });
 }
 
 /**

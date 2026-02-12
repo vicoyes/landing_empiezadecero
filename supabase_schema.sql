@@ -417,10 +417,52 @@ $$ LANGUAGE plpgsql;
 COMMENT ON FUNCTION get_user_by_referral_code IS 'Busca un usuario por su código de referido';
 
 -- ============================================
+-- 10. TABLAS DE SEGUIMIENTO DE ENLACES
+-- ============================================
+-- Registran cuándo se genera un enlace y cuándo se abre (activacion.html).
+-- Relación: user_code → users(user_code)
+
+-- Tabla: enlaces generados (generador de enlaces)
+CREATE TABLE IF NOT EXISTS link_generations (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_code TEXT NOT NULL REFERENCES users(user_code) ON DELETE CASCADE,
+    email_conector TEXT,
+    asesor TEXT NOT NULL,
+    type TEXT,
+    nombre_conector TEXT,
+    enlace TEXT NOT NULL,
+    generated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+COMMENT ON TABLE link_generations IS 'Cada vez que se genera un enlace de activación para un conector';
+COMMENT ON COLUMN link_generations.user_code IS 'Código del conector (users.user_code)';
+
+CREATE INDEX IF NOT EXISTS idx_link_generations_user_code ON link_generations(user_code);
+CREATE INDEX IF NOT EXISTS idx_link_generations_generated_at ON link_generations(generated_at);
+
+-- Tabla: aperturas del enlace de activación
+CREATE TABLE IF NOT EXISTS link_opens (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_code TEXT NOT NULL REFERENCES users(user_code) ON DELETE CASCADE,
+    page_url TEXT,
+    opened_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+COMMENT ON TABLE link_opens IS 'Cada vez que alguien abre activacion.html con un user_code válido';
+COMMENT ON COLUMN link_opens.user_code IS 'Código del conector (users.user_code)';
+
+CREATE INDEX IF NOT EXISTS idx_link_opens_user_code ON link_opens(user_code);
+CREATE INDEX IF NOT EXISTS idx_link_opens_opened_at ON link_opens(opened_at);
+
+-- ============================================
 -- FIN DEL SCRIPT
 -- ============================================
 -- Para verificar la instalación, ejecuta:
 -- SELECT * FROM users LIMIT 1;
 -- SELECT * FROM referrals LIMIT 1;
 -- SELECT * FROM referral_stats LIMIT 5;
+-- SELECT * FROM link_generations LIMIT 5;
+-- SELECT * FROM link_opens LIMIT 5;
 

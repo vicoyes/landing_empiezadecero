@@ -48,7 +48,11 @@ const CONFIG = {
     n8n: {
         webhookForm: "https://n8n.empiezadecero.cat/webhook/75123388-942d-4d53-be3a-b34a445d6d73",  // Webhook para formulario (también usado para verificación de email)
         webhookGetUser: "https://n8n.empiezadecero.cat/webhook/14e3ea06-6d70-491b-be82-d4f4ea1555fa",  // Webhook para consultar usuario por email (GET) - PRODUCCIÓN - Generador de enlaces v2
-        webhookValidateUserCode: "https://n8n.empiezadecero.cat/webhook/c4e25823-be5b-4f0a-b139-a22a3194a701"  // Webhook para validar user_code en formulario de activación (GET)
+        webhookValidateUserCode: "https://n8n.empiezadecero.cat/webhook/c4e25823-be5b-4f0a-b139-a22a3194a701",  // Webhook para validar user_code en formulario de activación (GET)
+        // Seguimiento de enlaces: crea el webhook en n8n y pega aquí la URL
+        webhookLogLinkGeneration: "https://n8n.empiezadecero.cat/webhook/7e9ec4a4-421d-47d8-a9eb-4a5af88c8123",  // POST: registra en link_generations cuando se genera un enlace - PRODUCCIÓN
+        webhookLogLinkOpen: "https://n8n.empiezadecero.cat/webhook-test/7e9ec4a4-421d-47d8-a9eb-4a5af88c8123",  // POST: registra cuándo alguien abre activacion.html (enlaces compartidos) - TEST
+        webhookGetLinkGenerationCount: "https://n8n.empiezadecero.cat/webhook/9543c53c-ba51-4eb7-9227-63a2a4527a5c"   // GET ?user_code=XXX - cantidad_registros
     }
 };
 
