@@ -84,20 +84,29 @@ function animateTimeline() {
 // INICIALIZACIÓN
 // ============================================
 
-// Función para inicializar AOS cuando esté disponible
+let aosInitRetries = 0;
+const AOS_INIT_MAX_RETRIES = 100;
+
+// Función para inicializar AOS cuando esté disponible (solo si la página usa [data-aos])
 function initAOS() {
+    if (!document.querySelector('[data-aos]')) return;
     if (typeof AOS !== 'undefined') {
         AOS.init(CONFIG.aos);
-    } else {
-        // Reintentar si AOS no está cargado aún
-        setTimeout(initAOS, 100);
+        return;
     }
+    aosInitRetries++;
+    if (aosInitRetries > AOS_INIT_MAX_RETRIES) return;
+    setTimeout(initAOS, 100);
 }
 
-// Función para inicializar Swiper cuando esté disponible
+let swiperInitRetries = 0;
+const SWIPER_INIT_MAX_RETRIES = 100;
+
+// Función para inicializar Swiper cuando esté disponible (solo si existe el carrusel)
 function initSwiper() {
+    if (!document.querySelector('.testimoniosSwiper')) return;
     if (typeof Swiper !== 'undefined') {
-        const testimoniosSwiper = new Swiper('.testimoniosSwiper', {
+        new Swiper('.testimoniosSwiper', {
             slidesPerView: 1,
             spaceBetween: 24,
             loop: true,
@@ -124,10 +133,11 @@ function initSwiper() {
                 },
             },
         });
-    } else {
-        // Reintentar si Swiper no está cargado aún
-        setTimeout(initSwiper, 100);
+        return;
     }
+    swiperInitRetries++;
+    if (swiperInitRetries > SWIPER_INIT_MAX_RETRIES) return;
+    setTimeout(initSwiper, 100);
 }
 
 // Inicialización principal
@@ -504,6 +514,22 @@ function removerErrorEmail(emailInput) {
     emailInput.classList.remove('border-red-500', 'focus:border-red-500', 'focus:ring-red-500');
 }
 
+/**
+ * Normaliza teléfono a formato E.164 con + (misma regla que el envío del formulario).
+ * @param {string} codigoPais - Ej. "+34"
+ * @param {string} telefonoRaw - Valor del input teléfono
+ * @returns {string}
+ */
+function normalizarTelefonoCompleto(codigoPais, telefonoRaw) {
+    const raw = (telefonoRaw || '').trim();
+    const codigo = codigoPais || '+34';
+    if (raw.startsWith('+')) {
+        return '+' + raw.replace(/[^\d]/g, '');
+    }
+    const telefonoNormalizado = raw.replace(/\D/g, '');
+    return codigo + telefonoNormalizado;
+}
+
 // ============================================
 // WEBHOOK FORM SUBMISSION (n8n)
 // ============================================
@@ -517,6 +543,28 @@ function initWebhookForm() {
         const submitBtn = form.querySelector('button[type="submit"]');
         const originalText = submitBtn.innerHTML;
         const emailInput = document.getElementById('email');
+
+        const emailSintetico = document.body.dataset.autogenerarEmail === 'telefono';
+        if (emailSintetico) {
+            const codigoPais = document.getElementById('codigo_pais')?.value || '+34';
+            const telefonoRaw = document.getElementById('telefono')?.value || '';
+            const telefonoCompletoTmp = normalizarTelefonoCompleto(codigoPais, telefonoRaw);
+            const digits = telefonoCompletoTmp.replace(/\D/g, '');
+            if (!digits || digits.length < 9) {
+                alert('Introduce un teléfono válido (mínimo 9 dígitos).');
+                return;
+            }
+            const domain = (typeof CONFIG !== 'undefined' && CONFIG.syntheticEmailDomain)
+                ? CONFIG.syntheticEmailDomain
+                : 'sintetico.empiezadecero.cat';
+            const prefix = (typeof CONFIG !== 'undefined' && CONFIG.syntheticEmailLocalPrefix != null)
+                ? CONFIG.syntheticEmailLocalPrefix
+                : 'w';
+            if (emailInput) {
+                emailInput.value = prefix + digits + '@' + domain;
+            }
+        }
+
         const email = emailInput ? emailInput.value.trim() : '';
 
         // Validación de email: Solo cuando se presiona el botón del paso 2
@@ -561,7 +609,9 @@ function initWebhookForm() {
             submitBtn.innerHTML = originalText;
             
             // Mostrar mensaje de error al usuario
-            if (emailInput) {
+            if (emailSintetico) {
+                alert('Este teléfono ya está asociado a un registro de conector. Si la persona ya existe, no hace falta volver a darla de alta.');
+            } else if (emailInput) {
                 mostrarErrorEmail(emailInput, 'Este email ya está registrado como conector. Por favor, usa otro email o contacta con soporte si ya tienes cuenta.');
             } else {
                 alert('Este email ya está registrado como conector. Por favor, usa otro email.');
@@ -609,17 +659,7 @@ function initWebhookForm() {
         // Obtener código de país y teléfono
         const codigoPais = document.getElementById('codigo_pais')?.value || '+34';
         const telefonoRaw = document.getElementById('telefono').value;
-        
-        // Normalizar teléfono: mantener el + si existe, eliminar todo lo demás excepto números
-        let telefonoCompleto;
-        if (telefonoRaw.trim().startsWith('+')) {
-            // Si el teléfono ya tiene código de país con +, normalizar todo manteniendo el +
-            telefonoCompleto = '+' + telefonoRaw.replace(/[^\d]/g, '');
-        } else {
-            // Si no tiene +, usar el código de país del selector y normalizar el número
-            const telefonoNormalizado = telefonoRaw.replace(/\D/g, '');
-            telefonoCompleto = codigoPais + telefonoNormalizado;
-        }
+        const telefonoCompleto = normalizarTelefonoCompleto(codigoPais, telefonoRaw);
 
         // Recoger datos del formulario
         const formData = {
@@ -641,7 +681,8 @@ function initWebhookForm() {
             page_title: document.title,
             // Honeypot fields (para filtrado en n8n)
             hp_website: document.getElementById('hp_website')?.value || '',
-            hp_confirm_email: document.getElementById('hp_confirm_email')?.value || ''
+            hp_confirm_email: document.getElementById('hp_confirm_email')?.value || '',
+            ...(emailSintetico ? { email_sintetico: true, email_generado_desde: 'telefono' } : {})
         };
 
         try {

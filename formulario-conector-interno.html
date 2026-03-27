@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Alta Conector (uso interno) | Empieza de Cero</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin />
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#0A2463",
+            "background-light": "#F8F9FA",
+            "background-dark": "#05143A",
+          },
+          fontFamily: {
+            display: ["IBM Plex Sans", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.5rem",
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    body {
+      font-family: 'IBM Plex Sans', system-ui, sans-serif;
+      margin: 0;
+      background: #F8F9FA;
+    }
+
+    .hero-gradient {
+      background-image: linear-gradient(to right, #0A2463 50%, #0d2e7a 100%);
+    }
+
+    .material-icons {
+      font-family: 'Material Icons';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 24px;
+      display: inline-block;
+      line-height: 1;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .animate-spin {
+      animation: spin 1s linear infinite;
+    }
+  </style>
+
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet" />
+  </noscript>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" media="print"
+    onload="this.media='all'" />
+  <noscript>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  </noscript>
+</head>
+
+<body class="bg-background-light" data-autogenerar-email="telefono">
+
+  <section class="hero-gradient py-10">
+    <div class="container mx-auto px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <p class="text-white/80 text-sm font-medium mb-2">Uso interno · Equipo comercial</p>
+        <h1 class="text-3xl md:text-4xl font-bold text-white mb-3">
+          Alta de Conector
+        </h1>
+        <p class="text-white/85 text-sm md:text-base">
+          El correo se genera solo a partir del teléfono. No hace falta que el contacto tenga email.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-10">
+    <div class="container mx-auto px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-8 md:p-10">
+
+          <div class="mb-8 text-center">
+            <p class="text-sm text-gray-500">Paso 1 · Mismo flujo que la landing (verificación y registro en n8n)</p>
+          </div>
+
+          <form id="contactForm" class="space-y-6">
+
+            <div style="opacity: 0; position: absolute; top: 0; left: 0; height: 0; width: 0; z-index: -1;">
+              <label for="hp_website">Website</label>
+              <input type="text" id="hp_website" name="hp_website" tabindex="-1" autocomplete="off">
+              <label for="hp_confirm_email">Confirm Email</label>
+              <input type="text" id="hp_confirm_email" name="hp_confirm_email" tabindex="-1" autocomplete="off">
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <label for="nombre" class="block text-sm font-semibold text-gray-700 mb-2">
+                  Nombre completo <span class="text-red-500">*</span>
+                </label>
+                <input type="text" id="nombre" name="nombre" required
+                  class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                  placeholder="Nombre del contacto">
+              </div>
+              <div class="bg-blue-50 border border-blue-100 rounded-xl p-4 flex flex-col justify-center">
+                <p class="text-xs font-semibold text-primary uppercase tracking-wide mb-1">Correo electrónico</p>
+                <p class="text-sm text-gray-700">
+                  Se creará automáticamente a partir del <strong>teléfono</strong> (formato interno para el sistema).
+                </p>
+                <input type="hidden" id="email" name="email" value="">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6" style="isolation: isolate;">
+              <div class="relative w-full min-w-0" style="z-index: 1;">
+                <label for="telefono" class="block text-sm font-semibold text-gray-700 mb-2">
+                  Teléfono <span class="text-red-500">*</span>
+                </label>
+                <div class="relative flex items-center bg-gray-50 border border-gray-200 rounded-xl focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 transition-all w-full min-w-0">
+                  <div class="relative flex-shrink-0">
+                    <select id="codigo_pais" name="codigo_pais" required
+                      class="appearance-none bg-transparent border-none px-2 sm:px-4 py-3 pr-6 sm:pr-8 text-gray-700 focus:outline-none cursor-pointer focus:ring-0 text-sm sm:text-base"
+                      style="min-width: 90px; max-width: 120px; -webkit-appearance: none; -moz-appearance: none; appearance: none; background-image: none; background: transparent;">
+                      <option value="+34" selected>🇪🇸 +34</option>
+                      <option value="+1">🇺🇸 +1</option>
+                      <option value="+44">🇬🇧 +44</option>
+                      <option value="+33">🇫🇷 +33</option>
+                      <option value="+39">🇮🇹 +39</option>
+                      <option value="+49">🇩🇪 +49</option>
+                      <option value="+351">🇵🇹 +351</option>
+                      <option value="+31">🇳🇱 +31</option>
+                      <option value="+32">🇧🇪 +32</option>
+                      <option value="+41">🇨🇭 +41</option>
+                      <option value="+43">🇦🇹 +43</option>
+                      <option value="+45">🇩🇰 +45</option>
+                      <option value="+46">🇸🇪 +46</option>
+                      <option value="+47">🇳🇴 +47</option>
+                      <option value="+358">🇫🇮 +358</option>
+                      <option value="+353">🇮🇪 +353</option>
+                      <option value="+30">🇬🇷 +30</option>
+                      <option value="+48">🇵🇱 +48</option>
+                      <option value="+420">🇨🇿 +420</option>
+                      <option value="+36">🇭🇺 +36</option>
+                      <option value="+40">🇷🇴 +40</option>
+                      <option value="+7">🇷🇺 +7</option>
+                      <option value="+90">🇹🇷 +90</option>
+                      <option value="+52">🇲🇽 +52</option>
+                      <option value="+54">🇦🇷 +54</option>
+                      <option value="+55">🇧🇷 +55</option>
+                      <option value="+56">🇨🇱 +56</option>
+                      <option value="+57">🇨🇴 +57</option>
+                      <option value="+51">🇵🇪 +51</option>
+                    </select>
+                    <div class="absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 pointer-events-none">
+                      <svg class="w-3 h-3 sm:w-4 sm:h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="h-6 w-px bg-gray-300 flex-shrink-0"></div>
+                  <input type="tel" id="telefono" name="telefono" required
+                    class="flex-1 min-w-0 bg-transparent border-none px-2 sm:px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-0 text-sm sm:text-base"
+                    placeholder="612 345 678">
+                </div>
+              </div>
+              <div class="relative w-full min-w-0" style="z-index: 2;">
+                <label for="provincia" class="block text-sm font-semibold text-gray-700 mb-2">
+                  Provincia
+                </label>
+                <select id="provincia" name="provincia"
+                  class="w-full min-w-0 px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all appearance-none cursor-pointer text-sm sm:text-base">
+                  <option value="">Selecciona tu provincia</option>
+                  <option value="alava">Álava</option>
+                  <option value="albacete">Albacete</option>
+                  <option value="alicante">Alicante</option>
+                  <option value="almeria">Almería</option>
+                  <option value="asturias">Asturias</option>
+                  <option value="avila">Ávila</option>
+                  <option value="badajoz">Badajoz</option>
+                  <option value="barcelona">Barcelona</option>
+                  <option value="burgos">Burgos</option>
+                  <option value="caceres">Cáceres</option>
+                  <option value="cadiz">Cádiz</option>
+                  <option value="cantabria">Cantabria</option>
+                  <option value="castellon">Castellón</option>
+                  <option value="ceuta">Ceuta</option>
+                  <option value="ciudad-real">Ciudad Real</option>
+                  <option value="cordoba">Córdoba</option>
+                  <option value="cuenca">Cuenca</option>
+                  <option value="girona">Girona</option>
+                  <option value="granada">Granada</option>
+                  <option value="guadalajara">Guadalajara</option>
+                  <option value="guipuzcoa">Guipúzcoa</option>
+                  <option value="huelva">Huelva</option>
+                  <option value="huesca">Huesca</option>
+                  <option value="illes-balears">Illes Balears</option>
+                  <option value="jaen">Jaén</option>
+                  <option value="la-coruna">La Coruña</option>
+                  <option value="la-rioja">La Rioja</option>
+                  <option value="las-palmas">Las Palmas</option>
+                  <option value="leon">León</option>
+                  <option value="lleida">Lleida</option>
+                  <option value="lugo">Lugo</option>
+                  <option value="madrid">Madrid</option>
+                  <option value="malaga">Málaga</option>
+                  <option value="melilla">Melilla</option>
+                  <option value="murcia">Murcia</option>
+                  <option value="navarra">Navarra</option>
+                  <option value="ourense">Ourense</option>
+                  <option value="palencia">Palencia</option>
+                  <option value="pontevedra">Pontevedra</option>
+                  <option value="salamanca">Salamanca</option>
+                  <option value="santa-cruz-tenerife">Santa Cruz de Tenerife</option>
+                  <option value="segovia">Segovia</option>
+                  <option value="sevilla">Sevilla</option>
+                  <option value="soria">Soria</option>
+                  <option value="tarragona">Tarragona</option>
+                  <option value="teruel">Teruel</option>
+                  <option value="toledo">Toledo</option>
+                  <option value="valencia">Valencia</option>
+                  <option value="valladolid">Valladolid</option>
+                  <option value="vizcaya">Vizcaya</option>
+                  <option value="zamora">Zamora</option>
+                  <option value="zaragoza">Zaragoza</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="space-y-6">
+              <div>
+                <label for="tiene_contacto" class="block text-sm font-semibold text-gray-700 mb-2">
+                  ¿Tienes ya a alguien que quieras ayudar y facilitarnos su contacto?
+                </label>
+                <select id="tiene_contacto" name="tiene_contacto"
+                  class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
+                  <option value="">Selecciona una opción</option>
+                  <option value="si">Sí</option>
+                  <option value="no">No</option>
+                  <option value="quizas">Quizás</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="autonomo_empresa" class="block text-sm font-semibold text-gray-700 mb-2">
+                  ¿Eres autónomo o tienes empresa?
+                </label>
+                <select id="autonomo_empresa" name="autonomo_empresa"
+                  class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
+                  <option value="">Selecciona una opción</option>
+                  <option value="autonomo">Soy autónomo</option>
+                  <option value="empresa">Tengo empresa</option>
+                  <option value="ambos">Autónomo con empresa</option>
+                  <option value="ninguno">Ninguno</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="space-y-4 pt-4">
+              <label class="flex items-start gap-3 cursor-pointer group">
+                <input type="checkbox" id="privacidad" name="privacidad" required
+                  class="mt-1 w-5 h-5 text-primary border-gray-300 rounded focus:ring-primary/20 cursor-pointer">
+                <span class="text-sm text-gray-600">
+                  Acepto la <a href="#" class="text-primary font-semibold hover:underline">política de privacidad</a>
+                  <span class="text-red-500">*</span>
+                </span>
+              </label>
+
+              <label class="flex items-start gap-3 cursor-pointer group">
+                <input type="checkbox" id="newsletter" name="newsletter"
+                  class="mt-1 w-5 h-5 text-primary border-gray-300 rounded focus:ring-primary/20 cursor-pointer">
+                <span class="text-sm text-gray-600">
+                  Deseo recibir noticias y actualizaciones
+                </span>
+              </label>
+            </div>
+
+            <div class="pt-4">
+              <button type="submit"
+                class="w-full bg-primary text-white font-bold text-lg py-4 px-8 rounded-xl shadow-lg hover:bg-primary/90 hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2">
+                <span>CONTINUAR AL PASO 2</span>
+                <span class="material-icons">arrow_forward</span>
+              </button>
+            </div>
+
+            <p class="text-center text-sm text-gray-400 flex items-center justify-center gap-2">
+              <span class="material-icons text-lg">lock</span>
+              Los datos se envían al mismo sistema que el formulario público.
+            </p>
+          </form>
+
+        </div>
+
+        <p class="text-center mt-6">
+          <a href="index.html" class="text-primary text-sm font-semibold hover:underline">Volver a la web</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-primary py-6 mt-8">
+    <div class="container mx-auto px-6 lg:px-8 text-center">
+      <p class="text-white/60 text-sm">© 2025 Empieza de Cero</p>
+    </div>
+  </footer>
+
+  <script src="src/js/config.js"></script>
+  <script src="src/js/form-steps.js"></script>
+  <script src="src/js/main.js" defer></script>
+</body>
+
+</html>

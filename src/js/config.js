@@ -42,6 +42,10 @@ const CONFIG = {
         anonKey: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzdXBhYmFzZSIsImlhdCI6MTc2Njc2OTQ4MCwiZXhwIjo0OTIyNDQzMDgwLCJyb2xlIjoiYW5vbiJ9.RmRHum6IRnIsdmHn4veDmAw2zngZR07onJpUO4sIRBw"   // Clave anónima pública de Supabase
     },
     
+    // Correo sintético (formulario interno sin email del cliente): dominio y prefijo del local-part
+    syntheticEmailDomain: 'sintetico.empiezadecero.cat',
+    syntheticEmailLocalPrefix: 'w',
+
     // ============================================
     // N8N - WEBHOOKS
     // ============================================
