@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Redireccionando a Calendly | Empieza de Cero</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #F8F9FA;
+      color: #1f2937;
+      font-family: 'IBM Plex Sans', system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-image: linear-gradient(to right, #0A2463 50%, #0d2e7a 100%);
+      padding: 16px 24px;
+    }
+    header img { width: 170px; height: auto; display: block; }
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 18px;
+    }
+    .panel {
+      width: 100%;
+      max-width: 620px;
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 34px 28px;
+      text-align: center;
+      box-shadow: 0 18px 45px rgba(10, 36, 99, .10);
+    }
+    .icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 999px;
+      background: #eef2ff;
+      color: #0A2463;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+    .icon .material-icons { font-size: 36px; }
+    h1 {
+      font-family: 'Inter', sans-serif;
+      color: #0A2463;
+      font-size: 28px;
+      line-height: 1.2;
+      margin: 0 0 12px;
+    }
+    p {
+      margin: 0 auto 14px;
+      color: #4b5563;
+      line-height: 1.6;
+      max-width: 500px;
+      font-size: 16px;
+    }
+    .notice {
+      margin: 20px auto 24px;
+      max-width: 500px;
+      padding: 14px 16px;
+      border-radius: 10px;
+      background: #fff7ed;
+      color: #9a3412;
+      border: 1px solid #fed7aa;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    a, button {
+      border: none;
+      border-radius: 10px;
+      padding: 12px 18px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .primary { background: #0A2463; color: #fff; }
+    .secondary { background: #eef2ff; color: #0A2463; }
+    #countdown { font-weight: 800; color: #0A2463; }
+    @media (max-width: 520px) {
+      .panel { padding: 28px 20px; }
+      h1 { font-size: 24px; }
+      a, button { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html"><img src="src/img/logo.svg" alt="Empieza de Cero" /></a>
+  </header>
+
+  <main>
+    <section class="panel" aria-labelledby="titulo">
+      <div class="icon"><span class="material-icons">event_available</span></div>
+      <h1 id="titulo">Te vamos a redirigir a Calendly</h1>
+      <p>En la siguiente pantalla podrás elegir el día y la hora para hacer tu llamada con el equipo de Empieza de Cero.</p>
+      <div class="notice">
+        Serás redirigido a una página de Calendly para completar la reserva de tu cita.
+      </div>
+      <p>Redirección automática en <span id="countdown">5</span> segundos.</p>
+      <div class="actions">
+        <a id="continueLink" class="primary" href="agendar-cita.html">
+          <span class="material-icons" style="font-size:18px">arrow_forward</span>
+          Continuar ahora
+        </a>
+        <button class="secondary" type="button" onclick="history.back()">
+          <span class="material-icons" style="font-size:18px">arrow_back</span>
+          Volver
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const calendlyUrl = 'agendar-cita.html' + (params.toString() ? '?' + params.toString() : '');
+    const continueLink = document.getElementById('continueLink');
+    const countdownEl = document.getElementById('countdown');
+    let seconds = 5;
+
+    continueLink.href = calendlyUrl;
+
+    const timer = setInterval(function() {
+      seconds -= 1;
+      countdownEl.textContent = String(seconds);
+      if (seconds <= 0) {
+        clearInterval(timer);
+        window.location.href = calendlyUrl;
+      }
+    }, 1000);
+  </script>
+</body>
+</html>

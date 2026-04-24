@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Paso 2 - Nota de Encargo Profesional | Empieza de Cero</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style>
+    body { font-family: 'IBM Plex Sans', system-ui, sans-serif; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen">
+  <header class="bg-gradient-to-r from-[#0A2463] to-[#0d2e7a] py-5">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+      <a href="index.html"><img src="src/img/logo.svg" alt="Empieza de Cero" class="w-44 sm:w-52 h-auto" /></a>
+      <span class="text-white/70 text-sm font-medium inline-flex items-center gap-1">
+        <span class="material-icons text-base">lock</span>
+        <span class="hidden sm:inline">Paso 1 ya completado</span>
+      </span>
+    </div>
+  </header>
+
+  <div class="h-1 bg-gray-200">
+    <div id="progressFill" class="h-full bg-[#0A2463] transition-all duration-300" style="width:50%"></div>
+  </div>
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 py-10 sm:py-12">
+    <div class="flex items-center justify-between mb-6">
+      <span class="inline-flex items-center gap-1 bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">
+        <span class="material-icons text-sm">check_circle</span>
+        Paso 1 completado
+      </span>
+      <span class="text-xs sm:text-sm text-gray-500 font-medium">Paso 2 de 3</span>
+    </div>
+
+    <section class="bg-white rounded-3xl shadow-xl border border-gray-100 p-6 sm:p-8">
+      <div class="mb-8">
+        <span class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider bg-[#0A2463] text-white rounded-full px-3 py-1 mb-4">
+          <span class="material-icons text-sm">gavel</span>
+          Nota de Encargo Profesional (NEP)
+        </span>
+        <h1 id="tituloPaso2" class="text-2xl sm:text-3xl font-extrabold text-[#0A2463]" style="font-family:'Inter',sans-serif;">
+          Paso 2: Nota de Encargo Profesional
+        </h1>
+          <p class="text-gray-600 mt-2">Aquí defines cómo se abonan los honorarios del servicio jurídico de Empieza de Cero. Configura la cuota inicial y el plan de cuotas mensuales.</p>
+      </div>
+
+      <form id="financieroForm" class="space-y-6">
+        <div class="rounded-xl bg-blue-50 border border-blue-200 p-4 text-sm text-blue-800">
+          <strong>¿Qué es la Nota de Encargo Profesional (NEP)?</strong> Es el documento que formaliza la contratación del servicio jurídico con Empieza de Cero. Los datos de esta pantalla corresponden a los <strong>honorarios del servicio</strong>, no a la deuda del cliente.
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label for="monto_total" class="block text-sm font-semibold text-gray-700 mb-2">Total honorarios (€) <span class="text-red-500">*</span></label>
+            <input id="monto_total" name="monto_total" type="number" min="1" step="0.01" required
+              class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-[#0A2463] focus:ring-2 focus:ring-[#0A2463]/20"
+              placeholder="4235.00" />
+            <p class="text-xs text-gray-400 mt-1">Incluye impuestos, honorarios de abogado y gastos de procurador.</p>
+          </div>
+          <div>
+            <label for="cuota_inicial" class="block text-sm font-semibold text-gray-700 mb-2">Cuota inicial (€) <span class="text-red-500">*</span></label>
+            <input id="cuota_inicial" name="cuota_inicial" type="number" min="200" step="0.01" required
+              class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-[#0A2463] focus:ring-2 focus:ring-[#0A2463]/20"
+              placeholder="Mín. 200 €" />
+            <p class="text-xs text-gray-400 mt-1">Mínimo 200 €.</p>
+          </div>
+        </div>
+        <div>
+          <label for="monto_financiar" class="block text-sm font-semibold text-gray-700 mb-2">Resto del servicio en pago aplazado sin intereses (€)</label>
+          <input id="monto_financiar" name="monto_financiar" type="text" readonly
+            class="w-full px-4 py-3 bg-blue-50 border border-blue-200 rounded-xl text-[#0A2463] font-semibold"
+            placeholder="Se calcula automáticamente: precio total − cuota inicial" />
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4 items-start">
+          <div class="flex flex-col">
+            <label for="numero_cuotas" class="block text-sm font-semibold text-gray-700 mb-2 sm:min-h-[3rem]">Cuotas totales (incluye la inicial y las cuotas mensuales, máx. 20)</label>
+            <input id="numero_cuotas" name="numero_cuotas" type="number" min="2" max="20" step="1"
+              class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-[#0A2463] focus:ring-2 focus:ring-[#0A2463]/20"
+              placeholder="Ej: 20 (1 inicial + 19 mensuales)" />
+            <p class="text-xs mt-1 invisible">Referencia de altura para mantener ambos campos alineados.</p>
+          </div>
+          <div class="flex flex-col">
+            <label for="cuota_mensual" class="block text-sm font-semibold text-gray-700 mb-2 sm:min-h-[3rem]">Importe de la cuota mensual (€)</label>
+            <input id="cuota_mensual" name="cuota_mensual" type="number" min="0.01" step="0.01"
+              class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-[#0A2463] focus:ring-2 focus:ring-[#0A2463]/20"
+              placeholder="Ej: 300" />
+            <p id="cuota_mensual_minima_hint" class="text-xs text-gray-400 mt-1">Completa el total y la cuota inicial para calcular el importe mínimo mensual permitido.</p>
+          </div>
+        </div>
+
+        <div id="alertaLimite" class="hidden rounded-xl border border-red-300 bg-red-50 text-red-700 p-3 text-sm">
+          El plan supera las 20 cuotas en total (contando la inicial). Ajusta la cuota mensual o el número de cuotas para continuar.
+        </div>
+
+        <div id="resumenCuotas" class="hidden rounded-2xl border border-gray-200 bg-gray-50 p-4">
+          <h3 class="text-sm font-bold text-[#0A2463] mb-2">Listado de cuotas</h3>
+          <p class="text-xs text-gray-500 mb-3">Detalle de cuotas mensuales. La última puede variar para cuadrar el total.</p>
+          <div id="listaCuotas" class="max-h-56 overflow-y-auto space-y-2"></div>
+        </div>
+
+        <div class="flex justify-center pt-2">
+          <button type="button" id="btnCalcular"
+            class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#0A2463] text-white font-semibold hover:bg-[#0A2463]/90">
+            <span class="material-icons text-base">calculate</span>
+            Calcular
+          </button>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:justify-end sm:items-center gap-3 pt-2">
+          <button type="button" id="btnHablarAsesor"
+            class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-amber-50 text-amber-900 border border-amber-200 font-semibold hover:bg-amber-100">
+            <span class="material-icons text-base">support_agent</span>
+            No puedo asumir esta cuota mínima
+          </button>
+          <button type="submit" id="btnEnviarFinanciero"
+            class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border-2 border-[#0A2463] text-[#0A2463] font-semibold hover:bg-[#0A2463]/5 disabled:opacity-50 disabled:cursor-not-allowed">
+            <span class="material-icons text-base">send</span>
+            Confirmar pago aplazado
+          </button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <div id="modalAsesor" class="hidden fixed inset-0 z-50 bg-slate-900/50 px-4">
+    <div class="min-h-screen flex items-center justify-center">
+      <div class="w-full max-w-lg rounded-2xl bg-white border border-gray-200 shadow-2xl p-6 sm:p-7">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center flex-shrink-0">
+            <span class="material-icons">support_agent</span>
+          </div>
+          <div>
+            <h3 class="text-xl font-extrabold text-[#0A2463]" style="font-family:'Inter',sans-serif;">Te ayudamos a revisar tu caso</h3>
+            <p class="text-gray-600 mt-2 leading-relaxed">
+              Serás redirigido al siguiente paso para elegir cómo quieres que uno de nuestros asesores se ponga en contacto contigo y te ayude a encontrar una alternativa.
+            </p>
+            <p class="text-gray-600 mt-3 leading-relaxed">
+              Podrás agendar una reunión o pedir que te contacten directamente.
+            </p>
+          </div>
+        </div>
+        <div class="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 mt-7">
+          <button type="button" id="btnCancelarModalAsesor"
+            class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-gray-200 text-gray-700 font-semibold hover:bg-gray-50">
+            Cancelar
+          </button>
+          <button type="button" id="btnAceptarModalAsesor"
+            class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#0A2463] text-white font-semibold hover:bg-[#0A2463]/90">
+            <span class="material-icons text-base">arrow_forward</span>
+            Aceptar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="src/js/config.js"></script>
+  <script>
+    function getPasoStorageKey(stepName, processId) {
+      return 'edc_' + stepName + '_' + processId;
+    }
+
+    function validarAccesoPaso2() {
+      const params = new URLSearchParams(window.location.search);
+      const idProceso = params.get('id_proceso_registro') || '';
+      const notaEncargoId = params.get('nota_encargo_id') || '';
+
+      if (!idProceso || !notaEncargoId) {
+        alert('Faltan datos del paso 1 para continuar. Volverás al formulario de activación.');
+        window.location.href = 'activacion.html' + (params.toString() ? '?' + params.toString() : '');
+        return false;
+      }
+
+      try {
+        const paso1Ok = sessionStorage.getItem(getPasoStorageKey('paso1', idProceso)) === 'true';
+        if (!paso1Ok) {
+          alert('Primero debes completar correctamente el paso 1.');
+          window.location.href = 'activacion.html?' + params.toString();
+          return false;
+        }
+      } catch (error) {
+        console.warn('No se pudo validar el acceso al paso 2 con sessionStorage:', error);
+      }
+
+      return true;
+    }
+
+    function marcarPaso2Completado(processId) {
+      if (!processId) return;
+      try {
+        sessionStorage.setItem(getPasoStorageKey('paso2', processId), 'true');
+      } catch (error) {
+        console.warn('No se pudo guardar el estado del paso 2 en sessionStorage:', error);
+      }
+    }
+
+    const form             = document.getElementById('financieroForm');
+    const btnCalcular      = document.getElementById('btnCalcular');
+    const alertaLimite     = document.getElementById('alertaLimite');
+    const inputMonto       = document.getElementById('monto_total');
+    const inputInicial     = document.getElementById('cuota_inicial');
+    const outputMontoFinanciar = document.getElementById('monto_financiar');
+    const inputCuotas      = document.getElementById('numero_cuotas');
+    const inputCuotaMensual = document.getElementById('cuota_mensual');
+    const cuotaMensualMinimaHint = document.getElementById('cuota_mensual_minima_hint');
+    const btnHablarAsesor = document.getElementById('btnHablarAsesor');
+    const btnEnviarFinanciero = document.getElementById('btnEnviarFinanciero');
+    const modalAsesor = document.getElementById('modalAsesor');
+    const btnCancelarModalAsesor = document.getElementById('btnCancelarModalAsesor');
+    const btnAceptarModalAsesor = document.getElementById('btnAceptarModalAsesor');
+    const resumenCuotas    = document.getElementById('resumenCuotas');
+    const listaCuotas      = document.getElementById('listaCuotas');
+    const MAX_CUOTAS_TOTALES = 20;
+    let calculoValido = false;
+    let ultimoCampoEditado = 'numero_cuotas';
+
+    if (!validarAccesoPaso2()) {
+      throw new Error('Acceso al paso 2 bloqueado');
+    }
+
+    function redondear2(valor) {
+      return Math.round((valor + Number.EPSILON) * 100) / 100;
+    }
+
+    function redondearCentenaMasCercana(valor) {
+      return Math.round(valor / 100) * 100;
+    }
+
+    function formatearEuros(valor) {
+      return valor.toFixed(2) + ' €';
+    }
+
+    function redondearHaciaArribaCentena(valor) {
+      return Math.ceil(valor / 100) * 100;
+    }
+
+    function limpiarListadoCuotas() {
+      resumenCuotas.classList.add('hidden');
+      listaCuotas.innerHTML = '';
+    }
+
+    function actualizarMontoFinanciarPreview() {
+      const monto   = Number(inputMonto.value);
+      const inicial = Number(inputInicial.value);
+      if (Number.isFinite(monto) && monto > 0 && Number.isFinite(inicial) && inicial >= 200 && inicial < monto) {
+        outputMontoFinanciar.value = redondear2(monto - inicial).toFixed(2);
+      } else {
+        outputMontoFinanciar.value = '';
+      }
+      actualizarCuotaMensualMinimaHint();
+    }
+
+    function calcularCuotaMensualMinimaPermitida(montoFinanciar) {
+      return redondearHaciaArribaCentena(montoFinanciar / (MAX_CUOTAS_TOTALES - 1));
+    }
+
+    function actualizarCuotaMensualMinimaHint() {
+      const monto   = Number(inputMonto.value);
+      const inicial = Number(inputInicial.value);
+
+      if (!Number.isFinite(monto) || monto <= 0 || !Number.isFinite(inicial) || inicial < 200 || inicial >= monto) {
+        cuotaMensualMinimaHint.textContent = 'Completa el total y la cuota inicial para calcular el importe mínimo mensual permitido.';
+        return;
+      }
+
+      const montoFinanciar = redondear2(monto - inicial);
+      const cuotaMinima = calcularCuotaMensualMinimaPermitida(montoFinanciar);
+      cuotaMensualMinimaHint.textContent = 'Importe mínimo mensual permitido: ' + formatearEuros(cuotaMinima) + ' para no superar 20 cuotas totales.';
+    }
+
+    // Distribuye montoFinanciar en cuotasMensuales cuotas.
+    // Si el origen es numero_cuotas, las cuotas mensuales intermedias se redondean a la centena más cercana
+    // y la última absorbe el ajuste.
+    function distribuirCuotas(montoFinanciar, cuotasMensuales, origen, cuotaMensualObjetivo) {
+      if (cuotasMensuales <= 1) {
+        return [redondear2(montoFinanciar)];
+      }
+
+      const cuotas = [];
+
+      if (origen === 'numero_cuotas') {
+        const cuotaRedondeada = redondearCentenaMasCercana(cuotaMensualObjetivo);
+        let acumulado = 0;
+        for (let i = 1; i < cuotasMensuales; i++) {
+          cuotas.push(cuotaRedondeada);
+          acumulado += cuotaRedondeada;
+        }
+        cuotas.push(redondear2(montoFinanciar - acumulado));
+        return cuotas;
+      }
+
+      if (origen === 'cuota_mensual') {
+        const cuotaFija = redondear2(cuotaMensualObjetivo);
+        let acumulado = 0;
+        for (let i = 1; i < cuotasMensuales; i++) {
+          cuotas.push(cuotaFija);
+          acumulado += cuotaFija;
+        }
+        cuotas.push(redondear2(montoFinanciar - acumulado));
+        return cuotas;
+      }
+
+      const totalCentimos    = Math.round(montoFinanciar * 100);
+      const baseCentimos     = Math.floor(totalCentimos / cuotasMensuales);
+      const ultimaCentimos   = totalCentimos - baseCentimos * (cuotasMensuales - 1);
+      for (let i = 1; i <= cuotasMensuales; i++) {
+        cuotas.push((i === cuotasMensuales ? ultimaCentimos : baseCentimos) / 100);
+      }
+      return cuotas;
+    }
+
+    // Renderiza el listado completo: cuota inicial + cuotas mensuales
+    function renderListadoCuotas(cuotaInicial, montoFinanciar, cuotasMensuales, origen, cuotaMensualObjetivo) {
+      listaCuotas.innerHTML = '';
+
+      // Cuota inicial (siempre la primera)
+      const filaInicial = document.createElement('div');
+      filaInicial.className = 'flex items-center justify-between rounded-lg border border-[#0A2463]/25 bg-[#0A2463]/5 px-3 py-2 text-sm text-[#0A2463] font-bold';
+      filaInicial.innerHTML = '<span>Cuota 1 — Inicial</span><span>' + formatearEuros(cuotaInicial) + '</span>';
+      listaCuotas.appendChild(filaInicial);
+
+      // Cuotas mensuales (cuota 2 en adelante)
+      distribuirCuotas(montoFinanciar, cuotasMensuales, origen, cuotaMensualObjetivo).forEach(function(importe, index) {
+        const fila = document.createElement('div');
+        const esUltima = index === cuotasMensuales - 1;
+        fila.className = 'flex items-center justify-between rounded-lg border px-3 py-2 text-sm ' +
+          (esUltima ? 'border-blue-200 bg-blue-50 text-[#0A2463] font-semibold' : 'border-gray-200 bg-white text-gray-700');
+        fila.innerHTML = '<span>Cuota mensual ' + (index + 2) + '</span><span>' + formatearEuros(importe) + '</span>';
+        listaCuotas.appendChild(fila);
+      });
+
+      resumenCuotas.classList.remove('hidden');
+    }
+
+    function generarListadoCuotas(cuotaInicial, montoFinanciar, cuotasMensuales, origen, cuotaMensualObjetivo) {
+      return [
+        { numero: 1, tipo: 'inicial', importe: redondear2(cuotaInicial) }
+      ].concat(distribuirCuotas(montoFinanciar, cuotasMensuales, origen, cuotaMensualObjetivo).map(function(importe, index) {
+        return {
+          numero: index + 2,
+          tipo: 'mensual',
+          importe: redondear2(importe)
+        };
+      }));
+    }
+
+    function resetearCalculo() {
+      alertaLimite.classList.add('hidden');
+      limpiarListadoCuotas();
+      calculoValido = false;
+      btnEnviarFinanciero.disabled = true;
+      btnEnviarFinanciero.innerHTML = '<span class="material-icons text-base">send</span> Confirmar pago aplazado';
+    }
+
+    // numero_cuotas = total incluyendo la inicial (max 20).
+    // cuotasMensuales = numero_cuotas - 1.
+    function calcular(origen) {
+      const monto   = Number(inputMonto.value);
+      const inicial = Number(inputInicial.value);
+
+      if (!Number.isFinite(monto) || monto <= 0)
+        throw new Error('Introduce el total de honorarios.');
+      if (!Number.isFinite(inicial) || inicial < 200)
+        throw new Error('La cuota inicial mínima es de 200 €.');
+      if (inicial >= monto)
+        throw new Error('La cuota inicial debe ser menor al total de honorarios.');
+
+      const montoFinanciar = redondear2(monto - inicial);
+      outputMontoFinanciar.value = montoFinanciar.toFixed(2);
+
+      let totalCuotas;    // incluye la inicial
+      let cuotasMensuales;
+      let cuotaMensual;
+
+      if (origen === 'cuota_mensual') {
+        const cuotaIngresada = Number(inputCuotaMensual.value);
+        if (!Number.isFinite(cuotaIngresada) || cuotaIngresada <= 0)
+          throw new Error('La cuota mensual debe ser mayor a 0.');
+        const cuotaMinimaPermitida = calcularCuotaMensualMinimaPermitida(montoFinanciar);
+        if (cuotaIngresada < cuotaMinimaPermitida)
+          throw new Error('La cuota mensual mínima permitida es ' + formatearEuros(cuotaMinimaPermitida) + ' para no superar 20 cuotas totales.');
+        cuotasMensuales = Math.ceil(montoFinanciar / cuotaIngresada);
+        totalCuotas     = cuotasMensuales + 1;
+        cuotaMensual    = redondear2(cuotaIngresada);
+      } else {
+        const cuotasIngresadas = Number(inputCuotas.value);
+        if (!Number.isInteger(cuotasIngresadas) || cuotasIngresadas < 2)
+          throw new Error('El número de cuotas totales debe ser al menos 2 (inicial + 1 mensual).');
+        if (cuotasIngresadas > MAX_CUOTAS_TOTALES)
+          throw new Error('El máximo es de 20 cuotas totales, contando la cuota inicial.');
+        totalCuotas     = cuotasIngresadas;
+        cuotasMensuales = totalCuotas - 1;
+        cuotaMensual    = redondearCentenaMasCercana(montoFinanciar / cuotasMensuales);
+      }
+
+      inputCuotas.value      = String(totalCuotas);
+      inputCuotaMensual.value = cuotaMensual.toFixed(2);
+
+      const excede = totalCuotas > MAX_CUOTAS_TOTALES;
+      alertaLimite.classList.toggle('hidden', !excede);
+
+      if (excede) {
+        limpiarListadoCuotas();
+      } else {
+        renderListadoCuotas(inicial, montoFinanciar, cuotasMensuales, origen, cuotaMensual);
+      }
+
+      return {
+        monto_total: monto, cuota_inicial: inicial,
+        monto_financiar: montoFinanciar,
+        numero_cuotas: totalCuotas, cuotas_mensuales: cuotasMensuales,
+        listado_cuotas: excede ? [] : generarListadoCuotas(inicial, montoFinanciar, cuotasMensuales, origen, cuotaMensual),
+        cuota_mensual: cuotaMensual,
+        limite_excedido: excede
+      };
+    }
+
+    function personalizarTitulo() {
+      const params = new URLSearchParams(window.location.search);
+      const nombre = params.get('nombre');
+      if (nombre) {
+        document.getElementById('tituloPaso2').textContent = 'Paso 2: NEP de ' + nombre;
+      }
+      // Pre-cargar honorarios desde URL o valor por defecto 4235 €
+      const honorariosParam  = params.get('honorarios');
+      const valorHonorarios  = honorariosParam ? Number(honorariosParam) : 4235;
+      if (valorHonorarios > 0) {
+        inputMonto.value = valorHonorarios.toFixed(2);
+        if (honorariosParam) {
+          inputMonto.readOnly = true;
+          inputMonto.classList.replace('bg-gray-50', 'bg-blue-50');
+          inputMonto.classList.replace('border-gray-200', 'border-blue-200');
+          inputMonto.classList.add('text-[#0A2463]', 'font-semibold');
+        }
+      }
+    }
+
+    async function enviarFinanciero(resultado) {
+      const params = new URLSearchParams(window.location.search);
+      const payload = {
+        tipo_formulario: 'paso2_nota_encargo_profesional',
+        nombre: params.get('nombre') || '',
+        user_code: params.get('user_code') || '',
+        id_unico_conector: params.get('user_code') || '',
+        id_proceso_registro: params.get('id_proceso_registro') || '',
+        nota_encargo_id: params.get('nota_encargo_id') || '',
+        asesor: params.get('asesor') || '',
+        deuda_total_aproximada: Number(params.get('deuda_total_aproximada')) || null,
+        total_honorarios: resultado.monto_total,
+        cuota_inicial: resultado.cuota_inicial,
+        monto_financiar: resultado.monto_financiar,
+        numero_cuotas_total: resultado.numero_cuotas,
+        cuotas_mensuales: resultado.cuotas_mensuales,
+        listado_cuotas: resultado.listado_cuotas,
+        cuota_mensual: resultado.cuota_mensual,
+        calculo_sin_interes: true,
+        timestamp: new Date().toISOString(),
+        page_url: window.location.href
+      };
+
+      const urls = [
+        (CONFIG?.n8n?.webhookPasoIntermedio || '').trim(),
+        (CONFIG?.n8n?.webhookPasoIntermedioTest || '').trim()
+      ].filter(Boolean);
+
+      if (!urls.length) throw new Error('No hay webhook configurado.');
+
+      for (const url of urls) {
+        try {
+          const resp = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          if (!resp.ok && resp.status !== 0) throw new Error('HTTP ' + resp.status);
+          const responseText = await resp.text();
+          let responseData = null;
+          if (responseText) {
+            responseData = JSON.parse(responseText);
+          }
+          const resultadoWebhook = procesarRespuestaPaso2(responseData);
+          if (!resultadoWebhook.exito) {
+            throw new Error('No se confirmó la actualización de la nota de encargo.');
+          }
+          if (resultadoWebhook.notaEncargoId) {
+            payload.nota_encargo_id = resultadoWebhook.notaEncargoId;
+          }
+          marcarPaso2Completado(payload.id_proceso_registro);
+          registrarProgresoProceso(payload);
+          return payload;
+        } catch (err) {
+          console.warn('Fallo webhook:', url, err);
+        }
+      }
+      throw new Error('No se pudo enviar la información. Revisa tu conexión e inténtalo de nuevo.');
+    }
+
+    function procesarRespuestaPaso2(responseData) {
+      if (!responseData) {
+        return { exito: false, notaEncargoId: '' };
+      }
+
+      const items = Array.isArray(responseData) ? responseData : [responseData];
+      const itemActualizado = items.find(function(item) {
+        return item && item.body && item.body.update === true;
+      });
+
+      if (!itemActualizado) {
+        return { exito: false, notaEncargoId: '' };
+      }
+
+      return {
+        exito: true,
+        notaEncargoId: itemActualizado.body.nota_encargo_id || ''
+      };
+    }
+
+    async function registrarProgresoProceso(payload) {
+      const url = (CONFIG?.n8n?.webhookRegistrationProcess || '').trim();
+      if (!url || !payload.id_proceso_registro) return;
+
+      const progressPayload = {
+        tipo_formulario: 'registration_process_progress',
+        event: 'paso_2_completado',
+        id_proceso_registro: payload.id_proceso_registro,
+        user_code: payload.user_code || '',
+        status: 'paso_2_completado',
+        current_step: 'encuesta-paso-3',
+        last_completed_step: 'paso-intermedio-nep',
+        progress_percent: 70,
+        paso_2_data: payload,
+        nota_encargo_id: payload.nota_encargo_id || '',
+        nombre: payload.nombre || '',
+        asesor: payload.asesor || '',
+        deuda_total_aproximada: payload.deuda_total_aproximada || null,
+        page_url: payload.page_url || window.location.href,
+        timestamp: new Date().toISOString()
+      };
+
+      try {
+        const resp = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(progressPayload)
+        });
+        if (!resp.ok && resp.status !== 0) throw new Error('HTTP ' + resp.status);
+      } catch (err) {
+        console.warn('No se pudo registrar el progreso del proceso:', err);
+      }
+    }
+
+    function irAPaso3Asesoria() {
+      const params = new URLSearchParams(window.location.search);
+      params.set('forzar_asesoria', 'true');
+      params.set('motivo_asesoria', 'cuota_minima_no_asumible');
+      window.location.href = 'encuesta-paso-3.html?' + params.toString();
+    }
+
+    function abrirModalAsesor() {
+      modalAsesor.classList.remove('hidden');
+    }
+
+    function cerrarModalAsesor() {
+      modalAsesor.classList.add('hidden');
+    }
+
+    // Resetear al editar cualquier campo
+    [inputMonto, inputInicial, inputCuotas, inputCuotaMensual].forEach(function(input) {
+      input.addEventListener('input', resetearCalculo);
+    });
+    inputCuotas.addEventListener('input', function() { ultimoCampoEditado = 'numero_cuotas'; });
+    inputCuotaMensual.addEventListener('input', function() {
+      ultimoCampoEditado = 'cuota_mensual';
+      if (!inputCuotaMensual.value) return;
+      try {
+        const r = calcular('cuota_mensual');
+        if (!r.limite_excedido) { calculoValido = true; btnEnviarFinanciero.disabled = false; }
+      } catch (_) {}
+    });
+    inputCuotas.addEventListener('blur', function() {
+      if (!inputCuotas.value) return;
+      ultimoCampoEditado = 'numero_cuotas';
+      try {
+        const r = calcular('numero_cuotas');
+        if (!r.limite_excedido) { calculoValido = true; btnEnviarFinanciero.disabled = false; }
+      } catch (_) {}
+    });
+    inputCuotaMensual.addEventListener('blur', function() {
+      if (!inputCuotaMensual.value) return;
+      ultimoCampoEditado = 'cuota_mensual';
+      try {
+        const r = calcular('cuota_mensual');
+        if (!r.limite_excedido) { calculoValido = true; btnEnviarFinanciero.disabled = false; }
+      } catch (_) {}
+    });
+    inputMonto.addEventListener('input', actualizarMontoFinanciarPreview);
+    inputMonto.addEventListener('change', actualizarMontoFinanciarPreview);
+    inputInicial.addEventListener('blur', actualizarMontoFinanciarPreview);
+    inputInicial.addEventListener('change', actualizarMontoFinanciarPreview);
+
+    btnCalcular.addEventListener('click', function() {
+      try {
+        const resultado = calcular(ultimoCampoEditado);
+        if (resultado.limite_excedido) {
+          calculoValido = false;
+          btnEnviarFinanciero.disabled = true;
+          return;
+        }
+        calculoValido = true;
+        btnEnviarFinanciero.disabled = false;
+        btnEnviarFinanciero.innerHTML = '<span class="material-icons text-base">send</span> Confirmar pago aplazado';
+      } catch (error) {
+        calculoValido = false;
+        btnEnviarFinanciero.disabled = true;
+        alert(error.message);
+      }
+    });
+
+    btnHablarAsesor.addEventListener('click', abrirModalAsesor);
+    btnCancelarModalAsesor.addEventListener('click', cerrarModalAsesor);
+    btnAceptarModalAsesor.addEventListener('click', irAPaso3Asesoria);
+    modalAsesor.addEventListener('click', function(event) {
+      if (event.target === modalAsesor) {
+        cerrarModalAsesor();
+      }
+    });
+
+    form.addEventListener('submit', async function(event) {
+      event.preventDefault();
+      if (!calculoValido) {
+        alert('Primero pulsa "Calcular" para validar el plan de pago.');
+        return;
+      }
+      btnEnviarFinanciero.disabled = true;
+      btnEnviarFinanciero.innerHTML = '<span class="material-icons animate-spin">sync</span> Enviando...';
+      try {
+        const resultado = calcular(ultimoCampoEditado);
+        if (resultado.limite_excedido) throw new Error('El plan supera las 20 cuotas. Ajusta los valores.');
+        const payloadEnviado = await enviarFinanciero(resultado);
+        document.getElementById('progressFill').style.width = '100%';
+        const params = new URLSearchParams(window.location.search);
+        if (payloadEnviado && payloadEnviado.nota_encargo_id) {
+          params.set('nota_encargo_id', payloadEnviado.nota_encargo_id);
+        }
+        form.innerHTML =
+          '<div class="rounded-2xl bg-green-50 border border-green-200 p-8 text-center">' +
+          '<div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-5">' +
+          '<span class="material-icons text-green-500 text-4xl">check_circle</span></div>' +
+          '<p class="text-green-800 font-bold text-xl mb-3">Nota de Encargo Profesional enviada</p>' +
+          '<p class="text-green-700">¡Genial! Hemos recibido los datos correctamente. En un momento te redirigimos al siguiente paso...</p>' +
+          '</div>';
+        setTimeout(function() {
+          window.location.href = 'encuesta-paso-3.html?' + params.toString();
+        }, 1800);
+      } catch (error) {
+        alert(error.message || 'No se pudo completar el envío. Inténtalo de nuevo.');
+        btnEnviarFinanciero.disabled = !calculoValido;
+        btnEnviarFinanciero.innerHTML = '<span class="material-icons text-base">send</span> Confirmar pago aplazado';
+      }
+    });
+
+    personalizarTitulo();
+    resetearCalculo();
+  </script>
+</body>
+</html>

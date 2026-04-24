@@ -3,12 +3,147 @@
  * Formulario de Segunda Oportunidad para conectores legales
  */
 
+const MUNICIPIOS_ES = {
+  'Álava': ['Vitoria-Gasteiz','Llodio','Amurrio','Laudio','Salvatierra-Agurain'],
+  'Albacete': ['Albacete','Hellín','Almansa','Villarrobledo','La Roda','Caudete','Tobarra'],
+  'Alicante': ['Alicante','Elche','Torrevieja','Orihuela','Benidorm','Alcoy','Villena','Elda','Petrer','Dénia','Calpe','Santa Pola','Guardamar del Segura'],
+  'Almería': ['Almería','Roquetas de Mar','El Ejido','Vícar','Adra','Vera','Berja','Huércal-Overa','Carboneras'],
+  'Asturias': ['Oviedo','Gijón','Avilés','Siero','Langreo','Mieres','Castrillón','Carreño','Cangas del Narcea','Grado'],
+  'Ávila': ['Ávila','Arenas de San Pedro','Arévalo','Sotillo de la Adrada','Las Navas del Marqués'],
+  'Badajoz': ['Badajoz','Mérida','Don Benito','Villanueva de la Serena','Almendralejo','Zafra','Plasencia'],
+  'Illes Balears': ['Palma','Calvià','Manacor','Llucmajor','Marratxí','Inca','Ibiza','Maó','Ciutadella de Menorca'],
+  'Barcelona': ['Barcelona','Badalona','Hospitalet de Llobregat','Terrassa','Sabadell','Mataró','Santa Coloma de Gramenet','Cornellà de Llobregat','Rubí','Manresa','Vilanova i la Geltrú','Viladecans','Granollers','Cerdanyola del Vallès','Gavà','Castelldefels','Sant Cugat del Vallès','Mollet del Vallès','Igualada','El Prat de Llobregat','Martorell','Vic'],
+  'Burgos': ['Burgos','Miranda de Ebro','Aranda de Duero','Briviesca','Medina de Pomar'],
+  'Cáceres': ['Cáceres','Plasencia','Trujillo','Navalmoral de la Mata','Moraleja'],
+  'Cádiz': ['Cádiz','Jerez de la Frontera','Algeciras','La Línea de la Concepción','San Fernando','El Puerto de Santa María','Chiclana de la Frontera','Sanlúcar de Barrameda','Rota','Barbate','Los Barrios'],
+  'Cantabria': ['Santander','Torrelavega','Castro-Urdiales','Camargo','El Astillero','Piélagos','Santoña','Laredo'],
+  'Castellón': ['Castellón de la Plana','Vila-real','Burriana','Benicàssim','Peñíscola','Vinaròs','Onda','Almassora','Nules'],
+  'Ceuta': ['Ceuta'],
+  'Ciudad Real': ['Ciudad Real','Puertollano','Valdepeñas','Alcázar de San Juan','Manzanares','Tomelloso','Miguelturra','Daimiel'],
+  'Córdoba': ['Córdoba','Lucena','Montilla','Puente Genil','Cabra','Priego de Córdoba','Pozoblanco','Palma del Río'],
+  'La Coruña': ['La Coruña','Santiago de Compostela','Ferrol','Narón','Oleiros','Arteixo','Culleredo','Carballo','Cambre'],
+  'Cuenca': ['Cuenca','Tarancón','Motilla del Palancar','Quintanar del Rey'],
+  'Girona': ['Girona','Figueres','Blanes','Salt','Lloret de Mar','Roses','Olot','Platja d\'Aro','Palamós','Palafrugell'],
+  'Granada': ['Granada','Motril','Armilla','Almuñécar','Maracena','Loja','Guadix','Baza','Las Gabias'],
+  'Guadalajara': ['Guadalajara','Azuqueca de Henares','Alovera','Cabanillas del Campo','Marchamalo'],
+  'Gipuzkoa': ['San Sebastián','Irún','Eibar','Errenteria','Zarautz','Arrasate-Mondragón','Tolosa','Hernani'],
+  'Huelva': ['Huelva','Lepe','Almonte','Moguer','Ayamonte','Isla Cristina','Bollullos Par del Condado'],
+  'Huesca': ['Huesca','Jaca','Barbastro','Monzón','Fraga','Sabiñánigo'],
+  'Jaén': ['Jaén','Linares','Úbeda','Baeza','Andújar','Martos','Alcalá la Real','Bailén'],
+  'La Rioja': ['Logroño','Calahorra','Arnedo','Alfaro','Haro','Nájera'],
+  'Las Palmas': ['Las Palmas de Gran Canaria','Telde','Santa Lucía de Tirajana','San Bartolomé de Tirajana','Arrecife','Puerto del Rosario','La Oliva','Arucas'],
+  'León': ['León','Ponferrada','San Andrés del Rabanedo','Villaquilambre','Astorga','La Bañeza'],
+  'Lleida': ['Lleida','Mollerussa','Tàrrega','La Seu d\'Urgell','Balaguer','Cervera'],
+  'Lugo': ['Lugo','Monforte de Lemos','Viveiro','Vilalba','Sarria','Burela'],
+  'Madrid': ['Madrid','Móstoles','Alcalá de Henares','Fuenlabrada','Leganés','Getafe','Alcorcón','Torrejón de Ardoz','Parla','Alcobendas','Las Rozas de Madrid','Pozuelo de Alarcón','Rivas-Vaciamadrid','Valdemoro','Collado Villalba','Coslada','Arganda del Rey','San Sebastián de los Reyes','Majadahonda','Boadilla del Monte','Pinto','Tres Cantos'],
+  'Málaga': ['Málaga','Marbella','Vélez-Málaga','Mijas','Fuengirola','Torremolinos','Benalmádena','Estepona','Ronda','Antequera','Nerja','Coín'],
+  'Melilla': ['Melilla'],
+  'Murcia': ['Murcia','Cartagena','Lorca','Molina de Segura','Alcantarilla','Mazarrón','San Javier','Torre-Pacheco','Yecla','Cieza','Águilas'],
+  'Navarra': ['Pamplona','Tudela','Barañáin','Burlada','Estella-Lizarra','Tafalla','Zizur Mayor','Noáin'],
+  'Ourense': ['Ourense','Xinzo de Limia','O Barco de Valdeorras','Verín','O Carballiño'],
+  'Palencia': ['Palencia','Aguilar de Campoo','Guardo','Venta de Baños'],
+  'Pontevedra': ['Vigo','Pontevedra','Vilagarcía de Arousa','Redondela','Moaña','Cangas','Marín','O Porriño','Sanxenxo'],
+  'Salamanca': ['Salamanca','Béjar','Ciudad Rodrigo','Santa Marta de Tormes','Carbajosa de la Sagrada'],
+  'Santa Cruz de Tenerife': ['Santa Cruz de Tenerife','San Cristóbal de La Laguna','Arona','Adeje','Granadilla de Abona','Puerto de la Cruz','Los Llanos de Aridane','San Miguel de Abona'],
+  'Segovia': ['Segovia','Cuéllar','El Espinar','Palazuelos de Eresma','La Granja de San Ildefonso'],
+  'Sevilla': ['Sevilla','Dos Hermanas','Alcalá de Guadaíra','Utrera','Camas','Mairena del Aljarafe','La Rinconada','Écija','Morón de la Frontera','Tomares','Bormujos'],
+  'Soria': ['Soria','El Burgo de Osma-Ciudad de Osma','Almazán'],
+  'Tarragona': ['Tarragona','Reus','Salou','Torredembarra','Cambrils','Vila-seca','Tortosa','Valls','Calafell'],
+  'Teruel': ['Teruel','Alcañiz','Andorra','Utrillas'],
+  'Toledo': ['Toledo','Talavera de la Reina','Illescas','Seseña','Fuensalida','Madridejos','Sonseca'],
+  'Valencia': ['Valencia','Torrent','Gandía','Paterna','Sagunto','Alzira','Burjassot','Mislata','Xirivella','Manises','Ontinyent','Sueca','Catarroja','Quart de Poblet','Paiporta'],
+  'Valladolid': ['Valladolid','Laguna de Duero','Arroyo de la Encomienda','Medina del Campo','Tordesillas'],
+  'Bizkaia': ['Bilbao','Barakaldo','Getxo','Basauri','Leioa','Portugalete','Sestao','Santurtzi','Durango','Ermua'],
+  'Zamora': ['Zamora','Benavente','Toro','Puebla de Sanabria'],
+  'Zaragoza': ['Zaragoza','Calatayud','Utebo','Cuarte de Huerva','Ejea de los Caballeros','Tarazona','Borja']
+};
+
+const PROVINCIAS_IDS = {
+  'Almería': '1',
+  'Cádiz': '2',
+  'Córdoba': '3',
+  'Granada': '4',
+  'Huelva': '5',
+  'Jaén': '6',
+  'Málaga': '7',
+  'Sevilla': '8',
+  'Huesca': '9',
+  'Teruel': '10',
+  'Zaragoza': '11',
+  'Asturias': '12',
+  'Illes Balears': '13',
+  'Las Palmas': '14',
+  'Santa Cruz de Tenerife': '15',
+  'Cantabria': '16',
+  'Ávila': '17',
+  'Burgos': '18',
+  'León': '19',
+  'Palencia': '20',
+  'Salamanca': '21',
+  'Segovia': '22',
+  'Soria': '23',
+  'Valladolid': '24',
+  'Zamora': '25',
+  'Albacete': '26',
+  'Ciudad Real': '27',
+  'Cuenca': '28',
+  'Guadalajara': '29',
+  'Toledo': '30',
+  'Barcelona': '31',
+  'Girona': '32',
+  'Lleida': '33',
+  'Tarragona': '34',
+  'Alicante': '35',
+  'Castellón': '36',
+  'Valencia': '37',
+  'Badajoz': '38',
+  'Cáceres': '39',
+  'La Coruña': '40',
+  'Lugo': '41',
+  'Ourense': '42',
+  'Pontevedra': '43',
+  'Madrid': '44',
+  'Murcia': '45',
+  'Navarra': '46',
+  'Álava': '47',
+  'Bizkaia': '48',
+  'Gipuzkoa': '49',
+  'La Rioja': '50',
+  'Ceuta': '51',
+  'Melilla': '52'
+};
+
 // Variables globales para almacenar parámetros de URL
 let asesorJuridico = '';
 let tipoConector = '';
 let nombreConector = '';
 let userCode = '';
+let idProcesoRegistro = '';
 let usuarioValidado = null; // Usuario validado desde la BD
+
+function getPasoStorageKey(stepName, processId) {
+  return 'edc_' + stepName + '_' + processId;
+}
+
+function marcarPasoCompletado(stepName, processId) {
+  if (!processId) return;
+  try {
+    sessionStorage.setItem(getPasoStorageKey(stepName, processId), 'true');
+  } catch (error) {
+    console.warn('No se pudo guardar el estado del paso en sessionStorage:', error);
+  }
+}
+
+function generarIdProcesoRegistro() {
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    const r = Math.random() * 16 | 0;
+    const v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
 
 /**
  * Inicializar el script cuando el DOM esté listo
@@ -259,6 +394,7 @@ function registrarAperturaEnlace() {
 function obtenerAsesorDesdeURL() {
   const urlParams = new URLSearchParams(window.location.search);
   asesorJuridico = urlParams.get('asesor') || '';
+  idProcesoRegistro = urlParams.get('id_proceso_registro') || generarIdProcesoRegistro();
   
   // Si ya validamos el usuario, usar los datos de la BD
   // Si no, usar los parámetros de la URL (incluyendo user_code y email)
@@ -324,15 +460,84 @@ function mostrarAvisoSinAsesor() {
 }
 
 /**
+ * Inicializa Tom Select en los campos provincia y ciudad.
+ * Al elegir provincia se filtran los municipios correspondientes.
+ */
+function configurarDireccion() {
+  const selProv = document.getElementById('dir_provincia');
+  const selCiudad = document.getElementById('dir_ciudad');
+  if (!selProv || !selCiudad || typeof TomSelect === 'undefined') return;
+
+  // Poblar opciones de provincia ordenadas
+  Object.keys(MUNICIPIOS_ES).sort(function(a, b) {
+    return a.localeCompare(b, 'es');
+  }).forEach(function(prov) {
+    const opt = document.createElement('option');
+    opt.value = PROVINCIAS_IDS[prov] || prov;
+    opt.textContent = prov;
+    opt.dataset.nombre = prov;
+    selProv.appendChild(opt);
+  });
+
+  const tsProv = new TomSelect('#dir_provincia', {
+    placeholder: 'Busca una provincia…',
+    allowEmptyOption: true,
+    sortField: { field: 'text', direction: 'asc' },
+  });
+
+  const tsCiudad = new TomSelect('#dir_ciudad', {
+    placeholder: 'Elige primero una provincia…',
+    allowEmptyOption: true,
+    create: false,
+  });
+  tsCiudad.disable();
+
+  tsProv.on('change', function(provId) {
+    tsCiudad.clear(true);
+    tsCiudad.clearOptions();
+    tsCiudad.addOption({ value: '', text: 'Selecciona una ciudad…' });
+
+    const selectedProv = selProv.options[selProv.selectedIndex];
+    const provNombre = selectedProv?.dataset.nombre || selectedProv?.textContent || '';
+
+    if (provId && MUNICIPIOS_ES[provNombre]) {
+      MUNICIPIOS_ES[provNombre].slice().sort(function(a, b) {
+        return a.localeCompare(b, 'es');
+      }).forEach(function(ciudad) {
+        tsCiudad.addOption({ value: ciudad, text: ciudad });
+      });
+      tsCiudad.enable();
+      tsCiudad.settings.placeholder = 'Busca una ciudad o municipio…';
+      document.getElementById('dir_ciudad_hint') && document.getElementById('dir_ciudad_hint').classList.add('hidden');
+    } else {
+      tsCiudad.disable();
+      tsCiudad.settings.placeholder = 'Elige primero una provincia…';
+      document.getElementById('dir_ciudad_hint') && document.getElementById('dir_ciudad_hint').classList.remove('hidden');
+    }
+    tsCiudad.setValue('', true);
+    tsCiudad.refreshOptions(false);
+  });
+}
+
+/**
  * Configurar el formulario de activación
  */
 function configurarFormulario() {
   const form = document.getElementById('activacionForm');
   if (!form) return;
 
+  configurarDireccion();
+
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
-    
+
+    // Validar ciudad manualmente (puede estar deshabilitada y escapar la validación HTML5)
+    const ciudadVal = (document.getElementById('dir_ciudad')?.value || '').trim();
+    if (!ciudadVal) {
+      alert('Por favor selecciona una ciudad o municipio para continuar.');
+      return;
+    }
+
     // Mostrar ventana de confirmación antes de enviar
     const confirmado = await mostrarConfirmacion();
     if (confirmado) {
@@ -408,8 +613,12 @@ async function enviarFormulario(form) {
   console.log('Enviando datos de activación:', formData);
   
   try {
+    const webhookUrl = typeof CONFIG !== 'undefined' && CONFIG.n8n && CONFIG.n8n.webhookActivacionPaso1
+      ? CONFIG.n8n.webhookActivacionPaso1
+      : 'https://n8n.empiezadecero.cat/webhook/594a5ce9-4be9-446b-a8a9-9d44ba773ac3';
+
     const response = await fetch(
-      'https://n8n.empiezadecero.cat/webhook/6f3fee4b-0ae5-47f2-9841-6ada8ec89ff5',
+      webhookUrl,
       {
         method: 'POST',
         headers: { 
@@ -441,7 +650,12 @@ async function enviarFormulario(form) {
     
     if (resultado.exito) {
       // Registro creado correctamente (confirmado con create_row: true)
-      mostrarMensajeExito(form);
+      if (resultado.notaEncargoId) {
+        formData.nota_encargo_id = resultado.notaEncargoId;
+      }
+      marcarPasoCompletado('paso1', formData.id_proceso_registro);
+      registrarProgresoProceso(formData);
+      mostrarMensajeExito(form, resultado.notaEncargoId);
     } else if (resultado.error) {
       // Hay un error en la respuesta (ej: duplicado)
       mostrarMensajeErrorDuplicado(form, submitBtn, originalText, resultado);
@@ -458,6 +672,53 @@ async function enviarFormulario(form) {
 }
 
 /**
+ * Registra el avance del proceso en n8n/Supabase.
+ * No bloquea el registro principal del cliente.
+ * @param {Object} formData
+ */
+async function registrarProgresoProceso(formData) {
+  const url = typeof CONFIG !== 'undefined' && CONFIG.n8n && CONFIG.n8n.webhookRegistrationProcess
+    ? CONFIG.n8n.webhookRegistrationProcess
+    : '';
+
+  if (!url || !formData.id_proceso_registro) return;
+
+  const payload = {
+    tipo_formulario: 'registration_process_progress',
+    event: 'paso_1_completado',
+    id_proceso_registro: formData.id_proceso_registro,
+    user_code: formData.user_code || '',
+    status: 'paso_1_completado',
+    current_step: 'paso-intermedio-nep',
+    last_completed_step: 'activacion',
+    progress_percent: 35,
+    activacion_data: formData,
+    nombre: formData.nombre_completo || formData.nombre || '',
+    email: formData.email || '',
+    telefono: formData.telefono ? String(formData.telefono) : '',
+    dni: formData.dni || '',
+    asesor: formData.asesor_juridico || '',
+    deuda_total_aproximada: formData.deuda_total_aproximada || null,
+    page_url: formData.page_url || window.location.href,
+    timestamp: new Date().toISOString()
+  };
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok && response.status !== 0) {
+      console.warn('No se pudo registrar el progreso del proceso:', response.status, response.statusText);
+    }
+  } catch (error) {
+    console.warn('No se pudo registrar el progreso del proceso:', error);
+  }
+}
+
+/**
  * Recoger todos los datos del formulario
  * @returns {Object} Objeto con los datos del formulario
  */
@@ -469,21 +730,48 @@ function recogerDatosFormulario() {
     asesorFinal = asesorInput ? asesorInput.value.trim() : 'No especificado';
   }
   
+  const nombre = (document.getElementById('nombre')?.value || '').trim();
+  const apellido = (document.getElementById('apellido')?.value || '').trim();
+  const nombreCompleto = [nombre, apellido].filter(Boolean).join(' ').trim();
+  const sexoSeleccionado = document.getElementById('sexo').value;
+  const sexoPayload = sexoSeleccionado === 'hombre' ? 'H' : sexoSeleccionado === 'mujer' ? 'M' : '';
+  const provinciaSelect = document.getElementById('dir_provincia');
+  const provinciaNombre = provinciaSelect?.options[provinciaSelect.selectedIndex]?.textContent || '';
+
+  // Mantener el campo legacy para integraciones existentes del webhook.
+  const nombreCompletoInput = document.getElementById('nombre_completo');
+  if (nombreCompletoInput) {
+    nombreCompletoInput.value = nombreCompleto;
+  }
+
   return {
     tipo_formulario: 'activacion_segunda_oportunidad',
     asesor_juridico: asesorFinal || 'No especificado',
     tipo_conector: tipoConector || 'No especificado',
     nombre_conector: nombreConector || 'No especificado',
     user_code: userCode || '', // Código del conector obtenido de la URL o validación
-    nombre_completo: document.getElementById('nombre_completo').value,
+    id_unico_conector: userCode || '',
+    id_proceso_registro: idProcesoRegistro,
+    nombre_completo: nombreCompleto,
+    nombre: nombre,
+    apellido: apellido,
+    sexo: sexoPayload,
     dni: document.getElementById('dni').value,
     telefono: Number(document.getElementById('telefono').value.replace(/\D/g, '')),
     email: document.getElementById('email').value,
-    direccion: document.getElementById('direccion').value,
+    dir_provincia: (document.getElementById('dir_provincia')?.value || '').trim(),
+    dir_ciudad: (document.getElementById('dir_ciudad')?.value || '').trim(),
+    dir_codigo_postal: (document.getElementById('dir_cp')?.value || '').trim(),
+    dir_calle: (document.getElementById('dir_calle')?.value || '').trim(),
+    direccion: [
+      (document.getElementById('dir_calle')?.value || '').trim(),
+      (document.getElementById('dir_cp')?.value || '').trim(),
+      (document.getElementById('dir_ciudad')?.value || '').trim(),
+      provinciaNombre.trim()
+    ].filter(Boolean).join(', '),
     estado_civil: document.getElementById('estado_civil').value,
-    deuda_total: Number(document.getElementById('deuda_total').value),
-    primera_cuota: Number(document.getElementById('primera_cuota').value),
-    cuota_mensual: Number(document.getElementById('cuota_mensual').value),
+    deuda_total_aproximada: Number(document.getElementById('deuda_total_aproximada').value) || null,
+    datos_veracidad: document.getElementById('datos_veracidad')?.checked ?? false,
     consentimiento: document.getElementById('consentimiento').checked,
     timestamp: new Date().toISOString(),
     page_url: window.location.href
@@ -506,10 +794,11 @@ function procesarRespuestaWebhook(responseData) {
   let datos = Array.isArray(responseData) ? responseData : [responseData];
   
   // Buscar si hay create_row: true (éxito confirmado)
-  const registroCreado = datos.some(item => item && item.create_row === true);
+  const registroCreado = datos.find(item => item && item.create_row === true);
   if (registroCreado) {
+    const notaEncargoId = registroCreado.id?.['Nota de encargo'] || registroCreado.nota_encargo_id || '';
     console.log('✅ Registro creado correctamente (create_row: true)');
-    return { exito: true, error: null, mensaje: null };
+    return { exito: true, error: null, mensaje: null, notaEncargoId };
   }
   
   // Buscar si hay error en algún objeto
@@ -550,27 +839,53 @@ function procesarRespuestaWebhook(responseData) {
 }
 
 /**
- * Mostrar mensaje de éxito
+ * Mostrar mensaje de éxito y redirigir al paso siguiente (paso-intermedio-nep.html)
  * @param {HTMLFormElement} form - Formulario donde mostrar el mensaje
  */
-function mostrarMensajeExito(form) {
-  const asesorMensaje = asesorJuridico 
-    ? `al área de asesoramiento jurídico de <strong class="text-primary">${asesorJuridico}</strong>` 
-    : 'a nuestro equipo legal';
-  
+function mostrarMensajeExito(form, notaEncargoId) {
+  const nombre = (document.getElementById('nombre')?.value || '').trim();
+
+  // Animar la línea conectora del stepper
+  const connector = document.getElementById('stepConnector');
+  if (connector) {
+    connector.style.transition = 'width 1s ease';
+    connector.style.width = '100%';
+  }
+
   form.innerHTML = `
-    <div class="text-center py-12">
-      <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+    <div class="text-center py-10">
+      <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-5">
         <span class="material-icons text-green-500 text-4xl">check_circle</span>
       </div>
-      <h3 class="text-2xl font-bold text-primary mb-4">¡Contacto Enviado!</h3>
-      <p class="text-gray-600 mb-6">Has enviado exitosamente el contacto ${asesorMensaje}.<br>El equipo legal revisará el caso y se pondrá en contacto con el cliente en las próximas 24-48 horas.</p>
-      <button onclick="location.reload()" class="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white rounded-xl font-semibold hover:bg-primary/90 transition-colors shadow-lg">
-        <span class="material-icons">add_circle</span>
-        Cargar Otro Contacto
+      <h3 class="text-2xl font-bold text-primary mb-2">¡Paso 1 completado!</h3>
+      <p class="text-gray-600 mb-1 text-base">Los datos de <strong>${nombre || 'el cliente'}</strong> han sido enviados correctamente.</p>
+      <p class="text-gray-400 text-sm mb-8">Preparando el paso financiero…</p>
+      <div class="flex items-center justify-center gap-2 mb-8">
+        <div class="w-2.5 h-2.5 rounded-full bg-primary" style="animation:bounce 0.9s infinite ease-in-out;animation-delay:0s"></div>
+        <div class="w-2.5 h-2.5 rounded-full bg-primary" style="animation:bounce 0.9s infinite ease-in-out;animation-delay:.2s"></div>
+        <div class="w-2.5 h-2.5 rounded-full bg-primary" style="animation:bounce 0.9s infinite ease-in-out;animation-delay:.4s"></div>
+      </div>
+      <style>@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}</style>
+      <button onclick="location.reload()"
+        class="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 text-gray-600 rounded-xl font-semibold hover:bg-gray-200 transition-colors text-sm">
+        <span class="material-icons text-base">add_circle_outline</span>
+        Cargar otro contacto
       </button>
     </div>
   `;
+
+  // Redirigir al paso 2 financiero tras 2.5 s
+  setTimeout(function () {
+    const params = new URLSearchParams(window.location.search);
+    if (nombre) params.set('nombre', nombre);
+    if (idProcesoRegistro) params.set('id_proceso_registro', idProcesoRegistro);
+    if (notaEncargoId) params.set('nota_encargo_id', notaEncargoId);
+    const telefono = document.getElementById('telefono')?.value || '';
+    if (telefono) params.set('telefono', telefono);
+    const deuda = document.getElementById('deuda_total_aproximada')?.value;
+    if (deuda) params.set('deuda_total_aproximada', deuda);
+    window.location.href = 'paso-intermedio-nep.html?' + params.toString();
+  }, 2500);
 }
 
 /**
