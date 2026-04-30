@@ -113,6 +113,64 @@ const PROVINCIAS_IDS = {
   'Melilla': '52'
 };
 
+const PROVINCIAS_CODPROV_API = {
+  'Álava': '01',
+  'Albacete': '02',
+  'Alicante': '03',
+  'Almería': '04',
+  'Asturias': '33',
+  'Ávila': '05',
+  'Badajoz': '06',
+  'Illes Balears': '07',
+  'Barcelona': '08',
+  'Burgos': '09',
+  'Cáceres': '10',
+  'Cádiz': '11',
+  'Cantabria': '39',
+  'Castellón': '12',
+  'Ceuta': '51',
+  'Ciudad Real': '13',
+  'Córdoba': '14',
+  'La Coruña': '15',
+  'Cuenca': '16',
+  'Girona': '17',
+  'Granada': '18',
+  'Guadalajara': '19',
+  'Gipuzkoa': '20',
+  'Huelva': '21',
+  'Huesca': '22',
+  'Jaén': '23',
+  'La Rioja': '26',
+  'Las Palmas': '35',
+  'León': '24',
+  'Lleida': '25',
+  'Lugo': '27',
+  'Madrid': '28',
+  'Málaga': '29',
+  'Melilla': '52',
+  'Murcia': '30',
+  'Navarra': '31',
+  'Ourense': '32',
+  'Palencia': '34',
+  'Pontevedra': '36',
+  'Salamanca': '37',
+  'Santa Cruz de Tenerife': '38',
+  'Segovia': '40',
+  'Sevilla': '41',
+  'Soria': '42',
+  'Tarragona': '43',
+  'Teruel': '44',
+  'Toledo': '45',
+  'Valencia': '46',
+  'Valladolid': '47',
+  'Bizkaia': '48',
+  'Zamora': '49',
+  'Zaragoza': '50'
+};
+
+const MUNICIPIOS_API_BASE_URL = 'https://api.el-tiempo.net/json/v3/provincias';
+const municipiosApiCache = {};
+
 // Variables globales para almacenar parámetros de URL
 let asesorJuridico = '';
 let tipoConector = '';
@@ -120,9 +178,65 @@ let nombreConector = '';
 let userCode = '';
 let idProcesoRegistro = '';
 let usuarioValidado = null; // Usuario validado desde la BD
+const ACTIVACION_DRAFT_KEY_PREFIX = 'edc_activacion_draft_';
 
 function getPasoStorageKey(stepName, processId) {
   return 'edc_' + stepName + '_' + processId;
+}
+
+function getActivacionDraftKey() {
+  return ACTIVACION_DRAFT_KEY_PREFIX + (userCode || 'sin_user_code');
+}
+
+function guardarBorradorActivacion(form) {
+  if (!form) return;
+
+  try {
+    const borrador = {};
+    form.querySelectorAll('input, select, textarea').forEach(function(campo) {
+      if (!campo.id || campo.type === 'hidden' || campo.type === 'submit' || campo.type === 'button') return;
+      borrador[campo.id] = campo.type === 'checkbox' ? campo.checked : campo.value;
+    });
+    sessionStorage.setItem(getActivacionDraftKey(), JSON.stringify(borrador));
+  } catch (error) {
+    console.warn('No se pudo guardar el borrador del formulario:', error);
+  }
+}
+
+function limpiarBorradorActivacion() {
+  try {
+    sessionStorage.removeItem(getActivacionDraftKey());
+  } catch (error) {
+    console.warn('No se pudo limpiar el borrador del formulario:', error);
+  }
+}
+
+function restaurarBorradorActivacion(form) {
+  if (!form) return;
+
+  try {
+    const raw = sessionStorage.getItem(getActivacionDraftKey());
+    if (!raw) return;
+
+    const borrador = JSON.parse(raw);
+    Object.keys(borrador).forEach(function(id) {
+      const campo = document.getElementById(id);
+      if (!campo) return;
+      if (campo.type === 'checkbox') {
+        campo.checked = Boolean(borrador[id]);
+      } else if (campo.tomselect) {
+        campo.tomselect.setValue(borrador[id], id !== 'dir_provincia');
+      } else {
+        campo.value = borrador[id];
+        if (id === 'dir_provincia') {
+          campo.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      }
+    });
+
+  } catch (error) {
+    console.warn('No se pudo restaurar el borrador del formulario:', error);
+  }
 }
 
 function marcarPasoCompletado(stepName, processId) {
@@ -459,14 +573,69 @@ function mostrarAvisoSinAsesor() {
   }
 }
 
+function obtenerCodigoProvinciaApi(provId, provNombre) {
+  return PROVINCIAS_CODPROV_API[provNombre] || String(provId || '').padStart(2, '0');
+}
+
+function extraerNombreMunicipio(item) {
+  if (!item) return '';
+  if (typeof item === 'string') return item;
+  return item.NOMBRE || item.nombre || item.MUNICIPIO || item.municipio || item.name || item.label || '';
+}
+
+function obtenerMunicipiosLocales(provNombre) {
+  return (MUNICIPIOS_ES[provNombre] || []).slice();
+}
+
+function seleccionarCiudad(tsCiudad, ciudad) {
+  if (!tsCiudad || !ciudad) return;
+  if (!tsCiudad.options[ciudad]) {
+    tsCiudad.addOption({ value: ciudad, text: ciudad });
+  }
+  tsCiudad.setValue(ciudad, true);
+}
+
+async function obtenerMunicipiosProvincia(provId, provNombre) {
+  const codProv = obtenerCodigoProvinciaApi(provId, provNombre);
+  if (!codProv) return obtenerMunicipiosLocales(provNombre);
+  if (municipiosApiCache[codProv]) return municipiosApiCache[codProv].slice();
+
+  try {
+    const response = await fetch(MUNICIPIOS_API_BASE_URL + '/' + encodeURIComponent(codProv) + '/municipios', {
+      headers: { 'Accept': 'application/json' }
+    });
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+
+    const data = await response.json();
+    const items = Array.isArray(data)
+      ? data
+      : (data.municipios || data.MUNICIPIOS || data.data || data.results || []);
+    const municipios = items
+      .map(extraerNombreMunicipio)
+      .filter(Boolean)
+      .filter(function(nombre, index, lista) {
+        return lista.indexOf(nombre) === index;
+      })
+      .sort(function(a, b) {
+        return a.localeCompare(b, 'es');
+      });
+
+    if (!municipios.length) throw new Error('Respuesta sin municipios');
+    municipiosApiCache[codProv] = municipios;
+    return municipios.slice();
+  } catch (error) {
+    console.warn('No se pudieron cargar municipios desde la API. Usando lista local:', error);
+    return obtenerMunicipiosLocales(provNombre);
+  }
+}
+
 /**
- * Inicializa Tom Select en los campos provincia y ciudad.
- * Al elegir provincia se filtran los municipios correspondientes.
+ * Inicializa Tom Select en el campo de provincia.
  */
 function configurarDireccion() {
   const selProv = document.getElementById('dir_provincia');
   const selCiudad = document.getElementById('dir_ciudad');
-  if (!selProv || !selCiudad || typeof TomSelect === 'undefined') return;
+  if (!selProv || typeof TomSelect === 'undefined') return;
 
   // Poblar opciones de provincia ordenadas
   Object.keys(MUNICIPIOS_ES).sort(function(a, b) {
@@ -480,19 +649,32 @@ function configurarDireccion() {
   });
 
   const tsProv = new TomSelect('#dir_provincia', {
-    placeholder: 'Busca una provincia…',
-    allowEmptyOption: true,
+    placeholder: 'Busca y selecciona una provincia…',
+    allowEmptyOption: false,
+    create: false,
+    maxOptions: null,
+    openOnFocus: true,
     sortField: { field: 'text', direction: 'asc' },
   });
+
+  if (!selCiudad) return;
 
   const tsCiudad = new TomSelect('#dir_ciudad', {
     placeholder: 'Elige primero una provincia…',
     allowEmptyOption: true,
-    create: false,
+    create: true,
+    persist: false,
+    createOnBlur: true,
+    maxOptions: null,
+    render: {
+      option_create: function(data, escape) {
+        return '<div class="create">Usar "' + escape(data.input) + '" como municipio</div>';
+      }
+    },
   });
   tsCiudad.disable();
 
-  tsProv.on('change', function(provId) {
+  tsProv.on('change', async function(provId) {
     tsCiudad.clear(true);
     tsCiudad.clearOptions();
     tsCiudad.addOption({ value: '', text: 'Selecciona una ciudad…' });
@@ -501,20 +683,22 @@ function configurarDireccion() {
     const provNombre = selectedProv?.dataset.nombre || selectedProv?.textContent || '';
 
     if (provId && MUNICIPIOS_ES[provNombre]) {
-      MUNICIPIOS_ES[provNombre].slice().sort(function(a, b) {
-        return a.localeCompare(b, 'es');
-      }).forEach(function(ciudad) {
+      tsCiudad.disable();
+      tsCiudad.settings.placeholder = 'Cargando municipios…';
+      tsCiudad.refreshOptions(false);
+
+      const municipios = await obtenerMunicipiosProvincia(provId, provNombre);
+      municipios.forEach(function(ciudad) {
         tsCiudad.addOption({ value: ciudad, text: ciudad });
       });
       tsCiudad.enable();
-      tsCiudad.settings.placeholder = 'Busca una ciudad o municipio…';
+      tsCiudad.settings.placeholder = 'Busca o escribe una ciudad o municipio…';
       document.getElementById('dir_ciudad_hint') && document.getElementById('dir_ciudad_hint').classList.add('hidden');
     } else {
       tsCiudad.disable();
       tsCiudad.settings.placeholder = 'Elige primero una provincia…';
       document.getElementById('dir_ciudad_hint') && document.getElementById('dir_ciudad_hint').classList.remove('hidden');
     }
-    tsCiudad.setValue('', true);
     tsCiudad.refreshOptions(false);
   });
 }
@@ -527,16 +711,10 @@ function configurarFormulario() {
   if (!form) return;
 
   configurarDireccion();
+  restaurarBorradorActivacion(form);
 
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
-
-    // Validar ciudad manualmente (puede estar deshabilitada y escapar la validación HTML5)
-    const ciudadVal = (document.getElementById('dir_ciudad')?.value || '').trim();
-    if (!ciudadVal) {
-      alert('Por favor selecciona una ciudad o municipio para continuar.');
-      return;
-    }
 
     // Mostrar ventana de confirmación antes de enviar
     const confirmado = await mostrarConfirmacion();
@@ -602,6 +780,7 @@ function mostrarConfirmacion() {
 async function enviarFormulario(form) {
   const submitBtn = form.querySelector('button[type="submit"]');
   const originalText = submitBtn.innerHTML;
+  guardarBorradorActivacion(form);
   
   // Estado de carga
   submitBtn.disabled = true;
@@ -655,6 +834,7 @@ async function enviarFormulario(form) {
       }
       marcarPasoCompletado('paso1', formData.id_proceso_registro);
       registrarProgresoProceso(formData);
+      limpiarBorradorActivacion();
       mostrarMensajeExito(form, resultado.notaEncargoId);
     } else if (resultado.error) {
       // Hay un error en la respuesta (ej: duplicado)
@@ -737,6 +917,7 @@ function recogerDatosFormulario() {
   const sexoPayload = sexoSeleccionado === 'hombre' ? 'H' : sexoSeleccionado === 'mujer' ? 'M' : '';
   const provinciaSelect = document.getElementById('dir_provincia');
   const provinciaNombre = provinciaSelect?.options[provinciaSelect.selectedIndex]?.textContent || '';
+  const ciudadPayload = '';
 
   // Mantener el campo legacy para integraciones existentes del webhook.
   const nombreCompletoInput = document.getElementById('nombre_completo');
@@ -760,13 +941,13 @@ function recogerDatosFormulario() {
     telefono: Number(document.getElementById('telefono').value.replace(/\D/g, '')),
     email: document.getElementById('email').value,
     dir_provincia: (document.getElementById('dir_provincia')?.value || '').trim(),
-    dir_ciudad: (document.getElementById('dir_ciudad')?.value || '').trim(),
+    dir_ciudad: ciudadPayload,
     dir_codigo_postal: (document.getElementById('dir_cp')?.value || '').trim(),
     dir_calle: (document.getElementById('dir_calle')?.value || '').trim(),
     direccion: [
       (document.getElementById('dir_calle')?.value || '').trim(),
       (document.getElementById('dir_cp')?.value || '').trim(),
-      (document.getElementById('dir_ciudad')?.value || '').trim(),
+      ciudadPayload,
       provinciaNombre.trim()
     ].filter(Boolean).join(', '),
     estado_civil: document.getElementById('estado_civil').value,

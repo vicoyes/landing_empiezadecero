@@ -504,6 +504,19 @@
       document.getElementById('progressFill').style.width = (map[id] || 20) + '%';
     }
 
+    function programarRedireccionGracias(payload) {
+      const params = new URLSearchParams(window.location.search);
+      if (payload && payload.id_proceso_registro) params.set('id_proceso_registro', payload.id_proceso_registro);
+      if (payload && payload.nombre) params.set('nombre', payload.nombre);
+      if (payload && payload.user_code) params.set('user_code', payload.user_code);
+      if (payload && payload.opcion_final) params.set('opcion_final', payload.opcion_final);
+
+      const destino = 'gracias.html' + (params.toString() ? '?' + params.toString() : '');
+      window.setTimeout(function() {
+        window.location.href = destino;
+      }, 1800);
+    }
+
     function go(next) {
       if (current === next) return;
       document.getElementById(current).classList.remove('active');
@@ -568,8 +581,9 @@
         if (!aceptaRedireccion) return;
       }
 
+      let payload = null;
       try {
-        const payload = await enviarEncuesta({
+        payload = await enviarEncuesta({
           opcion_final: tipo,
           prioridad: tipo === 'urgente' ? 'urgente' : 'normal'
         });
@@ -587,6 +601,7 @@
       document.getElementById('finalText').textContent = textMap[tipo] || 'Hemos guardado tu elección correctamente.';
       document.getElementById('finalChips').innerHTML = '';
       go('sf');
+      programarRedireccionGracias(payload);
     }
 
     async function confirmarNEP() {
@@ -607,8 +622,9 @@
         '<span class="chip">' + whatsapp.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</span>'
       ];
 
+      let payload = null;
       try {
-        const payload = await enviarEncuesta({
+        payload = await enviarEncuesta({
           opcion_final: 'envio_nep',
           canales_nep: ['whatsapp', 'mail'],
           email_confirmacion_nep: email,
@@ -622,6 +638,7 @@
       document.getElementById('finalText').textContent = 'Te enviaremos la NEP por email y por WhatsApp con los datos confirmados.';
       document.getElementById('finalChips').innerHTML = chips.join('');
       go('sf');
+      programarRedireccionGracias(payload);
     }
 
     async function confirmarWhatsapp() {
@@ -634,8 +651,9 @@
 
       whatsappConfirmado = telefono;
 
+      let payload = null;
       try {
-        const payload = await enviarEncuesta({
+        payload = await enviarEncuesta({
           opcion_final: 'whatsapp',
           prioridad: 'normal',
           telefono_whatsapp: telefono
@@ -649,6 +667,7 @@
       document.getElementById('finalText').textContent = 'Perfecto, te contactaremos por WhatsApp para coordinar la llamada telefónica.';
       document.getElementById('finalChips').innerHTML = '<span class="chip">' + telefono.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</span>';
       go('sf');
+      programarRedireccionGracias(payload);
     }
 
     async function confirmarUrgente() {
@@ -661,8 +680,9 @@
 
       telefonoUrgenteConfirmado = telefono;
 
+      let payload = null;
       try {
-        const payload = await enviarEncuesta({
+        payload = await enviarEncuesta({
           opcion_final: 'urgente',
           prioridad: 'urgente',
           telefono_urgente: telefono
@@ -676,6 +696,7 @@
       document.getElementById('finalText').textContent = 'Entendido, registramos tu prioridad urgente para que te llamen lo antes posible.';
       document.getElementById('finalChips').innerHTML = '<span class="chip">' + telefono.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</span><span class="chip">Urgente</span>';
       go('sf');
+      programarRedireccionGracias(payload);
     }
 
     function reiniciar() {
