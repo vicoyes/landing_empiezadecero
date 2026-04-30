@@ -56,7 +56,12 @@ const CONFIG = {
         // Seguimiento de enlaces: crea el webhook en n8n y pega aquí la URL
         webhookLogLinkGeneration: "https://n8n.empiezadecero.cat/webhook/7e9ec4a4-421d-47d8-a9eb-4a5af88c8123",  // POST: registra en link_generations cuando se genera un enlace - PRODUCCIÓN
         webhookLogLinkOpen: "https://n8n.empiezadecero.cat/webhook-test/7e9ec4a4-421d-47d8-a9eb-4a5af88c8123",  // POST: registra cuándo alguien abre activacion.html (enlaces compartidos) - TEST
-        webhookGetLinkGenerationCount: "https://n8n.empiezadecero.cat/webhook/9543c53c-ba51-4eb7-9227-63a2a4527a5c"   // GET ?user_code=XXX - cantidad_registros
+        webhookGetLinkGenerationCount: "https://n8n.empiezadecero.cat/webhook/9543c53c-ba51-4eb7-9227-63a2a4527a5c",  // GET ?user_code=XXX - cantidad_registros
+        webhookActivacionPaso1: "https://n8n.empiezadecero.cat/webhook/594a5ce9-4be9-446b-a8a9-9d44ba773ac3",  // POST: paso 1 portal de activación - PRODUCCIÓN
+        webhookPasoIntermedioTest: "https://n8n.empiezadecero.cat/webhook-test/9d2c62c9-6e62-4e2c-b16e-9bccee4bc0b9",  // POST: decisión del paso intermedio (NEP) - TEST
+        webhookPasoIntermedio: "https://n8n.empiezadecero.cat/webhook/9d2c62c9-6e62-4e2c-b16e-9bccee4bc0b9",           // POST: decisión del paso intermedio (NEP) - PRODUCCIÓN
+        webhookEncuestaPaso3: "https://n8n.empiezadecero.cat/webhook/472c31ed-8721-4286-870d-4fa4a6ae037c",           // POST: encuesta final paso 3 - PRODUCCIÓN
+        webhookRegistrationProcess: "https://n8n.empiezadecero.cat/webhook/fe8cdd3a-6122-480a-a3ae-8085206d6639"      // POST: upsert en registration_processes
     }
 };
 

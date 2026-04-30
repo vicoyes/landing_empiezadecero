@@ -17,6 +17,7 @@ Este esquema de base de datos soporta un **programa de referidos** donde:
 - **Milestones del plan**: viven en `commission_plan_milestones` (1, 2, 3 partes…).
 - **Eventos de comisión**: viven en `commission_events` y congelan la regla aplicada a cada cliente.
 - **Pagos del cliente**: viven en `referral_payments` y determinan cuándo un evento pasa de `pendiente` → `ganado` → `pagado`.
+- **Proceso de registro**: vive en `registration_processes` y guarda el avance por `id_proceso_registro`.
 
 ---
 
@@ -33,6 +34,8 @@ Este esquema de base de datos soporta un **programa de referidos** donde:
 
 ### Relaciones principales
 - `referrals.referrer_id` → `users.id`  (**un referral pertenece a un conector**)
+- `registration_processes.user_code` → `users.user_code` (**un proceso puede pertenecer a un conector**)
+- `registration_processes.referral_id` → `referrals.id` (**un proceso puede quedar asociado al cliente referido**)
 - `commission_plans.perfil` → `users.perfil` (**un plan aplica a un perfil**)
 - `commission_plan_milestones.plan_id` → `commission_plans.id` (**milestones de un plan**)
 - `commission_events.referral_id` → `referrals.id` (**eventos por referral**)
@@ -40,6 +43,8 @@ Este esquema de base de datos soporta un **programa de referidos** donde:
 
 ### Cardinalidades (en simple)
 - Un `user` puede tener muchos `referrals`.
+- Un `user` puede tener muchos `registration_processes`.
+- Un `referral` puede tener un proceso de registro asociado.
 - Un `referral` puede tener muchos `referral_payments`.
 - Un `referral` puede tener muchos `commission_events` (según milestones).
 - Un `perfil` tiene **1 plan activo** en `commission_plans`.
@@ -152,6 +157,27 @@ Campos recomendados:
 - `external_payment_id` (text, opcional)
 - `notes` (text, opcional)
 - `created_at`
+
+---
+
+### 7) `registration_processes` — Progreso del proceso
+**Propósito:** guardar el avance del flujo entre `activacion.html`, paso intermedio y `encuesta-paso-3.html`.
+
+Campos clave:
+- `id` (uuid, PK)
+- `id_proceso_registro` (text, UNIQUE) — ID que viaja por URL entre pasos
+- `user_code` (text, FK a `users.user_code`)
+- `referral_id` (uuid, FK a `referrals.id`, opcional)
+- `status` — `iniciado | paso_1_completado | paso_2_completado | paso_3_completado | completado | abandonado | error`
+- `current_step`, `last_completed_step`, `progress_percent`
+- `activacion_data`, `paso_2_data`, `encuesta_data`, `metadata` (jsonb)
+- Campos rápidos: `nombre`, `email`, `telefono`, `dni`, `asesor`, `deuda_total_aproximada`, `page_url`
+- `started_at`, `completed_at`, `created_at`, `updated_at`
+
+Uso recomendado:
+- Crear o actualizar por `id_proceso_registro`.
+- Guardar el payload completo de cada paso en su campo JSONB.
+- Copiar datos frecuentes a columnas normales para búsquedas y filtros.
 
 ---
 

@@ -343,6 +343,64 @@ CREATE INDEX IF NOT EXISTS idx_referrals_status ON referrals(status); -- Para fi
 CREATE INDEX IF NOT EXISTS idx_referrals_commission_paid ON referrals(commission_paid); -- Para consultas de comisiones
 
 -- ============================================
+-- 6.1. TABLA: registration_processes (Progreso del proceso)
+-- ============================================
+-- Guarda el avance del flujo de activación y encuesta final usando
+-- id_proceso_registro, que viaja en la URL entre páginas.
+
+CREATE TABLE IF NOT EXISTS registration_processes (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id_proceso_registro TEXT UNIQUE NOT NULL,
+    user_code TEXT REFERENCES users(user_code) ON DELETE SET NULL,
+    referral_id UUID REFERENCES referrals(id) ON DELETE SET NULL,
+
+    -- Estado general del flujo
+    status TEXT NOT NULL DEFAULT 'iniciado' CHECK (status IN ('iniciado', 'paso_1_completado', 'paso_2_completado', 'paso_3_completado', 'completado', 'abandonado', 'error')),
+    current_step TEXT NOT NULL DEFAULT 'activacion',
+    last_completed_step TEXT,
+    progress_percent INTEGER NOT NULL DEFAULT 0 CHECK (progress_percent >= 0 AND progress_percent <= 100),
+
+    -- Datos capturados por etapa
+    activacion_data JSONB NOT NULL DEFAULT '{}'::jsonb,
+    paso_2_data JSONB NOT NULL DEFAULT '{}'::jsonb,
+    encuesta_data JSONB NOT NULL DEFAULT '{}'::jsonb,
+    metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+
+    -- Trazabilidad frecuente para filtros rápidos
+    nombre TEXT,
+    email TEXT,
+    telefono TEXT,
+    dni TEXT,
+    asesor TEXT,
+    deuda_total_aproximada NUMERIC(12, 2),
+    page_url TEXT,
+
+    started_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    completed_at TIMESTAMPTZ,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+COMMENT ON TABLE registration_processes IS 'Progreso del flujo de registro/activación identificado por id_proceso_registro';
+COMMENT ON COLUMN registration_processes.id_proceso_registro IS 'ID persistente que viaja entre activacion, paso intermedio y encuesta final';
+COMMENT ON COLUMN registration_processes.status IS 'Estado del proceso: iniciado, paso_1_completado, paso_2_completado, paso_3_completado, completado, abandonado, error';
+COMMENT ON COLUMN registration_processes.current_step IS 'Página o etapa actual del usuario';
+COMMENT ON COLUMN registration_processes.activacion_data IS 'Payload del formulario de activación/paso 1';
+COMMENT ON COLUMN registration_processes.encuesta_data IS 'Payload de la encuesta final/paso 3';
+
+CREATE TRIGGER update_registration_processes_updated_at
+    BEFORE UPDATE ON registration_processes
+    FOR EACH ROW
+    EXECUTE FUNCTION update_updated_at_column();
+
+CREATE INDEX IF NOT EXISTS idx_registration_processes_id_proceso ON registration_processes(id_proceso_registro);
+CREATE INDEX IF NOT EXISTS idx_registration_processes_user_code ON registration_processes(user_code);
+CREATE INDEX IF NOT EXISTS idx_registration_processes_referral_id ON registration_processes(referral_id);
+CREATE INDEX IF NOT EXISTS idx_registration_processes_status ON registration_processes(status);
+CREATE INDEX IF NOT EXISTS idx_registration_processes_current_step ON registration_processes(current_step);
+CREATE INDEX IF NOT EXISTS idx_registration_processes_updated_at ON registration_processes(updated_at);
+
+-- ============================================
 -- 7. POLÍTICAS DE SEGURIDAD (RLS)
 -- ============================================
 
@@ -352,6 +410,7 @@ CREATE INDEX IF NOT EXISTS idx_referrals_commission_paid ON referrals(commission
 -- Deshabilitar RLS por ahora (permite acceso público para INSERT)
 ALTER TABLE users ENABLE ROW LEVEL SECURITY;
 ALTER TABLE referrals ENABLE ROW LEVEL SECURITY;
+ALTER TABLE registration_processes ENABLE ROW LEVEL SECURITY;
 
 -- Política temporal: Permitir INSERT público (para el formulario)
 CREATE POLICY "Allow public insert on users" ON users
@@ -363,6 +422,22 @@ CREATE POLICY "Allow public insert on referrals" ON referrals
     FOR INSERT
     TO public
     WITH CHECK (true);
+
+CREATE POLICY "Allow public insert on registration_processes" ON registration_processes
+    FOR INSERT
+    TO public
+    WITH CHECK (true);
+
+CREATE POLICY "Allow public update on registration_processes" ON registration_processes
+    FOR UPDATE
+    TO public
+    USING (true)
+    WITH CHECK (true);
+
+CREATE POLICY "Allow public select on registration_processes" ON registration_processes
+    FOR SELECT
+    TO public
+    USING (true);
 
 -- NOTA: En el futuro, cuando se implementen usuarios autenticados, se crearán políticas como:
 -- - Usuarios solo pueden ver sus propios datos
@@ -465,4 +540,4 @@ CREATE INDEX IF NOT EXISTS idx_link_opens_opened_at ON link_opens(opened_at);
 -- SELECT * FROM referral_stats LIMIT 5;
 -- SELECT * FROM link_generations LIMIT 5;
 -- SELECT * FROM link_opens LIMIT 5;
-
+-- SELECT * FROM registration_processes LIMIT 5;

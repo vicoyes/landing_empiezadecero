@@ -92,14 +92,51 @@
     }
 
     @keyframes scaleIn {
-      from { 
+      from {
         transform: scale(0.9);
         opacity: 0;
       }
-      to { 
+      to {
         transform: scale(1);
         opacity: 1;
       }
+    }
+
+    /* Tom Select — tema personalizado */
+    .ts-wrapper .ts-control {
+      border: 1px solid #e5e7eb;
+      border-radius: 0.75rem;
+      background-color: #f9fafb;
+      padding: 0.65rem 1rem;
+      min-height: 3rem;
+      font-size: 0.875rem;
+      color: #374151;
+      box-shadow: none;
+      cursor: pointer;
+    }
+    .ts-wrapper.focus .ts-control,
+    .ts-wrapper.input-active .ts-control {
+      border-color: #0A2463;
+      box-shadow: 0 0 0 2px rgb(10 36 99 / 0.2);
+      outline: none;
+    }
+    .ts-wrapper .ts-control input { color: #374151; font-size: 0.875rem; }
+    .ts-wrapper .ts-control .placeholder { color: #9ca3af; }
+    .ts-dropdown {
+      border-radius: 0.75rem;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.08);
+      margin-top: 4px;
+      font-size: 0.875rem;
+    }
+    .ts-dropdown .option { padding: 0.5rem 1rem; color: #374151; }
+    .ts-dropdown .option.active { background-color: #0A2463; color: #fff; }
+    .ts-dropdown .option:hover:not(.active) { background-color: rgb(10 36 99 / 0.07); color: #0A2463; }
+    .ts-wrapper.disabled .ts-control {
+      opacity: 0.45;
+      background-color: #f3f4f6;
+      cursor: not-allowed;
+      pointer-events: none;
     }
   </style>
 
@@ -120,6 +157,9 @@
   <noscript>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   </noscript>
+
+  <!-- Tom Select -->
+  <link href="https://cdn.jsdelivr.net/npm/tom-select@2/dist/css/tom-select.default.min.css" rel="stylesheet" />
 
   <!-- AOS CSS -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
@@ -159,12 +199,12 @@
       
       <!-- Descripción -->
       <p class="text-lg md:text-xl text-white/80 max-w-3xl mx-auto mb-8" data-aos="fade-up" data-aos-delay="100">
-        Como conector, utiliza este formulario para registrar los datos de las personas que desean 
-        acogerse a la <strong class="text-white">Ley de Segunda Oportunidad</strong> y comenzar un nuevo camino financiero.
+        Paso 1 de 2: registra la información básica del cliente para continuar con la evaluación financiera
+        en el siguiente paso.
       </p>
 
       <!-- Beneficios rápidos -->
-      <div class="flex flex-wrap justify-center gap-4 md:gap-8 text-white/70 text-sm" data-aos="fade-up" data-aos-delay="200">
+      <div class="flex flex-wrap justify-center gap-4 md:gap-8 text-white/70 text-sm mb-10" data-aos="fade-up" data-aos-delay="200">
         <div class="flex items-center gap-2">
           <span class="material-icons text-green-400 text-lg">check_circle</span>
           <span>Proceso 100% confidencial</span>
@@ -176,6 +216,28 @@
         <div class="flex items-center gap-2">
           <span class="material-icons text-green-400 text-lg">check_circle</span>
           <span>Asesoría legal especializada</span>
+        </div>
+      </div>
+
+      <!-- Indicador de pasos del proceso -->
+      <div class="flex items-center justify-center gap-0 max-w-sm mx-auto" data-aos="fade-up" data-aos-delay="300">
+        <!-- Paso 1 (activo) -->
+        <div class="flex flex-col items-center">
+          <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-lg">
+            <span class="material-icons text-primary text-xl">edit_document</span>
+          </div>
+          <span class="text-white text-xs font-semibold mt-2 whitespace-nowrap">Datos del cliente</span>
+        </div>
+        <!-- Línea conectora -->
+        <div class="flex-1 h-0.5 bg-white/30 mx-3 mt-[-14px]">
+          <div class="h-full w-0 bg-white/70 rounded-full" id="stepConnector"></div>
+        </div>
+        <!-- Paso 2 (pendiente) -->
+        <div class="flex flex-col items-center opacity-50">
+          <div class="w-10 h-10 rounded-full bg-white/20 border-2 border-white/40 flex items-center justify-center">
+            <span class="text-white text-sm font-bold">2</span>
+          </div>
+          <span class="text-white/70 text-xs font-semibold mt-2 whitespace-nowrap">Información financiera</span>
         </div>
       </div>
     </div>
@@ -226,7 +288,7 @@
           </div>
 
           <form id="activacionForm" class="space-y-6">
-            
+
             <!-- Sección: Datos Personales -->
             <div class="mb-8">
               <h3 class="text-lg font-bold text-primary mb-4 flex items-center gap-2">
@@ -235,15 +297,38 @@
               </h3>
               <div class="h-px bg-gray-200 mb-6"></div>
 
-              <!-- Nombre y DNI -->
+              <!-- Nombre y Apellido -->
               <div class="grid md:grid-cols-2 gap-6 mb-6">
                 <div>
-                  <label for="nombre_completo" class="block text-sm font-semibold text-gray-700 mb-2">
-                    Nombre Completo <span class="text-red-500">*</span>
+                  <label for="nombre" class="block text-sm font-semibold text-gray-700 mb-2">
+                    Nombre <span class="text-red-500">*</span>
                   </label>
-                  <input type="text" id="nombre_completo" name="nombre_completo" required
+                  <input type="text" id="nombre" name="nombre" required
                     class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                    placeholder="Nombre y apellidos del cliente">
+                    placeholder="Nombre del cliente">
+                </div>
+                <div>
+                  <label for="apellido" class="block text-sm font-semibold text-gray-700 mb-2">
+                    Apellido <span class="text-red-500">*</span>
+                  </label>
+                  <input type="text" id="apellido" name="apellido" required
+                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                    placeholder="Apellido del cliente">
+                </div>
+              </div>
+
+              <!-- Sexo y DNI -->
+              <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div>
+                  <label for="sexo" class="block text-sm font-semibold text-gray-700 mb-2">
+                    Sexo <span class="text-red-500">*</span>
+                  </label>
+                  <select id="sexo" name="sexo" required
+                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
+                    <option value="">Selecciona una opción</option>
+                    <option value="hombre">Hombre</option>
+                    <option value="mujer">Mujer</option>
+                  </select>
                 </div>
                 <div>
                   <label for="dni" class="block text-sm font-semibold text-gray-700 mb-2">
@@ -254,6 +339,9 @@
                     placeholder="12345678A">
                 </div>
               </div>
+
+              <!-- Campo oculto para mantener compatibilidad con el webhook -->
+              <input type="hidden" id="nombre_completo" name="nombre_completo">
 
               <!-- Teléfono y Email -->
               <div class="grid md:grid-cols-2 gap-6 mb-6">
@@ -285,14 +373,55 @@
                   placeholder="Ingresa tu nombre como asesor">
               </div>
 
-              <!-- Dirección -->
+              <!-- Dirección de Empadronamiento -->
               <div class="mb-6">
-                <label for="direccion" class="block text-sm font-semibold text-gray-700 mb-2">
-                  Dirección de Empadronamiento <span class="text-red-500">*</span>
+                <p class="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-1.5">
+                  <span class="material-icons text-primary text-base">location_on</span>
+                  Dirección de Empadronamiento
+                </p>
+
+                <!-- Provincia -->
+                <div class="mb-4">
+                  <div>
+                    <label for="dir_provincia" class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">
+                      Provincia <span class="text-red-500">*</span>
+                    </label>
+                    <select id="dir_provincia" name="dir_provincia" required>
+                      <option value=""></option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Código postal / Calle -->
+                <div class="grid sm:grid-cols-3 gap-4">
+                  <div>
+                    <label for="dir_cp" class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">
+                      Código postal <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="dir_cp" name="dir_cp" inputmode="numeric" maxlength="5" pattern="[0-9]{5}" required
+                      class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                      placeholder="28001">
+                  </div>
+                  <div class="sm:col-span-2">
+                    <label for="dir_calle" class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">
+                      Calle, número y piso <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="dir_calle" name="dir_calle" required
+                      class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                      placeholder="Ej: Calle Gran Vía 12, 3º A">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Deuda Total Aproximada -->
+              <div class="mb-6">
+                <label for="deuda_total_aproximada" class="block text-sm font-semibold text-gray-700 mb-2">
+                  Deuda total aproximada (€) <span class="text-red-500">*</span>
                 </label>
-                <input type="text" id="direccion" name="direccion" required
+                <input type="number" id="deuda_total_aproximada" name="deuda_total_aproximada" min="1" step="0.01" required
                   class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                  placeholder="Calle, número, piso, código postal, ciudad">
+                  placeholder="Ej: 25000">
+                <p class="text-xs text-gray-400 mt-1">Suma total de todas las deudas del cliente (préstamos, créditos, acreedores…)</p>
               </div>
 
               <!-- Estado Civil -->
@@ -305,6 +434,8 @@
                   <option value="">Selecciona el estado civil</option>
                   <option value="soltero">Soltero/a</option>
                   <option value="casado">Casado/a</option>
+                  <option value="casado_gananciales">Casado/a con gananciales</option>
+                  <option value="casado_separacion_bienes">Casado/a con separación de bienes</option>
                   <option value="divorciado">Divorciado/a</option>
                   <option value="viudo">Viudo/a</option>
                   <option value="separado">Separado/a</option>
@@ -313,83 +444,42 @@
               </div>
             </div>
 
-            <!-- Sección: Información Financiera -->
-            <div class="mb-8">
-              <h3 class="text-lg font-bold text-primary mb-4 flex items-center gap-2">
-                <span class="material-icons text-primary">account_balance</span>
-                Información Financiera
-              </h3>
-              <div class="h-px bg-gray-200 mb-6"></div>
+            <!-- Declaraciones antes del envío -->
+            <div class="space-y-3 border border-gray-200 rounded-2xl p-5 bg-gray-50">
+              <!-- Veracidad de los datos -->
+              <label class="flex items-start gap-3 cursor-pointer">
+                <input type="checkbox" id="datos_veracidad" name="datos_veracidad" required
+                  class="mt-1 w-5 h-5 text-primary border-gray-300 rounded focus:ring-primary/20 cursor-pointer flex-shrink-0">
+                <span class="text-sm text-gray-700 leading-relaxed">
+                  Declaro que todos los datos facilitados son <strong>veraces, completos y actuales</strong>,
+                  y asumo la responsabilidad de cualquier inexactitud en la información proporcionada.
+                  <span class="text-red-500">*</span>
+                </span>
+              </label>
 
-              <!-- Deuda Total -->
-              <div class="mb-6">
-                <label for="deuda_total" class="block text-sm font-semibold text-gray-700 mb-2">
-                  Deuda Total Aproximada <span class="text-red-500">*</span>
-                </label>
-                <div class="relative">
-                  <input type="number" id="deuda_total" name="deuda_total" required min="15000"
-                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all pr-12"
-                    placeholder="25000">
-                  <span class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 font-semibold">€</span>
-                </div>
-                <p class="text-xs text-gray-500 mt-1">Mínimo requerido: 15.000 €</p>
-              </div>
+              <div class="h-px bg-gray-200"></div>
 
-              <!-- Primera Cuota y Cuota Mensual -->
-              <div class="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label for="primera_cuota" class="block text-sm font-semibold text-gray-700 mb-2">
-                    Primera Cuota <span class="text-red-500">*</span>
-                  </label>
-                  <div class="relative">
-                    <input type="number" id="primera_cuota" name="primera_cuota" required min="500"
-                      class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all pr-12"
-                      placeholder="1500">
-                    <span class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 font-semibold">€</span>
-                  </div>
-                  <p class="text-xs text-gray-500 mt-1">Recomendado: 1.500 €</p>
-                </div>
-                <div>
-                  <label for="cuota_mensual" class="block text-sm font-semibold text-gray-700 mb-2">
-                    Cuota Mensual <span class="text-red-500">*</span>
-                  </label>
-                  <div class="relative">
-                    <input type="number" id="cuota_mensual" name="cuota_mensual" required min="200"
-                      class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all pr-12"
-                      placeholder="300">
-                    <span class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 font-semibold">€</span>
-                  </div>
-                  <p class="text-xs text-gray-500 mt-1">Mínimo: 200 € | Recomendado: 300 €</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Checkbox Consentimiento -->
-            <div class="space-y-4 pt-4">
-              <label class="flex items-start gap-3 cursor-pointer group">
+              <!-- Consentimiento RGPD -->
+              <label class="flex items-start gap-3 cursor-pointer">
                 <input type="checkbox" id="consentimiento" name="consentimiento" required
-                  class="mt-1 w-5 h-5 text-primary border-gray-300 rounded focus:ring-primary/20 cursor-pointer">
-                <span class="text-sm text-gray-600">
-                  Confirmo que el cliente ha dado su consentimiento para el tratamiento de sus datos personales 
-                  y acepta la <a href="#" class="text-primary font-semibold hover:underline">política de privacidad</a> <span class="text-red-500">*</span>
+                  class="mt-1 w-5 h-5 text-primary border-gray-300 rounded focus:ring-primary/20 cursor-pointer flex-shrink-0">
+                <span class="text-sm text-gray-700 leading-relaxed">
+                  Acepto que los datos personales facilitados en este formulario sean tratados conforme al
+                  <a href="#" class="text-primary font-semibold hover:underline">Reglamento General de Protección de Datos (RGPD)</a>
+                  y la <a href="#" class="text-primary font-semibold hover:underline">política de privacidad</a> de Empieza de Cero.
+                  <span class="text-red-500">*</span>
                 </span>
               </label>
             </div>
 
             <!-- Botón de envío -->
-            <div class="pt-6">
+            <div class="pt-2">
               <button type="submit"
                 class="w-full bg-primary text-white font-bold text-lg py-4 px-8 rounded-xl shadow-lg hover:bg-primary/90 hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2">
                 <span class="material-icons">send</span>
-                <span>Enviar Solicitud de Activación</span>
+                <span>Continuar al Paso 2</span>
               </button>
             </div>
-
-            <!-- Nota de seguridad -->
-            <p class="text-center text-sm text-gray-400 flex items-center justify-center gap-2 pt-4">
-              <span class="material-icons text-lg">lock</span>
-              Datos protegidos bajo la normativa RGPD.
-            </p>
           </form>
         </div>
 
@@ -449,9 +539,12 @@
   <!-- AOS Script -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   
+  <!-- Tom Select JS -->
+  <script src="https://cdn.jsdelivr.net/npm/tom-select@2/dist/js/tom-select.complete.min.js"></script>
+
   <!-- Configuración (debe cargarse antes de activacion.js) -->
   <script src="src/js/config.js"></script>
-  
+
   <!-- Script de Activación -->
   <script src="src/js/activacion.js"></script>
 
