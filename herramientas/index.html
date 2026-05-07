@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Herramientas Internas | Empieza de Cero</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin />
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#0A2463",
+            "background-light": "#F8F9FA",
+            "background-dark": "#05143A",
+          },
+          fontFamily: {
+            display: ["IBM Plex Sans", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.5rem",
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    body {
+      font-family: 'IBM Plex Sans', system-ui, sans-serif;
+      margin: 0;
+      background: #F8F9FA;
+    }
+
+    .hero-gradient {
+      background-image: linear-gradient(to right, #0A2463 50%, #0d2e7a 100%);
+    }
+
+    .material-icons {
+      font-family: 'Material Icons';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 24px;
+      display: inline-block;
+      line-height: 1;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet" />
+  </noscript>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" media="print"
+    onload="this.media='all'" />
+  <noscript>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  </noscript>
+</head>
+
+<body class="bg-background-light">
+
+  <section class="hero-gradient py-10 md:py-12">
+    <div class="container mx-auto px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm font-medium mb-6">
+          <span class="material-icons text-lg">apps</span>
+          Accesos internos
+        </div>
+        <h1 class="text-3xl md:text-5xl font-bold text-white mb-4">
+          Herramientas de Empieza de Cero
+        </h1>
+        <p class="text-base md:text-xl text-white/80 max-w-3xl mx-auto">
+          Accede a las utilidades operativas del equipo y revisa el objetivo de cada una antes de usarla.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <main class="py-10 md:py-14">
+    <div class="container mx-auto px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+
+          <article class="bg-white rounded-2xl shadow-xl p-6 flex flex-col">
+            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-5">
+              <span class="material-icons text-primary">upload_file</span>
+            </div>
+            <p class="text-xs font-semibold text-primary uppercase tracking-wide mb-2">CSV y notas de encargo</p>
+            <h2 class="text-xl font-bold text-gray-800 mb-3">Convertidor CSV a Notas de Encargo</h2>
+            <p class="text-sm text-gray-600 leading-6 mb-6 flex-1">
+              Limpia archivos CSV de contactos, corrige caracteres rotos, normaliza teléfonos españoles y genera un CSV compatible con notas de encargo.
+            </p>
+            <a href="../convertidor-csv-notas-encargo.html"
+              class="inline-flex items-center justify-center gap-2 px-5 py-3 bg-primary text-white rounded-xl font-semibold hover:bg-primary/90 transition-colors">
+              Abrir herramienta
+              <span class="material-icons text-lg">arrow_forward</span>
+            </a>
+          </article>
+
+          <article class="bg-white rounded-2xl shadow-xl p-6 flex flex-col">
+            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-5">
+              <span class="material-icons text-primary">link</span>
+            </div>
+            <p class="text-xs font-semibold text-primary uppercase tracking-wide mb-2">Afiliados y conectores</p>
+            <h2 class="text-xl font-bold text-gray-800 mb-3">Generador de Enlaces</h2>
+            <p class="text-sm text-gray-600 leading-6 mb-6 flex-1">
+              Busca los datos de un conector o afiliado y crea enlaces personalizados para compartir el flujo correcto con cada contacto.
+            </p>
+            <a href="../generar-enlace.html"
+              class="inline-flex items-center justify-center gap-2 px-5 py-3 bg-primary text-white rounded-xl font-semibold hover:bg-primary/90 transition-colors">
+              Abrir herramienta
+              <span class="material-icons text-lg">arrow_forward</span>
+            </a>
+          </article>
+
+          <article class="bg-white rounded-2xl shadow-xl p-6 flex flex-col">
+            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-5">
+              <span class="material-icons text-primary">person_add</span>
+            </div>
+            <p class="text-xs font-semibold text-primary uppercase tracking-wide mb-2">Alta interna</p>
+            <h2 class="text-xl font-bold text-gray-800 mb-3">Alta de Conector</h2>
+            <p class="text-sm text-gray-600 leading-6 mb-6 flex-1">
+              Registra conectores desde uso interno, generando el correo operativo a partir del teléfono y enviando los datos al flujo de registro.
+            </p>
+            <a href="../formulario-conector-interno.html"
+              class="inline-flex items-center justify-center gap-2 px-5 py-3 bg-primary text-white rounded-xl font-semibold hover:bg-primary/90 transition-colors">
+              Abrir herramienta
+              <span class="material-icons text-lg">arrow_forward</span>
+            </a>
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+</body>
+
+</html>
