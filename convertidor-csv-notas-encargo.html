@@ -140,7 +140,7 @@
           <div class="mt-6 space-y-3">
             <label class="flex gap-3 text-sm text-gray-700">
               <input id="onlySpain" type="checkbox" checked class="mt-0.5 rounded border-gray-300 text-primary focus:ring-primary">
-              <span>Exportar solo teléfonos españoles válidos de 9 dígitos o +34.</span>
+              <span>Exportar solo teléfonos españoles válidos de 9 dígitos o formato internacional 34.</span>
             </label>
             <label class="flex gap-3 text-sm text-gray-700">
               <input id="onlyMobile" type="checkbox" checked class="mt-0.5 rounded border-gray-300 text-primary focus:ring-primary">
@@ -240,6 +240,10 @@
           </div>
         </div>
 
+        <div id="fileInfo" class="mt-5 rounded-xl border border-blue-100 bg-blue-50 p-4 text-sm text-primary">
+          Carga un CSV para ver separador, columnas detectadas y columna de teléfono usada.
+        </div>
+
         <p class="text-xs text-gray-500 mt-5">
           Columnas destino:
           <code class="bg-blue-50 text-primary px-1.5 py-0.5 rounded">gender, first_name, last_name, whatsapp_phone, Dirección, Estado Civil, Mail, CodigoPostal, has_opt_in_sms, has_opt_in_email, consent_phrase</code>
@@ -272,8 +276,23 @@
 
   <script>
     const TARGET_HEADERS = ['gender', 'first_name', 'last_name', 'whatsapp_phone', 'Dirección', 'Estado Civil', 'Mail', 'CodigoPostal', 'has_opt_in_sms', 'has_opt_in_email', 'consent_phrase'];
+    const PHONE_SOURCE_HEADERS = [
+      'Número de teléfono',
+      'Numero de telefono',
+      'Nº de teléfono',
+      'Telefono',
+      'Teléfono',
+      'Phone Number',
+      'Phone',
+      'whatsapp_phone',
+      'telefono_whatsapp'
+    ];
+    const FIRST_NAME_SOURCE_HEADERS = ['Nombre', 'first_name', 'First Name'];
+    const LAST_NAME_SOURCE_HEADERS = ['Apellidos', 'last_name', 'Last Name'];
+    const EMAIL_SOURCE_HEADERS = ['Correo', 'Mail', 'Email', 'email'];
     let convertedRows = [];
     let issueRows = [];
+    let lastFileInfo = null;
 
     const $ = id => document.getElementById(id);
     const fileInput = $('file');
@@ -304,14 +323,54 @@
       const lines = String(text).replace(/^\uFEFF/, '').split(/\r?\n/).map(l => l.replace(/\r/g, '')).filter(l => l.trim() !== '');
       return lines.map(line => {
         const t = line.trim();
-        if (t.startsWith('"') && t.endsWith('"')) {
+        if (t.startsWith('"') && t.endsWith('"') && !/[,\t;]\s*"/.test(t)) {
           return t.slice(1, -1).replace(/""/g, '"');
         }
         return line;
       }).join('\n');
     }
 
-    function parseCSV(text) {
+    function parseSourceCsv(text) {
+      const rawText = String(text).replace(/^\uFEFF/, '');
+      const rawDelimiter = detectDelimiter(rawText);
+      const rawParsed = parseCSV(rawText, rawDelimiter);
+      const rawHeaders = rawParsed[0] ? rawParsed[0].map(fixMojibake) : [];
+      if (hasAnyHeader(rawHeaders, PHONE_SOURCE_HEADERS) || looksLikeIssuesReport(rawHeaders)) {
+        return { parsed: rawParsed, delimiter: rawDelimiter, repaired: false };
+      }
+
+      const repairedText = normalizeBrokenHubspotCsv(rawText);
+      const repairedDelimiter = detectDelimiter(repairedText);
+      const repairedParsed = parseCSV(repairedText, repairedDelimiter);
+      return { parsed: repairedParsed, delimiter: repairedDelimiter, repaired: true };
+    }
+
+    function detectDelimiter(text) {
+      const firstLine = String(text).split(/\r?\n/).find(line => line.trim() !== '') || '';
+      const candidates = [',', ';', '\t'];
+      let best = ',';
+      let bestCount = -1;
+      for (const candidate of candidates) {
+        let count = 0;
+        let inQuotes = false;
+        for (let i = 0; i < firstLine.length; i++) {
+          const c = firstLine[i], n = firstLine[i + 1];
+          if (c === '"') {
+            if (inQuotes && n === '"') i++;
+            else inQuotes = !inQuotes;
+          } else if (c === candidate && !inQuotes) {
+            count++;
+          }
+        }
+        if (count > bestCount) {
+          best = candidate;
+          bestCount = count;
+        }
+      }
+      return best;
+    }
+
+    function parseCSV(text, delimiter = ',') {
       const rows = [];
       let row = [], field = '', inQuotes = false;
       for (let i = 0; i < text.length; i++) {
@@ -319,7 +378,7 @@
         if (c === '"') {
           if (inQuotes && n === '"') { field += '"'; i++; }
           else { inQuotes = !inQuotes; }
-        } else if (c === ',' && !inQuotes) {
+        } else if (c === delimiter && !inQuotes) {
           row.push(field); field = '';
         } else if ((c === '\n' || c === '\r') && !inQuotes) {
           if (c === '\r' && n === '\n') i++;
@@ -344,6 +403,15 @@
       });
     }
 
+    function normalizeHeaderName(value) {
+      return fixMojibake(value)
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, ' ')
+        .trim();
+    }
+
     function getField(obj, names) {
       for (const name of names) {
         if (obj[name] !== undefined) return obj[name];
@@ -353,7 +421,26 @@
         const k = keys.find(x => x.toLowerCase() === name.toLowerCase());
         if (k) return obj[k];
       }
+      const normalizedNames = names.map(normalizeHeaderName);
+      const normalizedKey = keys.find(k => normalizedNames.includes(normalizeHeaderName(k)));
+      if (normalizedKey) return obj[normalizedKey];
       return '';
+    }
+
+    function findHeader(headers, names) {
+      const normalizedNames = names.map(normalizeHeaderName);
+      return headers.find(header => normalizedNames.includes(normalizeHeaderName(header))) || '';
+    }
+
+    function hasAnyHeader(headers, names) {
+      const normalizedHeaders = headers.map(normalizeHeaderName);
+      return names.some(name => normalizedHeaders.includes(normalizeHeaderName(name)));
+    }
+
+    function looksLikeIssuesReport(headers) {
+      return hasAnyHeader(headers, ['line'])
+        && hasAnyHeader(headers, ['normalized_phone'])
+        && hasAnyHeader(headers, ['issues']);
     }
 
     function isValidEmail(email) {
@@ -361,46 +448,73 @@
       return /^[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$/.test(email);
     }
 
+    function buildPhoneResult(local, note = '') {
+      return {
+        formatted: '34' + local,
+        local,
+        country: 'ES',
+        validSpain: /^[6789]\d{8}$/.test(local),
+        isMobile: /^[67]\d{8}$/.test(local),
+        note
+      };
+    }
+
     function normalizePhone(raw) {
       let original = fixMojibake(raw);
       let s = original.replace(/[^0-9+]/g, '');
       if (s.startsWith('00')) s = '+' + s.slice(2);
-      const digits = s.replace(/\D/g, '');
+      let digits = s.replace(/\D/g, '');
+
+      if (!s.startsWith('+') && /^3434[6789]\d{8}$/.test(digits)) {
+        return buildPhoneResult(digits.slice(4), 'Prefijo 34 duplicado corregido');
+      }
+      if (!s.startsWith('+') && /^34[6789]\d{8}$/.test(digits)) {
+        return buildPhoneResult(digits.slice(2));
+      }
 
       if (s.startsWith('+34') && digits.length === 11) {
-        const local = digits.slice(2);
-        return { formatted: '+34' + local, local, country: 'ES', validSpain: /^[6789]\d{8}$/.test(local), isMobile: /^[67]\d{8}$/.test(local) };
-      }
-      if (!s.startsWith('+') && digits.startsWith('34') && digits.length === 11) {
-        const local = digits.slice(2);
-        return { formatted: '+34' + local, local, country: 'ES', validSpain: /^[6789]\d{8}$/.test(local), isMobile: /^[67]\d{8}$/.test(local) };
+        return buildPhoneResult(digits.slice(2));
       }
       if (!s.startsWith('+') && digits.length === 9) {
-        return { formatted: '+34' + digits, local: digits, country: 'ES', validSpain: /^[6789]\d{8}$/.test(digits), isMobile: /^[67]\d{8}$/.test(digits) };
+        return buildPhoneResult(digits);
       }
       if (s.startsWith('+')) {
-        return { formatted: '+' + digits, local: digits, country: 'INTL', validSpain: false, isMobile: false };
+        return { formatted: '+' + digits, local: digits, country: 'INTL', validSpain: false, isMobile: false, note: '' };
       }
-      return { formatted: digits, local: digits, country: 'UNKNOWN', validSpain: false, isMobile: false };
+      return { formatted: digits, local: digits, country: 'UNKNOWN', validSpain: false, isMobile: false, note: '' };
     }
 
     function processText(text) {
       convertedRows = [];
       issueRows = [];
-      const normalized = normalizeBrokenHubspotCsv(text);
-      const parsed = parseCSV(normalized);
+      const { parsed, delimiter, repaired } = parseSourceCsv(text);
       if (parsed.length < 2) {
         showError('No se pudo leer el CSV. Revisa que tenga encabezados y filas.');
+        return;
+      }
+      const headers = parsed[0].map(fixMojibake);
+      const phoneHeader = findHeader(headers, PHONE_SOURCE_HEADERS);
+      const emailHeader = findHeader(headers, EMAIL_SOURCE_HEADERS);
+      const firstNameHeader = findHeader(headers, FIRST_NAME_SOURCE_HEADERS);
+      lastFileInfo = { delimiter, columns: headers.length, phoneHeader, emailHeader, firstNameHeader, repaired };
+      if (looksLikeIssuesReport(headers)) {
+        showError('Parece que cargaste el reporte de errores, no el CSV original de HubSpot. Sube el archivo de contactos que contiene columnas como "Nombre", "Correo" y "Número de teléfono".');
+        updateStats(0, 0, 0, 0);
+        return;
+      }
+      if (!hasAnyHeader(headers, PHONE_SOURCE_HEADERS)) {
+        showError('No encontré una columna de teléfono. El CSV debe incluir una columna como "Número de teléfono" o "Teléfono".');
+        updateStats(0, 0, 0, 0);
         return;
       }
       const source = rowsToObjects(parsed);
       const seenPhones = new Map();
 
       for (const obj of source) {
-        const first = getField(obj, ['Nombre', 'first_name', 'First Name']).trim();
-        const last = getField(obj, ['Apellidos', 'last_name', 'Last Name']).trim();
-        const email = getField(obj, ['Correo', 'Mail', 'Email', 'email']).trim();
-        const rawPhone = getField(obj, ['Número de teléfono', 'Numero de telefono', 'NÃºmero de telÃ©fono', 'whatsapp_phone', 'phone']).trim();
+        const first = getField(obj, FIRST_NAME_SOURCE_HEADERS).trim();
+        const last = getField(obj, LAST_NAME_SOURCE_HEADERS).trim();
+        const email = getField(obj, EMAIL_SOURCE_HEADERS).trim();
+        const rawPhone = getField(obj, PHONE_SOURCE_HEADERS).trim();
         const phone = normalizePhone(rawPhone);
         const rowIssues = [];
 
@@ -409,6 +523,7 @@
         if (!rawPhone) rowIssues.push('Teléfono vacío');
         if (!phone.validSpain) rowIssues.push('Teléfono no español válido');
         if (!phone.isMobile) rowIssues.push('No parece móvil español 6/7');
+        if (phone.note) rowIssues.push(phone.note);
         if (!isValidEmail(email)) rowIssues.push('Correo inválido');
 
         let skip = false;
@@ -438,18 +553,46 @@
         }
       }
 
-      $('total').textContent = source.length;
-      $('exported').textContent = convertedRows.length;
-      $('skipped').textContent = source.length - convertedRows.length;
-      $('issuesCount').textContent = issueRows.length;
+      updateStats(source.length, convertedRows.length, source.length - convertedRows.length, issueRows.length);
       $('download').disabled = convertedRows.length === 0;
       $('downloadIssues').disabled = issueRows.length === 0;
       renderPreview(convertedRows.slice(0, 30));
       renderIssues(issueRows.slice(0, 80));
+      renderFileInfo(source.length);
+    }
+
+    function updateStats(total, exported, skipped, issuesCount) {
+      $('total').textContent = total;
+      $('exported').textContent = exported;
+      $('skipped').textContent = skipped;
+      $('issuesCount').textContent = issuesCount;
+      $('download').disabled = convertedRows.length === 0;
+      $('downloadIssues').disabled = issueRows.length === 0;
+    }
+
+    function delimiterLabel(delimiter) {
+      if (delimiter === '\t') return 'tabulación';
+      if (delimiter === ';') return 'punto y coma';
+      return 'coma';
+    }
+
+    function renderFileInfo(totalRows = 0) {
+      if (!lastFileInfo) return;
+      const parts = [
+        `Separador: ${delimiterLabel(lastFileInfo.delimiter)}`,
+        `columnas: ${lastFileInfo.columns}`,
+        `contactos: ${totalRows}`,
+        `teléfono: ${lastFileInfo.phoneHeader || 'no detectada'}`
+      ];
+      if (lastFileInfo.emailHeader) parts.push(`correo: ${lastFileInfo.emailHeader}`);
+      if (lastFileInfo.firstNameHeader) parts.push(`nombre: ${lastFileInfo.firstNameHeader}`);
+      if (lastFileInfo.repaired) parts.push('CSV reparado');
+      $('fileInfo').innerHTML = parts.map(part => `<span class="inline-block mr-3">${escapeHtml(part)}</span>`).join('');
     }
 
     function showError(msg) {
       $('preview').innerHTML = `<p class="text-sm p-4 text-red-700">${escapeHtml(msg)}</p>`;
+      $('fileInfo').innerHTML = escapeHtml(msg);
     }
 
     function escapeHtml(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
